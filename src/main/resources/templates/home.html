@@ -1,0 +1,37 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Alains Shop</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="home">
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/products}">Products</a></li>
+        <li><a th:href="@{/order}">Order</a></li>
+        <li th:if="${user != null}">
+            <form action="/users/logout" method="post" style="display:inline;">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+        <li th:unless="${user != null}">
+            <form action="/users/login" method="post" style="display:inline;">
+                <button type="submit">Log in</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <h1 class="welcome-text">Alains Shop</h1>
+    <div th:if="${user != null}">
+        <h2 th:if="${user != null}">Welcome, <span th:text="${user.username}"></span>!</h2>
+    </div>
+</div>
+
+</body>
+</html>

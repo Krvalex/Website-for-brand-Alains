@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+<h1>Add New Product</h1>
+<form action="/admin/create/product" method="post">
+    <label for="productName">Название товара:</label>
+    <input id="productName" name="productName" required type="text"><br><br>
+
+    <label for="productDescription">Описание товара:</label>
+    <textarea id="productDescription" name="productDescription" required></textarea><br><br>
+
+    <label for="productPrice">Цена товара:</label>
+    <input id="productPrice" name="productPrice" required step="0.01" type="number"><br><br>
+
+    <label for="productSize">Размер товара:</label>
+    <select id="productSize" name="productSize" required>
+        <option value="XS">Extra Small</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">Extra Large</option>
+        <option value="XLL">Double Extra Large</option>
+        <!-- Добавьте другие размеры -->
+    </select><br><br>
+
+    <label for="productCategory">Категория товара:</label>
+    <select id="productCategory" name="productCategory" required>
+        <option value="T_SHIRTS">T-Shirt</option>
+        <option value="HOODIES">Hoodie</option>
+    </select><br><br>
+
+    <label for="productImage">Ссылка на изображение товара:</label>
+    <input id="productImage" name="productImage" required type="text"><br><br>
+
+    <input type="submit" value="Добавить товар">
+</form>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="products">
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/products}">Products</a></li>
+        <li><a th:href="@{/order}">Order</a></li>
+        <li><a th:href="@{/users/login}">Login</a></li>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <h2>Available Products</h2>
+
+    <form method="GET" th:action="@{/products}">
+        <select name="category" required="required">
+            <option disabled selected value="">All Categorise</option>
+            <option th:each="category : ${categories}"
+                    th:text="${category.displayName}"
+                    th:value="${category}">
+            </option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <div class="product-item" th:each="product : ${products}">
+        <!-- Dynamic image loading -->
+        <img alt="Product Image" th:src="@{'/' + ${product.productImage}}">
+
+        <h3 th:text="${product.productName}"></h3>
+        <p th:text="${product.productDescription}"></p>
+        <p th:text="'Size: ' + ${product.productSize.displayName}"></p>
+        <p th:text="'Category: ' + ${product.productCategory.displayName}"></p>
+        <p th:text="'Price: $' + ${product.productPrice}"></p>
+        <form method="post" th:action="@{'/order/add/' + ${product.productId}}">
+            <button type="submit">Add to Order</button>
+        </form>
+
+        <a th:href="@{'/products/' + ${product.productId}}">View Details</a>
+
+        <hr>
+    </div>
+</div>
+
+</body>
+</html>
