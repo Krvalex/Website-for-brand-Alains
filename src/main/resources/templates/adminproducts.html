@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+</head>
+<body>
+<h1>Products List</h1>
+<hr>
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Category</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.getProductId()}">Product ID</td>
+        <td th:text="${product.getProductName()}">Product Name</td>
+        <td th:text="${product.getProductDescription()}">Description</td>
+        <td th:text="${product.getProductPrice()}">Price</td>
+        <td th:text="${product.getProductSize()}">Size</td>
+        <td th:text="${product.getProductCategory()}">Category</td>
+    </tr>
+</table>
+<hr>
+<a href="/admin/create/product">
+    <button>Add Product</button>
+</a>
+<hr>
+<h1>Delete Product</h1>
+<form action="/admin/delete/product" method="post">
+    <label for="productId">Product ID:</label>
+    <input id="productId" name="id" required type="number"><br><br>
+
+    <input type="submit" value="Delete Product">
+</form>
+</body>
+</html>
