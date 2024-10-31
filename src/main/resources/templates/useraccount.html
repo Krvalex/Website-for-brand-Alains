@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Account Information</title>
+    <link href="/css/useraccount.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="account-info">
+        <h1>Account Information</h1>
+        <div class="user-details">
+            <div class="detail">
+                <span th:text="${user.username}"></span>
+            </div>
+        </div>
+    </div>
+    <form action="/users/logout" method="post" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
+</div>
+</body>
+</html>

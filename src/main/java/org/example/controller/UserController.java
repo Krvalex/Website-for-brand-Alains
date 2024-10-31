@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.User;
-import org.example.repository.UserRepository;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/login")
     public String login() {
@@ -45,6 +42,13 @@ public class UserController {
     public String logout(Principal principal) {
         userService.getUserByPrincipal(principal).setActive(false);
         return "redirect:/";
+    }
+
+    @GetMapping("/account")
+    public String account(Principal principal, Model model) {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "useraccount";
     }
 
     @GetMapping
