@@ -5,7 +5,6 @@ import lombok.Data;
 import org.example.model.enums.Role;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,7 +26,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    @OneToOne(mappedBy = "user")
+    private Order order;
 }
 

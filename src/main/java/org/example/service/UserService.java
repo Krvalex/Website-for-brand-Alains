@@ -2,8 +2,10 @@ package org.example.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.model.Order;
 import org.example.model.User;
 import org.example.model.enums.Role;
+import org.example.repository.OrderRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +23,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -35,6 +40,11 @@ public class UserService {
         user.setActive(true);
         user.getRoles().add(Role.ROLE_USER);
         userRepository.save(user);
+
+        Order order = new Order();
+        order.setUser(user);
+        orderRepository.save(order);
+
     }
 
     public User getUserByPrincipal(Principal principal) {
