@@ -34,13 +34,8 @@
         <img alt="Product Image" th:src="@{'/' + ${product.productImage}}">
 
         <h3 th:text="${product.productName}"></h3>
-        <p th:text="${product.productDescription}"></p>
-        <p th:text="'Size: ' + ${product.productSize.displayName}"></p>
         <p th:text="'Category: ' + ${product.productCategory.displayName}"></p>
         <p th:text="'Price: $' + ${product.productPrice}"></p>
-        <form method="post" th:action="@{'/order/add/' + ${product.productId}}">
-            <button type="submit">Add to Order</button>
-        </form>
 
         <a th:href="@{'/products/' + ${product.productId}}">View Details</a>
 

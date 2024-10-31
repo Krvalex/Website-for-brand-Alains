@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Product Details</title>
+    <link href="/css/product-details.css" rel="stylesheet">
+</head>
+<body>
+<img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
+     th:src="@{'/' + ${product.productImage}}">
+<div class="product-info">
+    <h1 th:text="${product.productName}"></h1>
+    <div class="product-details">
+        <dl>
+            <dt>Description:</dt>
+            <dd th:text="${product.productDescription}"></dd>
+            <dt>Price:</dt>
+            <dd th:text="${product.productPrice}"></dd>
+            <dt>Size:</dt>
+            <dd th:text="${product.productSize}"></dd>
+            <dt>Category:</dt>
+            <dd th:text="${product.productCategory}"></dd>
+        </dl>
+        <form method="post" th:action="@{'/order/add/' + ${product.productId}}">
+            <button type="submit">Add to Order</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
