@@ -3,7 +3,7 @@ package org.example.configuration;
 import org.example.model.Product;
 import org.example.model.enums.Category;
 import org.example.model.enums.Size;
-import org.example.repository.OrderRepository;
+import org.example.repository.CartRepository;
 import org.example.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,11 +14,11 @@ import java.util.List;
 public class DataInitializer implements CommandLineRunner {
 
     private final ProductRepository productRepository;
-    private final OrderRepository orderRepository;
+    private final CartRepository cartRepository;
 
-    public DataInitializer(ProductRepository productRepository, OrderRepository orderRepository) {
+    public DataInitializer(ProductRepository productRepository, CartRepository cartRepository) {
         this.productRepository = productRepository;
-        this.orderRepository = orderRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DataInitializer implements CommandLineRunner {
 
     private void initializeProducts() {
 //        productRepository.deleteAll();
-//        orderRepository.deleteAll();
+//        cartRepository.deleteAll();
         Product tShirt1 = new Product("Fnatic", "Comfortable T-Shirt", 19.99, Size.M, Category.T_SHIRTS, "fnaticTshirt.jpg");
         Product tShirt2 = new Product("NiP", "Casual T-Shirt", 24.99, Size.L, Category.T_SHIRTS, "nipTshirt.jpg");
         Product tShirt3 = new Product("Team Liquid", "Sporty T-Shirt", 29.99, Size.S, Category.T_SHIRTS, "liquidTshirt.jpg");

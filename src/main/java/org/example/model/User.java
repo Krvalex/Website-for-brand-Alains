@@ -27,6 +27,6 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @OneToOne(mappedBy = "user")
-    private Order order;
+    private Cart cart;
 }
 

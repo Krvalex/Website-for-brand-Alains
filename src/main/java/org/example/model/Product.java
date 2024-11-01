@@ -30,8 +30,8 @@ public class Product {
     private String productImage;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     public Product(String productName, String productDescription, double productPrice, Size productSize,
                    Category productCategory, String productImage) {

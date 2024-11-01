@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class OrderDetails {
+public class CartDetails {
 
     private String deliveryAddress;
     private String paymentMethod;

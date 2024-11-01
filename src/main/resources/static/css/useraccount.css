@@ -28,16 +28,16 @@
     font-weight: bold;
 }
 
-.orders {
+.carts {
     margin-top: 20px;
 }
 
-.orders ul {
+.carts ul {
     list-style: none;
     padding: 0;
 }
 
-.orders li {
+.carts li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,7 +45,7 @@
     border-bottom: 1px solid #ddd;
 }
 
-.orders li:last-child {
+.carts li:last-child {
     border-bottom: none;
 }
 

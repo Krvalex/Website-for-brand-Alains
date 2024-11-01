@@ -29,7 +29,7 @@ public class SecurityConfig {
 //        http.authorizeHttpRequests(
 //                (requests) -> requests
 //                        .requestMatchers("/", "/users/registration","/users/login").permitAll()
-//                        //.requestMatchers("/products/**", "/order/**", "/users/**")
+//                        //.requestMatchers("/products/**", "/cart/**", "/users/**")
 //                        .anyRequest().authenticated()
 //        ).formLogin((form) -> form
 //                .loginPage("/users/login")

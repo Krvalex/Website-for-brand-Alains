@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "\"order\"")
+@Table(name = "\"cart\"")
 @Setter
 @Getter
-public class Order {
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long cartId;
 
     @OneToOne
     @JoinColumn(name = "user_id")

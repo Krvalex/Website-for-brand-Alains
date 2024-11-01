@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order</title>
+    <title>Cart</title>
     <link href="/css/styles.css" rel="stylesheet">
 </head>
-<body class="order">
+<body class="cart">
 <nav>
     <ul>
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/order}">Order</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
         <li th:if="${user != null}">
             <form action="/users/account" style="display:inline;">
                 <button type="submit">Account</button>
@@ -24,7 +24,7 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h2>Your Order</h2>
+    <h2>Your Cart</h2>
 
     <table border="1">
         <thead>
@@ -41,7 +41,7 @@
             <td th:text="${product.productSize.displayName}"></td>
             <td th:text="${product.productPrice}"></td>
             <td>
-                <form method="post" th:action="@{order/delete/{productId}(productId=${product.productId})}">
+                <form method="post" th:action="@{cart/delete/{productId}(productId=${product.productId})}">
                     <button type="submit">Delete</button>
                 </form>
             </td>
@@ -49,8 +49,8 @@
         </tbody>
     </table>
 
-    <p>Total Price: <span th:text="${order.calculateTotalPrice()}"></span></p>
-    <a class="buy-now-button" th:href="@{/order/orderdetails}">Buy Now</a>
+    <p>Total Price: <span th:text="${cart.calculateTotalPrice()}"></span></p>
+    <a class="buy-now-button" th:href="@{/cart/cartdetails}">Buy Now</a>
 </div>
 </body>
 </html>

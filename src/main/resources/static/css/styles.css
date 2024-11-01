@@ -152,7 +152,7 @@ p {
     font-size: 18px;
 }
 
-body.orderDetails {
+body.cartDetails {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
     color: #333;
@@ -194,8 +194,8 @@ button:hover {
     color: #fff;
 }
 
-/* Order styles */
-body.order {
+/* Cart styles */
+body.cart {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -207,7 +207,7 @@ body.order {
     color: #333;
 }
 
-body.order .buy-now-button {
+body.cart .buy-now-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #555;
@@ -220,7 +220,7 @@ body.order .buy-now-button {
     margin-top: 20px;
 }
 
-body.order .buy-now-button:hover {
+body.cart .buy-now-button:hover {
     background-color: #777;
     color: #fff;
 }
@@ -242,7 +242,7 @@ body.order .buy-now-button:hover {
     color: #fff;
 }
 
-body.orderPlaced {
+body.cartPlaced {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
     color: #333;

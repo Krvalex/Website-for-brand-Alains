@@ -1,10 +1,9 @@
 package org.example.controller;
 
-import org.example.model.Order;
-import org.example.model.OrderDetails;
+import org.example.model.CartDetails;
 import org.example.model.Product;
 import org.example.model.User;
-import org.example.service.OrderService;
+import org.example.service.CartService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/order")
-public class OrderController {
-    private final Order order = new Order();
+@RequestMapping("/cart")
+public class CartController {
 
     @Autowired
     private ProductService productService;
@@ -26,61 +24,61 @@ public class OrderController {
     private UserService userService;
 
     @Autowired
-    private OrderService orderService;
+    private CartService cartService;
 
     @GetMapping
-    public String getOrder(Principal principal, Model model) {
+    public String getCart(Principal principal, Model model) {
         if (principal == null) {
             return "redirect:/users/login";
         }
         User user = userService.getUserByPrincipal(principal);
-        model.addAttribute("products", user.getOrder().getProducts());
+        model.addAttribute("products", user.getCart().getProducts());
         model.addAttribute("user", user);
-        model.addAttribute("order", user.getOrder());
-        return "order";
+        model.addAttribute("cart", user.getCart());
+        return "cart";
     }
 
     @PostMapping("/add/{productId}")
-    public String addToOrder(@PathVariable Long productId, Principal principal) {
+    public String addToCart(@PathVariable Long productId, Principal principal) {
         if (principal == null) {
             return "redirect:/users/login";
         }
         Product product = productService.getProductById(productId);
         User user = userService.getUserByPrincipal(principal);
-        user.getOrder().getProducts().add(product);
-        orderService.saveOrder(user.getOrder());
-        return "redirect:/order";
+        user.getCart().getProducts().add(product);
+        cartService.saveCart(user.getCart());
+        return "redirect:/cart";
     }
 
-    @GetMapping("/orderdetails")
-    public String getOrderDetails(Model model, Principal principal) {
+    @GetMapping("/cartdetails")
+    public String getCartDetails(Model model, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
-        model.addAttribute("order", user.getOrder());
+        model.addAttribute("cart", user.getCart());
         model.addAttribute("user", user);
-        model.addAttribute("orderDetails", new OrderDetails());
-        return "orderdetails";
+        model.addAttribute("cartDetails", new CartDetails());
+        return "cartdetails";
     }
 
-    @PostMapping("/orderdetails")
-    public String processOrderDetails(@ModelAttribute("orderDetails") OrderDetails orderDetails, Principal principal) {
+    @PostMapping("/cartdetails")
+    public String processCartDetails(@ModelAttribute("cartDetails") CartDetails cartDetails, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
-        user.getOrder().getProducts().clear();
-        orderService.saveOrder(user.getOrder());
-        return "redirect:/order/orderplaced";
+        user.getCart().getProducts().clear();
+        cartService.saveCart(user.getCart());
+        return "redirect:/cart/cartplaced";
     }
 
-    @GetMapping("/orderplaced")
-    public String orderPlaced(Model model) {
-        return "orderplaced";
+    @GetMapping("/cartplaced")
+    public String cartPlaced(Model model) {
+        return "cartplaced";
     }
 
     @PostMapping("/delete/{productId}")
     public String deteleProduct(@PathVariable Long productId, Principal principal) {
         Product product = productService.getProductById(productId);
         User user = userService.getUserByPrincipal(principal);
-        user.getOrder().getProducts().remove(product);
-        orderService.saveOrder(user.getOrder());
-        return "redirect:/order";
+        user.getCart().getProducts().remove(product);
+        cartService.saveCart(user.getCart());
+        return "redirect:/cart";
     }
 
 }

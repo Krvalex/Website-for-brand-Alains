@@ -1,10 +1,10 @@
 package org.example.repository;
 
-import org.example.model.Order;
+import org.example.model.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface CartRepository extends JpaRepository<Cart, Long> {
 
 }
