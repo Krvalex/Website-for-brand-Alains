@@ -13,6 +13,10 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }

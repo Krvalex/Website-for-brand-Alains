@@ -12,12 +12,22 @@
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/products}">Products</a></li>
         <li><a th:href="@{/order}">Order</a></li>
+        <li th:if="${user != null}">
+            <form action="/users/account" style="display:inline;">
+                <button type="submit">Account</button>
+            </form>
+        </li>
+        <li th:unless="${user != null}">
+            <form action="/users/login" method="post" style="display:inline;">
+                <button type="submit">Log in</button>
+            </form>
+        </li>
     </ul>
 </nav>
 <div class="main-content">
     <form method="post" th:action="@{/order/orderdetails}">
         <label for="name">Email:</label>
-        <input id="name" name="name" required type="text">
+        <input id="name" name="name" required th:value="${user != null ? user.username : ''}" type="text">
         <br>
         <label for="address">Address:</label>
         <input id="address" name="address" required type="text">

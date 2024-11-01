@@ -21,27 +21,10 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        this.products.add(product);
-    }
 
     public double calculateTotalPrice() {
         return products.stream().mapToDouble(Product::getProductPrice).sum();
-    }
-
-    public void clear() {
-        items.clear();
-        products.clear();
     }
 }

@@ -6,7 +6,24 @@
     <title>Product Details</title>
     <link href="/css/product-details.css" rel="stylesheet">
 </head>
-<body>
+<body class="order">
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/products}">Products</a></li>
+        <li><a th:href="@{/order}">Order</a></li>
+        <li th:if="${user != null}">
+            <form action="/users/account" style="display:inline;">
+                <button type="submit">Account</button>
+            </form>
+        </li>
+        <li th:unless="${user != null}">
+            <form action="/users/login" method="post" style="display:inline;">
+                <button type="submit">Log in</button>
+            </form>
+        </li>
+    </ul>
+</nav>
 <img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
      th:src="@{'/' + ${product.productImage}}">
 <div class="product-info">

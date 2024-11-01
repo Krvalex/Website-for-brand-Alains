@@ -29,6 +29,9 @@ public class Product {
 
     private String productImage;
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Product(String productName, String productDescription, double productPrice, Size productSize,
                    Category productCategory, String productImage) {

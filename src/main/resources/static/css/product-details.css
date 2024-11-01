@@ -44,3 +44,43 @@ h1 {
 .product-details dd {
     margin-bottom: 10px;
 }
+
+/* Navigation bar styles */
+nav {
+    background-color: #333;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+nav a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.main-content {
+    margin-top: 60px;
+}
