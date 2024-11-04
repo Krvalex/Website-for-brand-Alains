@@ -35,14 +35,27 @@
             <dt>Price:</dt>
             <dd th:text="${product.productPrice}"></dd>
             <dt>Size:</dt>
-            <dd th:text="${product.productSize}"></dd>
+            <dd>
+                <select id="size" name="size" onchange="updateHiddenSize(this)">
+                    <option th:each="productS : ${products}"
+                            th:text="${productS.getProductSize()}"
+                            th:value="${productS.getProductSize()}">
+                    </option>
+                </select>
+            </dd>
             <dt>Category:</dt>
             <dd th:text="${product.productCategory}"></dd>
         </dl>
         <form method="post" th:action="@{'/cart/add/' + ${product.productId}}">
+            <input id="hiddenSize" name="size" type="hidden">
             <button type="submit">Add to Cart</button>
         </form>
     </div>
 </div>
+<script>
+    function updateHiddenSize(select) {
+        document.getElementById('hiddenSize').value = select.value;
+    }
+</script>
 </body>
 </html>

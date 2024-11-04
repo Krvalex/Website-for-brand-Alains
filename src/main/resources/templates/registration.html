@@ -8,9 +8,10 @@
 <hr>
 <h4>Регистрация</h4>
 <form action="/users/registration" method="post">
-    Имя пользователя: <input name="username" type="email"><br><br>
-    Пароль: <input name="password" type="password"><br><br>
+    Имя пользователя: <input name="username" required type="text"><br><br>
+    Пароль: <input name="password" required type="password"><br><br>
     <input type="submit" value="Зарегистрироваться"/>
 </form>
+<span style="color: red" th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
 </body>
 </html>

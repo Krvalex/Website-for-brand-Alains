@@ -38,14 +38,14 @@
                 <th>Product Name</th>
                 <th>Price</th>
             </tr>
-            <tr th:each="product : ${cart.products}">
+            <tr th:each="product : ${products}">
                 <td th:text="${product.productName}"></td>
                 <td th:text="${product.productPrice}"></td>
             </tr>
         </table>
         <br>
         <h3>Total Price</h3>
-        <p th:text="${cart.calculateTotalPrice()}"></p>
+        <p th:text="${sum}"></p>
         <br>
         <button type="submit">Place Cart</button>
     </form>

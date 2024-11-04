@@ -35,6 +35,9 @@ public class UserService {
     }
 
     public void createUser(User user) {
+        if (existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Пользователь с таким email уже существует");
+        }
         user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
@@ -50,6 +53,10 @@ public class UserService {
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return null;
         return userRepository.findByUsername(principal.getName()).orElse(null);
+    }
+
+    public boolean existsByUsername(String email) {
+        return userRepository.existsByUsername(email);
     }
 
 }

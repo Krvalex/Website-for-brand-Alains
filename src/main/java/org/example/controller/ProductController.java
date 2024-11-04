@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.Product;
-import org.example.model.User;
 import org.example.model.enums.Category;
 import org.example.service.ProductService;
 import org.example.service.UserService;
@@ -29,9 +28,9 @@ public class ProductController {
     @GetMapping
     public String getAllProducts(Model model, @RequestParam(required = false) Category category, Principal principal) {
         List<Product> products = productService.getProducts(category);
-        User user = userService.getUserByPrincipal(principal);
-        model.addAttribute("products", products);
-        model.addAttribute("user", user);
+        List<Product> uniqueProducts = productService.getUniqueProducts(products);
+        model.addAttribute("products", uniqueProducts);
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("categories", Category.values());
         return "products";
     }
@@ -39,7 +38,9 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getProductById(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
+        List<Product> productsByName = productService.getAllProductsByName(product.getProductName());
         model.addAttribute("product", product);
+        model.addAttribute("products", productsByName);
         return "product-details";
     }
 }

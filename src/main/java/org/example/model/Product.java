@@ -20,6 +20,7 @@ public class Product {
     private String productName;
     private String productDescription;
     private double productPrice;
+    private int productQuantity;
 
     @Enumerated(EnumType.STRING)
     private Size productSize;
@@ -29,15 +30,12 @@ public class Product {
 
     private String productImage;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    public Product(String productName, String productDescription, double productPrice, Size productSize,
+    public Product(String productName, String productDescription, double productPrice, int productQuantity, Size productSize,
                    Category productCategory, String productImage) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
+        this.productQuantity = productQuantity;
         this.productSize = productSize;
         this.productCategory = productCategory;
         this.productImage = productImage;

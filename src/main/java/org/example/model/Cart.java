@@ -21,10 +21,8 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products = new ArrayList<>();
-
-    public double calculateTotalPrice() {
-        return products.stream().mapToDouble(Product::getProductPrice).sum();
-    }
+    @ElementCollection
+    @CollectionTable(name = "cart_products", joinColumns = @JoinColumn(name = "cart_id"))
+    @Column(name = "product_id")
+    private List<Long> products_id = new ArrayList<>();
 }

@@ -1,6 +1,9 @@
 package org.example.controller;
 
+import org.example.model.Order;
+import org.example.model.Product;
 import org.example.model.User;
+import org.example.service.OrderService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderService productService;
 
     @GetMapping("/login")
     public String login() {
@@ -33,9 +42,14 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String create(@ModelAttribute User user) {
-        userService.createUser(user);
-        return "redirect:/users/login";
+    public String create(@ModelAttribute User user, Model model) {
+        try {
+            userService.createUser(user);
+            return "redirect:/users/login";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "registration"; // Перенаправление на страницу регистрации с сообщением об ошибке
+        }
     }
 
     @PostMapping("/logout")
@@ -47,7 +61,13 @@ public class UserController {
     @GetMapping("/account")
     public String account(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
+        List<Order> orders = user.getOrders();
+        List<List<Product>> allProductsInOrders = orderService.getAllProductsInOrders(orders);
+        List<Double> totalPrices = productService.getSumPriceOfListProducts(allProductsInOrders);
         model.addAttribute("user", user);
+        model.addAttribute("orders", orders);
+        model.addAttribute("allProductsInOrders", allProductsInOrders);
+        model.addAttribute("totalPrices", totalPrices);
         return "useraccount";
     }
 
