@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import org.example.model.Order;
 import org.example.model.User;
 import org.example.service.OrderService;
 import org.example.service.UserService;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -60,23 +58,20 @@ public class UserController {
     @GetMapping("/account")
     public String account(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
-        List<Order> orders = user.getOrders();
         model.addAttribute("user", user);
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", user.getOrders());
         return "useraccount";
     }
 
     @GetMapping
     public String getAllUsers(Model model) {
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable Long id, Model model) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getUserById(id));
         return "userdetails";
     }
 }

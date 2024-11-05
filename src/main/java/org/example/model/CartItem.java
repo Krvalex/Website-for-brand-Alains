@@ -26,11 +26,6 @@ public class CartItem {
     @Column(name = "quantity")
     private int quantity;
 
-    public CartItem(Product product, String size) {
-        this.product = product;
-        this.size = size;
-    }
-
     public CartItem(Product product, String size, int quantity) {
         this.quantity = quantity;
         this.product = product;

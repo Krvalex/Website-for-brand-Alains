@@ -77,7 +77,7 @@ public class CartController {
         List<CartItem> cartItems = user.getCart().getProducts();
         orderService.createNewOrder(cartItems, user);
         cartItemService.decrementProducts(cartItems);
-        user.getCart().getProducts().clear();
+        userService.clearCart(user);
         cartService.saveCart(user.getCart());
         return "redirect:/cart/cartplaced";
     }

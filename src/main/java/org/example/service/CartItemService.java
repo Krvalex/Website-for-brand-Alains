@@ -14,13 +14,6 @@ public class CartItemService {
 
     @Autowired
     private CartItemRepository cartItemRepository;
-    @Autowired
-    private ProductService productService;
-
-    public void saveCartItem(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
-    }
-
 
     public double sum(List<CartItem> items) {
         double sum = 0;

@@ -47,7 +47,6 @@ public class UserService {
         Cart cart = new Cart();
         cart.setUser(user);
         cartRepository.save(cart);
-
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -59,4 +58,7 @@ public class UserService {
         return userRepository.existsByUsername(email);
     }
 
+    public void clearCart(User user) {
+        user.getCart().getProducts().clear();
+    }
 }

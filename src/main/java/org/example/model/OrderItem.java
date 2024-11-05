@@ -26,11 +26,6 @@ public class OrderItem {
     @Column(name = "quantity")
     private int quantity;
 
-    public OrderItem(Product product, String size) {
-        this.product = product;
-        this.size = size;
-    }
-
     public OrderItem(Product product, String size, int quantity) {
         this.quantity = quantity;
         this.product = product;
