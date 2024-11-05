@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.User;
-import org.example.service.OrderService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +15,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderService productService;
 
     @GetMapping("/login")
     public String login() {
@@ -45,7 +38,7 @@ public class UserController {
             return "redirect:/users/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "registration"; // Перенаправление на страницу регистрации с сообщением об ошибке
+            return "registration";
         }
     }
 

@@ -37,9 +37,9 @@
             <dt>Size:</dt>
             <select id="size" name="size" onchange="updateHiddenSize(this)">
                 <option selected value="select size">Select Size</option>
-                <option th:each="size : ${sizes}"
-                        th:text="${size}"
-                        th:value="${size}">
+                <option th:each="entry : ${productSizes}"
+                        th:text="${entry.key} + ' (' + ${entry.value} + ' left)'"
+                        th:value="${entry.key}">
                 </option>
             </select>
             <dt>Category:</dt>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/products")
@@ -37,9 +38,9 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getProductById(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
-        List<String> sizes = productService.getSizesFromProduct(product);
+        Map<String, Integer> productSizes = product.getProductSizes(); // Получаем карту размеров и количества
         model.addAttribute("product", product);
-        model.addAttribute("sizes", sizes);
+        model.addAttribute("productSizes", productSizes);
         return "product-details";
     }
 }

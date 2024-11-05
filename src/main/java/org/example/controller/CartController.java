@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.handler.InsufficientStockException;
 import org.example.model.CartDetails;
 import org.example.model.CartItem;
 import org.example.model.Product;
@@ -72,13 +73,23 @@ public class CartController {
     }
 
     @PostMapping("/cartdetails")
-    public String processCartDetails(@ModelAttribute("cartDetails") CartDetails cartDetails, Principal principal) {
+    public String processCartDetails(@ModelAttribute("cartDetails") CartDetails cartDetails, Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
         List<CartItem> cartItems = user.getCart().getProducts();
-        orderService.createNewOrder(cartItems, user);
-        cartItemService.decrementProducts(cartItems);
-        userService.clearCart(user);
-        cartService.saveCart(user.getCart());
+        try {
+            orderService.createNewOrder(cartItems, user);
+            cartItemService.decrementProducts(cartItems);
+            userService.clearCart(user);
+            cartService.saveCart(user.getCart());
+        } catch (InsufficientStockException e) {
+            double sum = cartItemService.sum(cartItems);
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("cartItems", cartItems);
+            model.addAttribute("user", user);
+            model.addAttribute("cart", user.getCart());
+            model.addAttribute("sum", sum);
+            return "cart";
+        }
         return "redirect:/cart/cartplaced";
     }
 

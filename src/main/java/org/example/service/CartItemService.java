@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.handler.InsufficientStockException;
 import org.example.model.CartItem;
 import org.example.model.Product;
 import org.example.model.User;
@@ -47,20 +48,36 @@ public class CartItemService {
         }
     }
 
-    public void decrementProducts(List<CartItem> cartItems) {
+    public void decrementProducts(List<CartItem> cartItems) throws InsufficientStockException {
+        StringBuilder errorMessage = new StringBuilder();
         for (CartItem cartItem : cartItems) {
             Product product = cartItem.getProduct();
             String size = cartItem.getSize();
-            int quantity = cartItem.getQuantity();
+            int requestedQuantity = cartItem.getQuantity();
 
             if (product.getProductSizes().containsKey(size)) {
-                int currentQuantity = product.getProductSizes().get(size);
-                if (currentQuantity >= quantity) {
-                    product.getProductSizes().put(size, currentQuantity - quantity);
+                int availableQuantity = product.getProductSizes().get(size);
+                if (availableQuantity >= requestedQuantity) {
+                    product.getProductSizes().put(size, availableQuantity - requestedQuantity);
                 } else {
-                    System.out.println("Недостаточно товара в наличии.");
+                    errorMessage.append("Недостаточно товара ")
+                            .append(product.getProductName())
+                            .append(" размера ")
+                            .append(size)
+                            .append(". Осталось ")
+                            .append(availableQuantity)
+                            .append(" шт.\n");
                 }
+            } else {
+                errorMessage.append("Товар ")
+                        .append(product.getProductName())
+                        .append(" размера ")
+                        .append(size)
+                        .append(" отсутствует.\n");
             }
+        }
+        if (errorMessage.length() > 0) {
+            throw new InsufficientStockException(errorMessage.toString());
         }
     }
 }

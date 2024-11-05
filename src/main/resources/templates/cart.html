@@ -53,6 +53,9 @@
 
     <p>Total Price: <span th:text="${sum}"></span></p>
     <a class="buy-now-button" th:href="@{/cart/cartdetails}">Buy Now</a>
+    <div class="error" th:if="${errorMessage != null}">
+        <p th:text="${errorMessage}"></p>
+    </div>
 </div>
 </body>
 </html>
