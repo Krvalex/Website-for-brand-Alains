@@ -7,20 +7,9 @@
 <h1>Alains Shop</h1>
 <hr>
 <h4>Авторизация</h4>
-
-<!-- Сообщение об отсутствии email в системе -->
-<div style="color: red;" th:if="${usernameNotFoundMessage}">
-    <p th:text="${usernameNotFoundMessage}"></p>
-</div>
-
-<!-- Сообщение о неверном пароле -->
-<div style="color: red;" th:if="${errorMessage}">
-    <p th:text="${errorMessage}"></p>
-</div>
-
 <form action="/users/login" method="post">
-    Эл. почта: <input name="username" type="email"><br><br>
-    Пароль: <input name="password" type="password"><br><br>
+    Эл. почта: <input name="username" required type="email"><br><br>
+    Пароль: <input name="password" required type="password"><br><br>
     <input type="submit" value="Вход"/>
 </form>
 <a href="/users/registration">Зарегистрироваться</a>

@@ -61,4 +61,8 @@ public class UserService {
     public void clearCart(User user) {
         user.getCart().getProducts().clear();
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
 }

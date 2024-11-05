@@ -5,6 +5,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Cart Details</title>
     <link href="/css/styles.css" rel="stylesheet">
+    <script>
+        function togglePromoCodeField() {
+            const promoCodeField = document.getElementById('promoCodeField');
+            const promoCodeYes = document.getElementById('hasPromoCodeYes');
+            promoCodeField.style.display = promoCodeYes.checked ? 'block' : 'none';
+        }
+    </script>
 </head>
 <body class="cartDetails">
 <nav>
@@ -30,8 +37,25 @@
         <input id="name" name="name" required th:value="${user != null ? user.username : ''}" type="text">
         <br>
         <label for="address">Address:</label>
-        <input id="address" name="address" required type="text">
+        <input id="address" name="address" required th:value="${address != null ? address : ''}" type="text">
         <br>
+
+        <h3>Do you have a promo code?</h3>
+        <label>
+            <input id="hasPromoCodeYes" name="hasPromoCode" onclick="togglePromoCodeField()" type="radio" value="yes">
+            Yes
+        </label>
+        <label>
+            <input checked id="hasPromoCodeNo" name="hasPromoCode" onclick="togglePromoCodeField()" type="radio"
+                   value="no"> No
+        </label>
+
+        <div id="promoCodeField" style="display: none;">
+            <label for="promoCode">Promo Code:</label>
+            <input id="promoCode" name="promoCode" type="text">
+            <button name="applyPromoCode" type="submit" value="true">Применить промокод</button>
+        </div>
+
         <h3>Cart Items</h3>
         <table border="1">
             <tr>
@@ -50,8 +74,11 @@
         <br>
         <h3>Total Price</h3>
         <p th:text="${sum}"></p>
+        <p style="color: green;" th:if="${discountMessage != null}" th:text="${discountMessage}"></p>
+        <p style="color: red;" th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
         <br>
-        <button type="submit">Place Cart</button>
+
+        <button name="applyPromoCode" type="submit" value="false">Place Order</button>
     </form>
 </div>
 </body>

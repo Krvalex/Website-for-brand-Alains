@@ -5,6 +5,7 @@ import org.example.model.enums.Category;
 import org.example.model.enums.Size;
 import org.example.repository.CartRepository;
 import org.example.repository.ProductRepository;
+import org.example.repository.PromoCodeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +17,18 @@ public class DataInitializer implements CommandLineRunner {
 
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
+    private final PromoCodeRepository promoCodeRepository;
 
-    public DataInitializer(ProductRepository productRepository, CartRepository cartRepository) {
+    public DataInitializer(ProductRepository productRepository, CartRepository cartRepository, PromoCodeRepository promoCodeRepository) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
+        this.promoCodeRepository = promoCodeRepository;
     }
 
     @Override
     public void run(String... args) {
         initializeProducts();
+        initializePromoCodes();
     }
 
     private void initializeProducts() {
@@ -63,5 +67,13 @@ public class DataInitializer implements CommandLineRunner {
         }}, Category.HOODIES, "tsmHoodie.jpg");
 
         productRepository.saveAll(List.of(tShirt1, tShirt2, tShirt3, hoodie1, hoodie2, hoodie3));
+    }
+
+    private void initializePromoCodes() {
+//        PromoCode promo1 = new PromoCode("DISCOUNT10", 10);
+//        PromoCode promo2 = new PromoCode("DISCOUNT20", 20);
+//        PromoCode promo3 = new PromoCode("DISCOUNT15", 15);
+//
+//        promoCodeRepository.saveAll(List.of(promo1, promo2, promo3));
     }
 }

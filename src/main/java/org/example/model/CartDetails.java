@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class CartDetails {
 
-    private String deliveryAddress;
+    private String address;
     private String paymentMethod;
 
 }

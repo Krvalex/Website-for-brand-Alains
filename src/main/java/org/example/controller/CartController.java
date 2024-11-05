@@ -1,10 +1,7 @@
 package org.example.controller;
 
 import org.example.handler.InsufficientStockException;
-import org.example.model.CartDetails;
-import org.example.model.CartItem;
-import org.example.model.Product;
-import org.example.model.User;
+import org.example.model.*;
 import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,9 @@ public class CartController {
 
     @Autowired
     private CartItemService cartItemService;
+
+    @Autowired
+    private PromoCodeService promoCodeService;
 
     @GetMapping
     public String getCart(Principal principal, Model model) {
@@ -73,24 +73,51 @@ public class CartController {
     }
 
     @PostMapping("/cartdetails")
-    public String processCartDetails(@ModelAttribute("cartDetails") CartDetails cartDetails, Principal principal, Model model) {
+    public String processCartDetails(@ModelAttribute("cartDetails") CartDetails cartDetails,
+                                     @RequestParam(required = false) String promoCode,
+                                     @RequestParam String hasPromoCode,
+                                     @RequestParam(required = false) String applyPromoCode,
+                                     Principal principal,
+                                     Model model) {
         User user = userService.getUserByPrincipal(principal);
         List<CartItem> cartItems = user.getCart().getProducts();
-        try {
-            orderService.createNewOrder(cartItems, user);
-            cartItemService.decrementProducts(cartItems);
-            userService.clearCart(user);
-            cartService.saveCart(user.getCart());
-        } catch (InsufficientStockException e) {
-            double sum = cartItemService.sum(cartItems);
-            model.addAttribute("errorMessage", e.getMessage());
+        double sum = cartItemService.sum(cartItems);
+
+        String address = cartDetails.getAddress();
+        model.addAttribute("address", address);
+
+        if ("yes".equals(hasPromoCode) && "true".equals(applyPromoCode)) {
+            PromoCode promo = promoCodeService.validatePromoCode(promoCode);
+            if (promo != null) {
+                double discount = sum * (promo.getDiscountPercentage() / 100);
+                sum -= discount;
+                model.addAttribute("discountMessage", "Скидка " + promo.getDiscountPercentage() + "% применена!");
+            } else {
+                model.addAttribute("errorMessage", "Недействительный промокод.");
+            }
             model.addAttribute("cartItems", cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
             model.addAttribute("sum", sum);
-            return "cart";
+            return "cartdetails";
         }
-        return "redirect:/cart/cartplaced";
+        if ("yes".equals(hasPromoCode) && "false".equals(applyPromoCode) || "no".equals(hasPromoCode)) {
+            try {
+                cartItemService.decrementProducts(cartItems);
+                orderService.createNewOrder(cartItems, user);
+                userService.clearCart(user);
+                cartService.saveCart(user.getCart());
+                return "cartplaced";
+            } catch (InsufficientStockException e) {
+                model.addAttribute("errorMessage", e.getMessage());
+                model.addAttribute("cartItems", cartItems);
+                model.addAttribute("user", user);
+                model.addAttribute("cart", user.getCart());
+                model.addAttribute("sum", sum);
+                return "cart";
+            }
+        }
+        return "cart";
     }
 
     @GetMapping("/cartplaced")
