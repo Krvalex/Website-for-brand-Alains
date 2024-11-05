@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -49,9 +50,13 @@ public class CartController {
     }
 
     @PostMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId, @RequestParam String size, Principal principal) {
+    public String addToCart(@PathVariable Long productId, @RequestParam String size, Principal principal, RedirectAttributes redirectAttributes) {
         if (principal == null) {
             return "redirect:/users/login";
+        }
+        if (size == null || size.equals("")) {
+            redirectAttributes.addFlashAttribute("error", "Пожалуйста, выберите размер.");
+            return "redirect:/products/" + productId;
         }
         User user = userService.getUserByPrincipal(principal);
         Product product = productService.getProductById(productId);

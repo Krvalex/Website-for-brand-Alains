@@ -26,6 +26,7 @@
 </nav>
 <img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
      th:src="@{'/' + ${product.productImage}}">
+
 <div class="product-info">
     <h1 th:text="${product.productName}"></h1>
     <div class="product-details">
@@ -49,6 +50,9 @@
             <input id="hiddenSize" name="size" type="hidden">
             <button type="submit">Add to Cart</button>
         </form>
+    </div>
+    <div style="color: red; margin-top: 10px;" th:if="${error}">
+        <p th:text="${error}"></p>
     </div>
 </div>
 <script>
