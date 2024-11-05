@@ -51,4 +51,5 @@ public class ProductService {
         product.setProductSizes(sizes);
         productRepository.save(product);
     }
+
 }

@@ -23,4 +23,16 @@ public class PromoCodeService {
         }
         return null;
     }
+
+    public List<PromoCode> getAllPromocodes() {
+        return promoCodeRepository.findAll();
+    }
+
+    public void add(PromoCode promoCode) {
+        promoCodeRepository.save(promoCode);
+    }
+
+    public void delete(Long id) {
+        promoCodeRepository.deleteById(id);
+    }
 }

@@ -2,14 +2,13 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.Product;
+import org.example.model.PromoCode;
 import org.example.service.ProductService;
+import org.example.service.PromoCodeService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class AdminController {
 
     private final UserService userService;
     private final ProductService productService;
+    private final PromoCodeService promoCodeService;
 
     @GetMapping("/admin")
     public String admin(Model model) {
@@ -55,6 +55,24 @@ public class AdminController {
     public String deleteProductPost(@RequestParam Long id) {
         productService.deleteProduct(id);
         return "redirect:/admin/products";
+    }
+
+    @GetMapping("/admin/promocodes")
+    public String listPromocodes(Model model) {
+        model.addAttribute("promocodes", promoCodeService.getAllPromocodes());
+        return "adminpromocodes";
+    }
+
+    @PostMapping("/admin/add/promocode")
+    public String addPromocode(@ModelAttribute PromoCode promoCode) {
+        promoCodeService.add(promoCode);
+        return "redirect:/admin/promocodes";
+    }
+
+    @PostMapping("/admin/delete/promocode/{id}")
+    public String deletePromocode(@PathVariable Long id) {
+        promoCodeService.delete(id);
+        return "redirect:/admin/promocodes"; // Перенаправляем на страницу списка промокодов
     }
 }
 
