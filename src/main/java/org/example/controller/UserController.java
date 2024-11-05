@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.Order;
-import org.example.model.Product;
 import org.example.model.User;
 import org.example.service.OrderService;
 import org.example.service.UserService;
@@ -62,12 +61,8 @@ public class UserController {
     public String account(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
         List<Order> orders = user.getOrders();
-        List<List<Product>> allProductsInOrders = orderService.getAllProductsInOrders(orders);
-        List<Double> totalPrices = productService.getSumPriceOfListProducts(allProductsInOrders);
         model.addAttribute("user", user);
         model.addAttribute("orders", orders);
-        model.addAttribute("allProductsInOrders", allProductsInOrders);
-        model.addAttribute("totalPrices", totalPrices);
         return "useraccount";
     }
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
@@ -36,8 +38,10 @@ public class AdminController {
     }
 
     @PostMapping("/admin/create/product")
-    public String createProduct(@ModelAttribute Product product) {
-        productService.saveProduct(product);
+    public String createProduct(@ModelAttribute Product product,
+                                @RequestParam("productSize") List<String> productSizes,
+                                @RequestParam("productQuantity") List<Integer> productQuantities) {
+        productService.saveNewProduct(product, productSizes, productQuantities);
         return "redirect:/admin/products";
     }
 

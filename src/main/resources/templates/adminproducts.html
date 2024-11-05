@@ -12,18 +12,21 @@
         <th>Product Name</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Quantity</th>
-        <th>Size</th>
+        <th>Sizes and Quantities</th>
         <th>Category</th>
     </tr>
     <tr th:each="product : ${products}">
-        <td th:text="${product.getProductId()}">Product ID</td>
-        <td th:text="${product.getProductName()}">Product Name</td>
-        <td th:text="${product.getProductDescription()}">Description</td>
-        <td th:text="${product.getProductPrice()}">Price</td>
-        <td th:text="${product.getProductQuantity()}">Quantity</td>
-        <td th:text="${product.getProductSize()}">Size</td>
-        <td th:text="${product.getProductCategory()}">Category</td>
+        <td th:text="${product.productId}">Product ID</td>
+        <td th:text="${product.productName}">Product Name</td>
+        <td th:text="${product.productDescription}">Description</td>
+        <td th:text="${product.productPrice}">Price</td>
+        <td>
+            <ul>
+                <li th:each="entry : ${product.productSizes}"
+                    th:text="${entry.key} + ' - Quantity: ' + ${entry.value}"></li>
+            </ul>
+        </td>
+        <td th:text="${product.productCategory}">Category</td>
     </tr>
 </table>
 <hr>

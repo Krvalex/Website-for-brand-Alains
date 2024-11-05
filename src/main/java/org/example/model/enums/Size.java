@@ -1,12 +1,12 @@
 package org.example.model.enums;
 
 public enum Size {
-    XS("Extra Small"),
-    S("Small"),
-    M("Medium"),
-    L("Large"),
-    XL("Extra Large"),
-    XXL("Double Extra Large");
+    XS("XS"),
+    S("S"),
+    M("M"),
+    L("L"),
+    XL("XL"),
+    XXL("XXL");
 
     private final String displayName;
 

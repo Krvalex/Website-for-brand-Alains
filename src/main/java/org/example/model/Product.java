@@ -6,39 +6,50 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.model.enums.Category;
-import org.example.model.enums.Size;
+
+import java.util.Map;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
     private String productName;
     private String productDescription;
     private double productPrice;
-    private int productQuantity;
 
-    @Enumerated(EnumType.STRING)
-    private Size productSize;
+    @ElementCollection
+    @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
+    @MapKeyColumn(name = "size")
+    @Column(name = "quantity")
+    private Map<String, Integer> productSizes; // Размер - количество
 
     @Enumerated(EnumType.STRING)
     private Category productCategory;
 
     private String productImage;
 
-    public Product(String productName, String productDescription, double productPrice, int productQuantity, Size productSize,
+    public Product(String productName, String productDescription, double productPrice, Map<String, Integer> productSizes,
                    Category productCategory, String productImage) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
-        this.productQuantity = productQuantity;
-        this.productSize = productSize;
+        this.productSizes = productSizes;
         this.productCategory = productCategory;
         this.productImage = productImage;
+    }
+
+    @Override
+    public Product clone() {
+        try {
+            return (Product) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

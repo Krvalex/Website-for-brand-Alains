@@ -2,6 +2,35 @@
 <html lang="en">
 <head>
     <title>Add Product</title>
+    <script>
+        function addSizeField() {
+            const container = document.getElementById("sizeFieldsContainer");
+            const div = document.createElement("div");
+            div.classList.add("size-field");
+
+            const sizeSelect = document.createElement("select");
+            sizeSelect.name = "productSize";
+            sizeSelect.required = true;
+            sizeSelect.innerHTML = `
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XLL">XXL</option>
+            `;
+            div.appendChild(sizeSelect);
+
+            const quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.name = "productQuantity";
+            quantityInput.required = true;
+            quantityInput.placeholder = "Количество";
+            div.appendChild(quantityInput);
+
+            container.appendChild(div);
+        }
+    </script>
 </head>
 <body>
 <h1>Add New Product</h1>
@@ -15,19 +44,22 @@
     <label for="productPrice">Цена товара:</label>
     <input id="productPrice" name="productPrice" required step="0.01" type="number"><br><br>
 
-    <label for="productQuantity">Количество товара:</label>
-    <input id="productQuantity" name="productQuantity" type="number"><br><br>
-
-    <label for="productSize">Размер товара:</label>
-    <select id="productSize" name="productSize" required>
-        <option value="XS">Extra Small</option>
-        <option value="S">Small</option>
-        <option value="M">Medium</option>
-        <option value="L">Large</option>
-        <option value="XL">Extra Large</option>
-        <option value="XLL">Double Extra Large</option>
-        <!-- Добавьте другие размеры -->
-    </select><br><br>
+    <label>Размер и количество:</label><br>
+    <div id="sizeFieldsContainer">
+        <div class="size-field">
+            <select name="productSize" required>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XLL">XXL</option>
+            </select>
+            <input name="productQuantity" placeholder="Количество" required type="number">
+        </div>
+    </div>
+    <button onclick="addSizeField()" type="button">Добавить размер</button>
+    <br><br>
 
     <label for="productCategory">Категория товара:</label>
     <select id="productCategory" name="productCategory" required>

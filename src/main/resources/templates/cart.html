@@ -31,17 +31,19 @@
         <tr>
             <th>Product Name</th>
             <th>Size</th>
+            <th>Quantity</th>
             <th>Price</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.productName}"></td>
-            <td th:text="${product.productSize.displayName}"></td>
-            <td th:text="${product.productPrice}"></td>
+        <tr th:each="cartItem : ${cartItems}">
+            <td th:text="${cartItem.product.productName}"></td>
+            <td th:text="${cartItem.size}"></td>
+            <td th:text="${cartItem.quantity}"></td>
+            <td th:text="${cartItem.product.productPrice}"></td>
             <td>
-                <form method="post" th:action="@{cart/delete/{productId}(productId=${product.productId})}">
+                <form method="post" th:action="@{/cart/delete/{cartItemId}(cartItemId=${cartItem.cartItemId})}">
                     <button type="submit">Delete</button>
                 </form>
             </td>

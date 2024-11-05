@@ -35,14 +35,13 @@
             <dt>Price:</dt>
             <dd th:text="${product.productPrice}"></dd>
             <dt>Size:</dt>
-            <dd>
-                <select id="size" name="size" onchange="updateHiddenSize(this)">
-                    <option th:each="productS : ${products}"
-                            th:text="${productS.getProductSize()}"
-                            th:value="${productS.getProductSize()}">
-                    </option>
-                </select>
-            </dd>
+            <select id="size" name="size" onchange="updateHiddenSize(this)">
+                <option selected value="select size">Select Size</option>
+                <option th:each="size : ${sizes}"
+                        th:text="${size}"
+                        th:value="${size}">
+                </option>
+            </select>
             <dt>Category:</dt>
             <dd th:text="${product.productCategory}"></dd>
         </dl>

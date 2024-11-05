@@ -36,11 +36,15 @@
         <table border="1">
             <tr>
                 <th>Product Name</th>
+                <th>Size</th>
+                <th>Quantity</th>
                 <th>Price</th>
             </tr>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.productName}"></td>
-                <td th:text="${product.productPrice}"></td>
+            <tr th:each="cartItem : ${cartItems}">
+                <td th:text="${cartItem.product.productName}"></td>
+                <td th:text="${cartItem.size}"></td>
+                <td th:text="${cartItem.quantity}"></td>
+                <td th:text="${cartItem.product.productPrice}"></td>
             </tr>
         </table>
         <br>

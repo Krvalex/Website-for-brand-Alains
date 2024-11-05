@@ -27,14 +27,7 @@ public class Order {
 
     private LocalDateTime orderDate;
 
-    @ElementCollection
-    @CollectionTable(name = "order_products", joinColumns = @JoinColumn(name = "order_id"))
-    @Column(name = "product_id")
-    private List<Long> products_id = new ArrayList<>();
-
-    public Order(User user, LocalDateTime orderDate, List<Long> products_id) {
-        this.user = user;
-        this.orderDate = orderDate;
-        this.products_id = products_id;
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<OrderItem> products = new ArrayList<>();
 }

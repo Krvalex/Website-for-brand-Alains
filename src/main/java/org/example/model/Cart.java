@@ -21,8 +21,7 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection
-    @CollectionTable(name = "cart_products", joinColumns = @JoinColumn(name = "cart_id"))
-    @Column(name = "product_id")
-    private List<Long> products_id = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cart_id")
+    private List<CartItem> products = new ArrayList<>();
 }

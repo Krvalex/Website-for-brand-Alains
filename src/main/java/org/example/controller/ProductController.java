@@ -28,8 +28,7 @@ public class ProductController {
     @GetMapping
     public String getAllProducts(Model model, @RequestParam(required = false) Category category, Principal principal) {
         List<Product> products = productService.getProducts(category);
-        List<Product> uniqueProducts = productService.getUniqueProducts(products);
-        model.addAttribute("products", uniqueProducts);
+        model.addAttribute("products", products);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("categories", Category.values());
         return "products";
@@ -38,9 +37,9 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getProductById(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
-        List<Product> productsByName = productService.getAllProductsByName(product.getProductName());
+        List<String> sizes = productService.getSizesFromProduct(product);
         model.addAttribute("product", product);
-        model.addAttribute("products", productsByName);
+        model.addAttribute("sizes", sizes);
         return "product-details";
     }
 }

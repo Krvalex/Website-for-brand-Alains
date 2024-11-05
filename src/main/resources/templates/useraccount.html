@@ -34,38 +34,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Отображение списка заказов -->
+    <div class="orders">
+        <h2>Your Orders</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Items</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.orderId}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td>
+                    <ul>
+                        <li th:each="item : ${order.products}"
+                            th:text="${item.product.productName} + ' (Size: ' + ${item.size} + ', Quantity: ' + ${item.quantity} + ')'"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <form action="/users/logout" method="post" style="display:inline;">
         <button type="submit">Log out</button>
     </form>
-
-    <div class="orders-container">
-        <h2>Your Orders</h2>
-        <div th:each="order, orderStat : ${orders}">
-            <div class="order-item" th:data-order-id="${order.getOrderId()}">
-                <h3>Order <span th:text="${orderStat.count}"></span></h3>
-                <div class="order-details" style="display:none;">
-                    <ul>
-                        <li th:each="product : ${allProductsInOrders[orderStat.index]}">
-                            <span th:text="${product.getProductName()}"></span>
-                            <span th:text="${product.getProductSize()}"></span>
-                            <span th:text="${product.getProductPrice()}"></span>
-                        </li>
-                    </ul>
-                    <p>Total Price: <span th:text="${totalPrices[orderStat.index]}"></span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-<script>
-    const orderItems = document.querySelectorAll('.order-item');
-    orderItems.forEach(orderItem => {
-        orderItem.addEventListener('click', () => {
-            const orderDetails = orderItem.querySelector('.order-details');
-            orderDetails.style.display = orderDetails.style.display === 'none' ? 'block' : 'none';
-        });
-    });
-</script>
 </body>
 </html>
