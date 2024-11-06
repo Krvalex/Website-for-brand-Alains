@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Cart</title>
     <link href="/css/styles.css" rel="stylesheet">
 </head>
-<body class="products">
+<body class="cart">
 <nav>
     <ul>
         <li><a th:href="@{/}">Home</a></li>
@@ -24,21 +24,8 @@
         </li>
     </ul>
 </nav>
-
 <div class="main-content">
-    <h2>Available Products</h2>
-
-    <form method="GET" th:action="@{/products}">
-        <select name="category" required="required">
-            <option disabled selected value="">All Categorise</option>
-            <option th:each="category : ${categories}"
-                    th:text="${category.displayName}"
-                    th:value="${category}">
-            </option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
-
+    <h2>Your Favorites</h2>
     <div class="product-item" th:each="product : ${products}">
         <!-- Dynamic image loading -->
         <img alt="Product Image" th:src="@{'/' + ${product.productImage}}">
@@ -49,9 +36,12 @@
 
         <a th:href="@{'/products/' + ${product.productId}}">View Details</a>
 
+        <!-- Кнопка для удаления из избранного -->
+        <form method="post" style="display: inline;" th:action="@{'/favorites/remove/' + ${product.productId}}">
+            <button type="submit">Remove from Favorites</button>
+        </form>
         <hr>
     </div>
 </div>
-
 </body>
 </html>

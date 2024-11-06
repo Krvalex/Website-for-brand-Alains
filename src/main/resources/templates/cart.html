@@ -11,6 +11,7 @@
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/products}">Products</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/favorites}">Favorites</a></li>
         <li th:if="${user != null}">
             <form action="/users/account" style="display:inline;">
                 <button type="submit">Account</button>

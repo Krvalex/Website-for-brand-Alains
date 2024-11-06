@@ -3,9 +3,11 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.model.Cart;
+import org.example.model.Favorite;
 import org.example.model.User;
 import org.example.model.enums.Role;
 import org.example.repository.CartRepository;
+import org.example.repository.FavoriteRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +27,9 @@ public class UserService {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -47,6 +52,10 @@ public class UserService {
         Cart cart = new Cart();
         cart.setUser(user);
         cartRepository.save(cart);
+
+        Favorite favorite = new Favorite();
+        favorite.setUser(user);
+        favoriteRepository.save(favorite);
     }
 
     public User getUserByPrincipal(Principal principal) {

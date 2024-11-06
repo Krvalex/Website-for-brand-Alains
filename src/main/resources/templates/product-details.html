@@ -12,6 +12,7 @@
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/products}">Products</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/favorites}">Favorites</a></li>
         <li th:if="${user != null}">
             <form action="/users/account" style="display:inline;">
                 <button type="submit">Account</button>
@@ -24,6 +25,7 @@
         </li>
     </ul>
 </nav>
+
 <img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
      th:src="@{'/' + ${product.productImage}}">
 
@@ -46,15 +48,23 @@
             <dt>Category:</dt>
             <dd th:text="${product.productCategory}"></dd>
         </dl>
+
+        <!-- Форма для добавления в корзину -->
         <form method="post" th:action="@{'/cart/add/' + ${product.productId}}">
             <input id="hiddenSize" name="size" type="hidden">
             <button type="submit">Add to Cart</button>
+        </form>
+
+        <!-- Форма для добавления в избранное -->
+        <form method="post" th:action="@{'/favorites/' + ${product.productId}}">
+            <button type="submit">Add to Favorite</button>
         </form>
     </div>
     <div style="color: red; margin-top: 10px;" th:if="${error}">
         <p th:text="${error}"></p>
     </div>
 </div>
+
 <script>
     function updateHiddenSize(select) {
         document.getElementById('hiddenSize').value = select.value;
