@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.model.FavoriteItem;
 import org.example.model.Product;
 import org.example.model.User;
 import org.example.service.FavoriteService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,17 +29,8 @@ public class FavoriteController {
 
     @PostMapping("/favorites/{productId}")
     public String favoriteProduct(@PathVariable Long productId, Principal principal) {
-        Product product = productService.getProductById(productId);
         User user = userService.getUserByPrincipal(principal);
-        boolean isAlreadyFavorite = user.getFavorite().getProducts()
-                .stream()
-                .anyMatch(item -> item.getProduct().getProductId().equals(productId));
-        if (!isAlreadyFavorite) {
-            // Создаем FavoriteItem и добавляем его в избранное
-            FavoriteItem favoriteItem = new FavoriteItem(product.clone());
-            user.getFavorite().getProducts().add(favoriteItem);
-            favoriteService.saveFavorite(user.getFavorite());
-        }
+        favoriteService.saveIfIsNotAlreadyFavorite(user, productId);
         return "redirect:/products/" + productId;
     }
 
@@ -51,11 +40,7 @@ public class FavoriteController {
             return "redirect:/users/login";
         }
         User user = userService.getUserByPrincipal(principal);
-        List<Product> products = user.getFavorite().getProducts()
-                .stream()
-                .map(FavoriteItem::getProduct)
-                .collect(Collectors.toList());
-
+        List<Product> products = favoriteService.getFavoriteProducts(user);
         model.addAttribute("user", user);
         model.addAttribute("products", products);
         return "favorites";
