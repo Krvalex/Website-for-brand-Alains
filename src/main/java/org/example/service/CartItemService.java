@@ -1,20 +1,23 @@
 package org.example.service;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.handler.InsufficientStockException;
 import org.example.model.CartItem;
 import org.example.model.Product;
 import org.example.model.User;
 import org.example.repository.CartItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 @Service
 public class CartItemService {
 
-    @Autowired
-    private CartItemRepository cartItemRepository;
+    CartItemRepository cartItemRepository;
 
     public double sum(List<CartItem> items) {
         double sum = 0;
@@ -40,7 +43,7 @@ public class CartItemService {
     }
 
     public void deleteProduct(User user, Long cartItemId) {
-        CartItem cartItem = cartItemRepository.findById(cartItemId).orElse(null);
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
         if (cartItem.getQuantity() > 1) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
         } else {
@@ -76,7 +79,7 @@ public class CartItemService {
                         .append(" отсутствует.\n");
             }
         }
-        if (errorMessage.length() > 0) {
+        if (!errorMessage.isEmpty()) {
             throw new InsufficientStockException(errorMessage.toString());
         }
     }

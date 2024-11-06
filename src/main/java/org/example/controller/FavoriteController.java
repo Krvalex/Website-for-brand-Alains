@@ -26,8 +26,8 @@ public class FavoriteController {
 
     @PostMapping("/favorites/{productId}")
     public String favoriteProduct(@PathVariable Long productId, Principal principal) {
-        User user = userService.getUserByPrincipal(principal);
-        favoriteService.saveIfIsNotAlreadyFavorite(user, productId);
+        User user = userService.getByPrincipal(principal);
+        favoriteService.saveIfNotAlreadyInFavorite(user, productId);
         return "redirect:/products/" + productId;
     }
 
@@ -36,8 +36,8 @@ public class FavoriteController {
         if (principal == null) {
             return "redirect:/users/login";
         }
-        User user = userService.getUserByPrincipal(principal);
-        List<Product> products = favoriteService.getFavoriteProducts(user);
+        User user = userService.getByPrincipal(principal);
+        List<Product> products = favoriteService.getProducts(user);
         model.addAttribute("user", user);
         model.addAttribute("products", products);
         return "favorites";
@@ -45,7 +45,7 @@ public class FavoriteController {
 
     @PostMapping("/favorites/remove/{productId}")
     public String removeFavoriteProduct(@PathVariable Long productId, Principal principal) {
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         favoriteService.deleteProduct(user, productId);
         return "redirect:/favorites";
     }

@@ -28,13 +28,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(mappedBy = "user")
-    private Cart cart;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private Cart cart = new Cart();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "favorite_id")
+    private Favorite favorite = new Favorite();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
-
-    @OneToOne(mappedBy = "user")
-    private Favorite favorite;
 }
 

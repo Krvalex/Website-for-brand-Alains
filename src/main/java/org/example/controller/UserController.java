@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/registration")
     public String create(@ModelAttribute User user, Model model) {
         try {
-            userService.createUser(user);
+            userService.create(user);
             return "redirect:/users/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -44,13 +44,13 @@ public class UserController {
 
     @PostMapping("/logout")
     public String logout(Principal principal) {
-        userService.getUserByPrincipal(principal).setActive(false);
+        userService.getByPrincipal(principal).setActive(false);
         return "redirect:/";
     }
 
     @GetMapping("/account")
     public String account(Principal principal, Model model) {
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("orders", user.getOrders());
         return "useraccount";
@@ -58,13 +58,13 @@ public class UserController {
 
     @GetMapping
     public String getAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
         return "users";
     }
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("user", userService.getById(id));
         return "userdetails";
     }
 }

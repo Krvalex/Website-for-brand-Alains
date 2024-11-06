@@ -1,5 +1,10 @@
 package org.example.model.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public enum Size {
     XS("XS"),
     S("S"),
@@ -9,12 +14,4 @@ public enum Size {
     XXL("XXL");
 
     private final String displayName;
-
-    Size(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
 }

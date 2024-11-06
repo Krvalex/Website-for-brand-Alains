@@ -39,7 +39,7 @@ public class CartController {
         if (principal == null) {
             return "redirect:/users/login";
         }
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         List<CartItem> cartItems = user.getCart().getProducts();
         double sum = cartItemService.sum(cartItems);
         model.addAttribute("cartItems", cartItems);
@@ -58,16 +58,16 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", "Пожалуйста, выберите размер.");
             return "redirect:/products/" + productId;
         }
-        User user = userService.getUserByPrincipal(principal);
-        Product product = productService.getProductById(productId);
+        User user = userService.getByPrincipal(principal);
+        Product product = productService.getById(productId);
         cartItemService.addToCart(user, product, size);
-        cartService.saveCart(user.getCart());
+        cartService.save(user.getCart());
         return "redirect:/cart";
     }
 
     @GetMapping("/cartdetails")
     public String getCartDetails(Model model, Principal principal) {
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         List<CartItem> cartItems = user.getCart().getProducts();
         double sum = cartItemService.sum(cartItems);
         model.addAttribute("cartItems", cartItems);
@@ -84,7 +84,7 @@ public class CartController {
                                      @RequestParam(required = false) String applyPromoCode,
                                      Principal principal,
                                      Model model) {
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         List<CartItem> cartItems = user.getCart().getProducts();
         double sum = cartItemService.sum(cartItems);
 
@@ -92,7 +92,7 @@ public class CartController {
         model.addAttribute("address", address);
 
         if ("yes".equals(hasPromoCode) && "true".equals(applyPromoCode)) {
-            PromoCode promo = promoCodeService.validatePromoCode(promoCode);
+            PromoCode promo = promoCodeService.findByCode(promoCode);
             if (promo != null) {
                 double discount = sum * (promo.getDiscountPercentage() / 100);
                 sum -= discount;
@@ -109,9 +109,9 @@ public class CartController {
         if ("yes".equals(hasPromoCode) && "false".equals(applyPromoCode) || "no".equals(hasPromoCode)) {
             try {
                 cartItemService.decrementProducts(cartItems);
-                orderService.createNewOrder(cartItems, user);
-                userService.clearCart(user);
-                cartService.saveCart(user.getCart());
+                orderService.create(cartItems, user);
+                cartService.clear(user);
+                cartService.save(user.getCart());
                 return "cartplaced";
             } catch (InsufficientStockException e) {
                 model.addAttribute("errorMessage", e.getMessage());
@@ -132,9 +132,9 @@ public class CartController {
 
     @PostMapping("/delete/{cartItemId}")
     public String deteleProduct(@PathVariable Long cartItemId, Principal principal) {
-        User user = userService.getUserByPrincipal(principal);
+        User user = userService.getByPrincipal(principal);
         cartItemService.deleteProduct(user, cartItemId);
-        cartService.saveCart(user.getCart());
+        cartService.save(user.getCart());
         return "redirect:/cart";
     }
 

@@ -11,6 +11,23 @@
             const promoCodeYes = document.getElementById('hasPromoCodeYes');
             promoCodeField.style.display = promoCodeYes.checked ? 'block' : 'none';
         }
+
+        function setAddressRequired(isRequired) {
+            const addressField = document.getElementById('address');
+            if (isRequired) {
+                addressField.setAttribute('required', 'required');
+            } else {
+                addressField.removeAttribute('required');
+            }
+        }
+
+        function applyPromoCode() {
+            setAddressRequired(false);
+        }
+
+        function placeOrder() {
+            setAddressRequired(true);
+        }
     </script>
 </head>
 <body class="cartDetails">
@@ -38,7 +55,7 @@
         <input id="name" name="name" required th:value="${user != null ? user.username : ''}" type="text">
         <br>
         <label for="address">Address:</label>
-        <input id="address" name="address" required th:value="${address != null ? address : ''}" type="text">
+        <input id="address" name="address" th:value="${address != null ? address : ''}" type="text">
         <br>
 
         <h3>Do you have a promo code?</h3>
@@ -54,7 +71,8 @@
         <div id="promoCodeField" style="display: none;">
             <label for="promoCode">Promo Code:</label>
             <input id="promoCode" name="promoCode" type="text">
-            <button name="applyPromoCode" type="submit" value="true">Применить промокод</button>
+            <button name="applyPromoCode" onclick="applyPromoCode()" type="submit" value="true">Применить промокод
+            </button>
         </div>
 
         <h3>Cart Items</h3>
@@ -79,7 +97,7 @@
         <p style="color: red;" th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
         <br>
 
-        <button name="applyPromoCode" type="submit" value="false">Place Order</button>
+        <button name="applyPromoCode" onclick="placeOrder()" type="submit" value="false">Place Order</button>
     </form>
 </div>
 </body>

@@ -22,13 +22,13 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
         return "/admin";
     }
 
     @GetMapping("/admin/users")
     public String usersList(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
         return "adminusers";
     }
 
@@ -41,25 +41,25 @@ public class AdminController {
     public String createProduct(@ModelAttribute Product product,
                                 @RequestParam("productSize") List<String> productSizes,
                                 @RequestParam("productQuantity") List<Integer> productQuantities) {
-        productService.saveNewProduct(product, productSizes, productQuantities);
+        productService.create(product, productSizes, productQuantities);
         return "redirect:/admin/products";
     }
 
     @GetMapping("/admin/products")
     public String listProducts(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productService.getAll());
         return "/adminproducts";
     }
 
     @PostMapping("/admin/delete/product")
     public String deleteProductPost(@RequestParam Long id) {
-        productService.deleteProduct(id);
+        productService.delete(id);
         return "redirect:/admin/products";
     }
 
     @GetMapping("/admin/promocodes")
     public String listPromocodes(Model model) {
-        model.addAttribute("promocodes", promoCodeService.getAllPromocodes());
+        model.addAttribute("promocodes", promoCodeService.getAll());
         return "adminpromocodes";
     }
 

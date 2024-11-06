@@ -28,16 +28,16 @@ public class ProductController {
 
     @GetMapping
     public String getAllProducts(Model model, @RequestParam(required = false) Category category, Principal principal) {
-        List<Product> products = productService.getProducts(category);
+        List<Product> products = productService.getByCategory(category);
         model.addAttribute("products", products);
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
         return "products";
     }
 
     @GetMapping("/{id}")
     public String getProductById(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id);
+        Product product = productService.getById(id);
         Map<String, Integer> productSizes = product.getProductSizes(); // Получаем карту размеров и количества
         model.addAttribute("product", product);
         model.addAttribute("productSizes", productSizes);
