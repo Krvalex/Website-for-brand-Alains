@@ -6,8 +6,6 @@ import org.example.model.Cart;
 import org.example.model.Favorite;
 import org.example.model.User;
 import org.example.model.enums.Role;
-import org.example.repository.CartRepository;
-import org.example.repository.FavoriteRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,10 +24,10 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private CartRepository cartRepository;
+    private CartService cartService;
 
     @Autowired
-    private FavoriteRepository favoriteRepository;
+    private FavoriteService favoriteService;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -51,11 +49,11 @@ public class UserService {
 
         Cart cart = new Cart();
         cart.setUser(user);
-        cartRepository.save(cart);
+        cartService.saveCart(cart);
 
         Favorite favorite = new Favorite();
         favorite.setUser(user);
-        favoriteRepository.save(favorite);
+        favoriteService.saveFavorite(favorite);
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -69,9 +67,5 @@ public class UserService {
 
     public void clearCart(User user) {
         user.getCart().getProducts().clear();
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
     }
 }

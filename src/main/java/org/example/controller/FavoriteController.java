@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.model.Product;
 import org.example.model.User;
 import org.example.service.FavoriteService;
-import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ public class FavoriteController {
     private final FavoriteService favoriteService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private ProductService productService;
 
     @PostMapping("/favorites/{productId}")
     public String favoriteProduct(@PathVariable Long productId, Principal principal) {

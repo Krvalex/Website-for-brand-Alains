@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -36,11 +34,6 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
-    }
-
-    public List<String> getSizesFromProduct(Product product) {
-        Set<String> sizes = product.getProductSizes().keySet();
-        return sizes.stream().collect(Collectors.toList());
     }
 
     public void saveNewProduct(Product product, List<String> productSizes, List<Integer> productQuantities) {
