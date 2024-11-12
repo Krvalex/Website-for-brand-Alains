@@ -3,7 +3,7 @@ package org.example.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.example.handler.InsufficientStockException;
+import org.example.data.exception.InsufficientStockException;
 import org.example.model.CartItem;
 import org.example.model.Product;
 import org.example.model.User;

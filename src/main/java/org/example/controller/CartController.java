@@ -2,11 +2,11 @@ package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.example.handler.InsufficientStockException;
+import org.example.data.exception.InsufficientStockException;
 import org.example.model.*;
 import org.example.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,31 +15,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.List;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/cart")
 public class CartController {
 
-    @Autowired
     ProductService productService;
-    @Autowired
     UserService userService;
-    @Autowired
     CartService cartService;
-    @Autowired
     OrderService orderService;
-    @Autowired
     CartItemService cartItemService;
-    @Autowired
     PromoCodeService promoCodeService;
-    @Autowired
     GuestCartService guestCartService;
 
     @GetMapping
     public String getCart(Principal principal, HttpSession session, Model model) {
         List<CartItem> cartItems;
         double sum;
-
         if (principal == null) { //если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);

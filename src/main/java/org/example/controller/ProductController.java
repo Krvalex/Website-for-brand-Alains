@@ -1,12 +1,12 @@
 package org.example.controller;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.example.model.Product;
 import org.example.model.enums.Category;
 import org.example.service.ProductService;
 import org.example.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +18,13 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
     ProductService productService;
-
-    @Autowired
     UserService userService;
 
     @GetMapping

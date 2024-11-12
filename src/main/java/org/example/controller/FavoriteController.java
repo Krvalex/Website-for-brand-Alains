@@ -9,7 +9,6 @@ import org.example.model.User;
 import org.example.service.FavoriteService;
 import org.example.service.GuestFavoriteService;
 import org.example.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 import java.util.List;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
 @RequiredArgsConstructor
 public class FavoriteController {
 
-    @Autowired
-    final FavoriteService favoriteService;
-    @Autowired
+    FavoriteService favoriteService;
     UserService userService;
-    @Autowired
     GuestFavoriteService guestFavoriteService;
 
     @PostMapping("/favorites/{productId}")

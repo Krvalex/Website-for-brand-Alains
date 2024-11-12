@@ -1,4 +1,4 @@
-package org.example.configuration;
+package org.example.component;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
