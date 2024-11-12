@@ -1,9 +1,11 @@
 package org.example.configuration;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.model.Product;
 import org.example.model.enums.Category;
 import org.example.model.enums.Size;
-import org.example.repository.CartRepository;
 import org.example.repository.ProductRepository;
 import org.example.repository.PromoCodeRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,18 +14,13 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private final ProductRepository productRepository;
-    private final CartRepository cartRepository;
-    private final PromoCodeRepository promoCodeRepository;
-
-    public DataInitializer(ProductRepository productRepository, CartRepository cartRepository, PromoCodeRepository promoCodeRepository) {
-        this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
-        this.promoCodeRepository = promoCodeRepository;
-    }
+    ProductRepository productRepository;
+    PromoCodeRepository promoCodeRepository;
 
     @Override
     public void run(String... args) {
@@ -33,7 +30,6 @@ public class DataInitializer implements CommandLineRunner {
 
     private void initializeProducts() {
 //        productRepository.deleteAll();
-//        cartRepository.deleteAll();
         Product tShirt1 = new Product("Fnatic", "Comfortable T-Shirt", 19.99, new HashMap<>() {{
             put(Size.S.getDisplayName(), 10); // S - 10 шт
             put(Size.M.getDisplayName(), 10); // M - 5 шт

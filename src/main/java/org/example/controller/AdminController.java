@@ -75,7 +75,7 @@ public class AdminController {
     @PostMapping("/admin/delete/promocode/{id}")
     public String deletePromocode(@PathVariable Long id) {
         promoCodeService.delete(id);
-        return "redirect:/admin/promocodes"; // Перенаправляем на страницу списка промокодов
+        return "redirect:/admin/promocodes";
     }
 }
 
