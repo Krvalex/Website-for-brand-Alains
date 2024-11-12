@@ -21,7 +21,10 @@ public class OrderService {
 
     OrderRepository orderRepository;
 
-    public void create(List<CartItem> cartItems, User user) {
+    GuestCartService guestCartService;
+    CartService cartService;
+
+    public void createUserOrder(List<CartItem> cartItems, User user) {
         Order order = new Order();
         order.setOrderDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         for (CartItem cartItem : cartItems) {
@@ -29,5 +32,18 @@ public class OrderService {
         }
         order.setUser(user);
         orderRepository.save(order);
+        cartService.clear(user);
+        cartService.save(user.getCart());
+    }
+
+    public void createGuestOrder(List<CartItem> cartItems, String guestEmail, String guestIdentifier) {
+        Order order = new Order();
+        order.setOrderDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        for (CartItem cartItem : cartItems) {
+            order.getProducts().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
+        }
+        order.setGuestEmail(guestEmail);
+        orderRepository.save(order);
+        guestCartService.clear(guestIdentifier);
     }
 }

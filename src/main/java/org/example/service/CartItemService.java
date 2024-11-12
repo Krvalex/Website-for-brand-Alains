@@ -19,6 +19,8 @@ public class CartItemService {
 
     CartItemRepository cartItemRepository;
 
+    CartService cartService;
+
     public double sum(List<CartItem> items) {
         double sum = 0;
         for (CartItem item : items) {
@@ -49,6 +51,7 @@ public class CartItemService {
         } else {
             user.getCart().getProducts().remove(cartItem);
         }
+        cartService.save(user.getCart());
     }
 
     public void decrementProducts(List<CartItem> cartItems) throws InsufficientStockException {
@@ -82,5 +85,9 @@ public class CartItemService {
         if (!errorMessage.isEmpty()) {
             throw new InsufficientStockException(errorMessage.toString());
         }
+    }
+
+    public void deleteByGuestCartId(Long guestCartId) {
+        cartItemRepository.deleteByGuestCartId(guestCartId);
     }
 }

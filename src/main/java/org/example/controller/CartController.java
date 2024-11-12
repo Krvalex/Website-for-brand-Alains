@@ -1,5 +1,8 @@
 package org.example.controller;
 
+import jakarta.servlet.http.HttpSession;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.example.handler.InsufficientStockException;
 import org.example.model.*;
 import org.example.service.*;
@@ -12,66 +15,94 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.List;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
     @Autowired
-    private ProductService productService;
-
+    ProductService productService;
     @Autowired
-    private UserService userService;
-
+    UserService userService;
     @Autowired
-    private CartService cartService;
-
+    CartService cartService;
     @Autowired
-    private OrderService orderService;
-
+    OrderService orderService;
     @Autowired
-    private CartItemService cartItemService;
-
+    CartItemService cartItemService;
     @Autowired
-    private PromoCodeService promoCodeService;
+    PromoCodeService promoCodeService;
+    @Autowired
+    GuestCartService guestCartService;
 
     @GetMapping
-    public String getCart(Principal principal, Model model) {
-        if (principal == null) {
-            return "redirect:/users/login";
+    public String getCart(Principal principal, HttpSession session, Model model) {
+        List<CartItem> cartItems;
+        double sum;
+
+        if (principal == null) { //если гость
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+            cartItems = guestCart.getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("cart", guestCart);
+        } else { // если пользователь
+            User user = userService.getByPrincipal(principal);
+            cartItems = user.getCart().getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("user", user);
+            model.addAttribute("cart", user.getCart());
         }
-        User user = userService.getByPrincipal(principal);
-        List<CartItem> cartItems = user.getCart().getProducts();
-        double sum = cartItemService.sum(cartItems);
+
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("user", user);
-        model.addAttribute("cart", user.getCart());
         model.addAttribute("sum", sum);
         return "cart";
     }
 
     @PostMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId, @RequestParam String size, Principal principal, RedirectAttributes redirectAttributes) {
-        if (principal == null) {
-            return "redirect:/users/login";
-        }
-        if (size == null || size.equals("")) {
+    public String addToCart(@PathVariable Long productId,
+                            @RequestParam String size,
+                            Principal principal,
+                            HttpSession session,
+                            RedirectAttributes redirectAttributes) {
+
+        if (size == null || size.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Пожалуйста, выберите размер.");
             return "redirect:/products/" + productId;
         }
-        User user = userService.getByPrincipal(principal);
-        Product product = productService.getById(productId);
-        cartItemService.addToCart(user, product, size);
-        cartService.save(user.getCart());
+
+        if (principal == null) { // если гость
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            Product product = productService.getById(productId);
+            guestCartService.addItem(guestIdentifier, product, size, 1, session);
+        } else { // если пользователь
+            User user = userService.getByPrincipal(principal);
+            Product product = productService.getById(productId);
+            cartItemService.addToCart(user, product, size);
+            cartService.save(user.getCart());
+        }
         return "redirect:/cart";
     }
 
     @GetMapping("/cartdetails")
-    public String getCartDetails(Model model, Principal principal) {
-        User user = userService.getByPrincipal(principal);
-        List<CartItem> cartItems = user.getCart().getProducts();
-        double sum = cartItemService.sum(cartItems);
+    public String getCartDetails(Model model, Principal principal, HttpSession session) {
+        List<CartItem> cartItems;
+        double sum;
+        if (principal == null) { // если гость
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+            cartItems = guestCart.getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("cart", guestCart);
+        } else { // если пользователь
+            User user = userService.getByPrincipal(principal);
+            cartItems = user.getCart().getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("user", user);
+            model.addAttribute("cart", user.getCart());
+        }
+
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("user", user);
         model.addAttribute("cartDetails", new CartDetails());
         model.addAttribute("sum", sum);
         return "cartdetails";
@@ -83,14 +114,30 @@ public class CartController {
                                      @RequestParam String hasPromoCode,
                                      @RequestParam(required = false) String applyPromoCode,
                                      Principal principal,
+                                     HttpSession session,
                                      Model model) {
-        User user = userService.getByPrincipal(principal);
-        List<CartItem> cartItems = user.getCart().getProducts();
-        double sum = cartItemService.sum(cartItems);
 
+        List<CartItem> cartItems;
+        double sum;
         String address = cartDetails.getAddress();
         model.addAttribute("address", address);
+        String guestIdentifier = null;
 
+        if (principal == null) { // если гость
+            guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+            cartItems = guestCart.getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("cart", guestCart);
+        } else { // если пользователь
+            User user = userService.getByPrincipal(principal);
+            cartItems = user.getCart().getProducts();
+            sum = cartItemService.sum(cartItems);
+            model.addAttribute("user", user);
+            model.addAttribute("cart", user.getCart());
+        }
+
+        // Применение промокода
         if ("yes".equals(hasPromoCode) && "true".equals(applyPromoCode)) {
             PromoCode promo = promoCodeService.findByCode(promoCode);
             if (promo != null) {
@@ -101,23 +148,24 @@ public class CartController {
                 model.addAttribute("errorMessage", "Недействительный промокод.");
             }
             model.addAttribute("cartItems", cartItems);
-            model.addAttribute("user", user);
-            model.addAttribute("cart", user.getCart());
             model.addAttribute("sum", sum);
             return "cartdetails";
         }
+
+        // Оформление заказа
         if ("yes".equals(hasPromoCode) && "false".equals(applyPromoCode) || "no".equals(hasPromoCode)) {
             try {
                 cartItemService.decrementProducts(cartItems);
-                orderService.create(cartItems, user);
-                cartService.clear(user);
-                cartService.save(user.getCart());
+                if (principal == null) { // если гость
+                    orderService.createGuestOrder(cartItems, address, guestIdentifier);
+                } else { // если пользователь
+                    User user = userService.getByPrincipal(principal);
+                    orderService.createUserOrder(cartItems, user);
+                }
                 return "cartplaced";
             } catch (InsufficientStockException e) {
                 model.addAttribute("errorMessage", e.getMessage());
                 model.addAttribute("cartItems", cartItems);
-                model.addAttribute("user", user);
-                model.addAttribute("cart", user.getCart());
                 model.addAttribute("sum", sum);
                 return "cart";
             }
@@ -131,10 +179,14 @@ public class CartController {
     }
 
     @PostMapping("/delete/{cartItemId}")
-    public String deteleProduct(@PathVariable Long cartItemId, Principal principal) {
-        User user = userService.getByPrincipal(principal);
-        cartItemService.deleteProduct(user, cartItemId);
-        cartService.save(user.getCart());
+    public String deleteProduct(@PathVariable Long cartItemId, Principal principal, HttpSession session) {
+        if (principal == null) { // Если гость
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            guestCartService.deleteProduct(guestIdentifier, cartItemId);
+        } else { // Если пользователь
+            User user = userService.getByPrincipal(principal);
+            cartItemService.deleteProduct(user, cartItemId);
+        }
         return "redirect:/cart";
     }
 

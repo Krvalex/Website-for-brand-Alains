@@ -22,10 +22,13 @@ public class Order {
     private Long orderId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     private LocalDateTime orderDate;
+
+    @Column(name = "guest_email", nullable = true)
+    private String guestEmail;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")

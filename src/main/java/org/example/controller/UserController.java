@@ -50,10 +50,13 @@ public class UserController {
 
     @GetMapping("/account")
     public String account(Principal principal, Model model) {
-        User user = userService.getByPrincipal(principal);
-        model.addAttribute("user", user);
-        model.addAttribute("orders", user.getOrders());
-        return "useraccount";
+        if (principal != null) {
+            User user = userService.getByPrincipal(principal);
+            model.addAttribute("user", user);
+            model.addAttribute("orders", user.getOrders());
+            return "useraccount";
+        }
+        return "login";
     }
 
     @GetMapping

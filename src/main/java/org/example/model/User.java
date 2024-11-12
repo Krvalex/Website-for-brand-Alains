@@ -29,11 +29,11 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "user_cart_id")
     private Cart cart = new Cart();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "favorite_id")
+    @JoinColumn(name = "user_favorite_id")
     private Favorite favorite = new Favorite();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

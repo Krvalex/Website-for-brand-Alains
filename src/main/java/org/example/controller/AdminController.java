@@ -1,6 +1,8 @@
 package org.example.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.model.Product;
 import org.example.model.PromoCode;
 import org.example.service.ProductService;
@@ -12,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
+@Controller
 public class AdminController {
 
-    private final UserService userService;
-    private final ProductService productService;
-    private final PromoCodeService promoCodeService;
+    UserService userService;
+    ProductService productService;
+    PromoCodeService promoCodeService;
 
     @GetMapping("/admin")
     public String admin(Model model) {

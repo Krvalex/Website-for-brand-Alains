@@ -1,38 +1,55 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Alains Shop</title>
-    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
 </head>
 <body class="home">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
+
+<!-- Навигационная полоса -->
+<nav class="navbar">
+    <!-- Левая часть: Кнопка для открытия каталога (теперь только значок) -->
+    <div class="navbar-left">
+        <button class="menu-button" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- Центр: Логотип бренда -->
+    <div class="navbar-center">
+        <img alt="Alains Shop Logo" class="logo" src="/images/logo.png">
+    </div>
+
+    <!-- Правая часть: Корзина, Избранное, Аккаунт -->
+    <div class="navbar-right">
+        <a class="icon-link" href="/cart">
+            <img alt="Cart" src="/images/cart.png">
+        </a>
+        <a class="icon-link" href="/favorites">
+            <img alt="Favorites" src="/images/favorites.png">
+        </a>
+        <a class="icon-link" href="/users/account">
+            <img alt="Account" src="/images/account.png">
+        </a>
+    </div>
 </nav>
 
-<div class="main-content">
-    <h1 class="welcome-text">Alains Shop</h1>
-    <div th:if="${user != null}">
-        <h2 th:if="${user != null}">Welcome, <span th:text="${user.username}"></span>!</h2>
-    </div>
+<!-- Выдвигающееся боковое меню каталога -->
+<div class="side-menu" id="sideMenu">
+    <button class="close-btn" onclick="toggleMenu()">&times;</button>
+    <a href="/products/tshirts">Футболки</a>
+    <a href="/products/hoodies">Худи</a>
+    <a href="/products">Уход</a>
+    <a href="/contacts">Контакты</a>
 </div>
 
+<!-- Основное содержание страницы -->
+<div class="main-content">
+    <h1 class="welcome-text">Alains Shop</h1>
+    <h2>Добро пожаловать, <span th:text="${user != null ? user.username : 'Гость'}"></span>!</h2>
+</div>
+
+<script src="/js/main.js"></script>
 </body>
 </html>
