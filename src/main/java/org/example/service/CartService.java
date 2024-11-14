@@ -20,6 +20,6 @@ public class CartService {
     }
 
     public void clear(User user) {
-        user.getCart().getProducts().clear();
+        user.getCart().getCartItems().clear();
     }
 }

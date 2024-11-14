@@ -27,16 +27,16 @@
 </nav>
 
 <img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
-     th:src="@{'/' + ${product.productImage}}">
+     th:src="@{'/' + ${product.getImage}}">
 
 <div class="product-info">
-    <h1 th:text="${product.productName}"></h1>
+    <h1 th:text="${product.getName}"></h1>
     <div class="product-details">
         <dl>
             <dt>Description:</dt>
-            <dd th:text="${product.productDescription}"></dd>
+            <dd th:text="${product.getDescription}"></dd>
             <dt>Price:</dt>
-            <dd th:text="${product.productPrice}"></dd>
+            <dd th:text="${product.getPrice}"></dd>
             <dt>Size:</dt>
             <select id="size" name="size" onchange="updateHiddenSize(this)">
                 <option selected value="select size">Select Size</option>
@@ -46,17 +46,17 @@
                 </option>
             </select>
             <dt>Category:</dt>
-            <dd th:text="${product.productCategory}"></dd>
+            <dd th:text="${product.getCategory}"></dd>
         </dl>
 
         <!-- Форма для добавления в корзину -->
-        <form method="post" th:action="@{'/cart/add/' + ${product.productId}}">
+        <form method="post" th:action="@{'/cart/add/' + ${product.getId}}">
             <input id="hiddenSize" name="size" type="hidden">
             <button type="submit">Add to Cart</button>
         </form>
 
         <!-- Форма для добавления в избранное -->
-        <form method="post" th:action="@{'/favorites/' + ${product.productId}}">
+        <form method="post" th:action="@{'/favorites/' + ${product.getId}}">
             <button type="submit">Add to Favorite</button>
         </form>
     </div>

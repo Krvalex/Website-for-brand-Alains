@@ -14,7 +14,7 @@
         <th>Роли</th>
     </tr>
     <tr th:each="user : ${users}"> <!-- Внедрить цикл в таблицу -->
-        <td th:text="${user.username}">Имя пользователя</td>
+        <td th:text="${user.getUsername}">Имя пользователя</td>
         <td th:text="${user.active}">Активность пользователя</td>
         <td th:text="${user.getRoles()}">Роли пользователя</td> <!-- Добавьте столбцы для информации -->
     </tr>

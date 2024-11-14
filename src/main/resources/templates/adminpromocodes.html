@@ -30,12 +30,12 @@
         <th>Действия</th> <!-- Добавляем новый заголовок для действий -->
     </tr>
     <tr th:each="promo : ${promocodes}">
-        <td th:text="${promo.getPromocodeId()}">ID</td>
+        <td th:text="${promo.getId()}">ID</td>
         <td th:text="${promo.getCode()}">Промокод</td>
-        <td th:text="${promo.getDiscountPercentage()}">Скидка</td>
+        <td th:text="${promo.getDiscount()}">Скидка</td>
         <td>
             <!-- Кнопка удаления -->
-            <form method="post" th:action="@{/admin/delete/promocode/{id}(id=${promo.getPromocodeId()})}">
+            <form method="post" th:action="@{/admin/delete/promocode/{id}(id=${promo.getId()})}">
                 <button onclick="return confirm('Вы уверены, что хотите удалить этот промокод?');" type="submit">
                     Удалить
                 </button>

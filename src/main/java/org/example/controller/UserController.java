@@ -63,13 +63,13 @@ public class UserController {
     }
 
     @GetMapping
-    public String getAllUsers(Model model) {
+    public String getAll(Model model) {
         model.addAttribute("users", userService.getAll());
         return "users";
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable Long id, Model model) {
+    public String getById(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "userdetails";
     }

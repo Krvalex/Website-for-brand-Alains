@@ -52,7 +52,7 @@
 <div class="main-content">
     <form method="post" th:action="@{/cart/cartdetails}">
         <label for="name">Email:</label>
-        <input id="name" name="name" required th:value="${user != null ? user.username : ''}" type="text">
+        <input id="name" name="name" required th:value="${user != null ? user.getUsername : ''}" type="text">
         <br>
         <label for="address">Address:</label>
         <input id="address" name="address" th:value="${address != null ? address : ''}" type="text">
@@ -84,10 +84,10 @@
                 <th>Price</th>
             </tr>
             <tr th:each="cartItem : ${cartItems}">
-                <td th:text="${cartItem.product.productName}"></td>
+                <td th:text="${cartItem.product.getName}"></td>
                 <td th:text="${cartItem.size}"></td>
                 <td th:text="${cartItem.quantity}"></td>
-                <td th:text="${cartItem.product.productPrice}"></td>
+                <td th:text="${cartItem.product.getPrice}"></td>
             </tr>
         </table>
         <br>

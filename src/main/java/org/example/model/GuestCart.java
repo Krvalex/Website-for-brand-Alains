@@ -20,14 +20,14 @@ public class GuestCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long guestCartId;
+    private Long Id;
 
     @Column(name = "guest_identifier", nullable = false, unique = true)
     private String guestIdentifier;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "guest_cart_id")
-    private List<CartItem> products = new ArrayList<>();
+    private List<CartItem> cartItems = new ArrayList<>();
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 

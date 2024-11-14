@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,14 +22,15 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/favorites")
 public class FavoriteController {
 
     FavoriteService favoriteService;
     UserService userService;
     GuestFavoriteService guestFavoriteService;
 
-    @PostMapping("/favorites/{productId}")
-    public String favoriteProduct(@PathVariable Long productId, Principal principal, HttpSession session) {
+    @PostMapping("/{productId}")
+    public String add(@PathVariable Long productId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             guestFavoriteService.saveIfNotAlreadyInFavorite(guestIdentifier, productId, session);
@@ -39,8 +41,8 @@ public class FavoriteController {
         return "redirect:/products/" + productId;
     }
 
-    @GetMapping("/favorites")
-    public String favoriteProducts(Principal principal, HttpSession session, Model model) {
+    @GetMapping
+    public String get(Principal principal, HttpSession session, Model model) {
         List<Product> products;
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
@@ -54,8 +56,8 @@ public class FavoriteController {
         return "favorites";
     }
 
-    @PostMapping("/favorites/remove/{productId}")
-    public String removeFavoriteProduct(@PathVariable Long productId, Principal principal, HttpSession session) {
+    @PostMapping("/remove/{productId}")
+    public String remove(@PathVariable Long productId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             guestFavoriteService.deleteProduct(guestIdentifier, productId, session);

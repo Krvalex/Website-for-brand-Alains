@@ -17,30 +17,30 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     UserService userService;
     ProductService productService;
     PromoCodeService promoCodeService;
 
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("users", userService.getAll());
+    @GetMapping
+    public String adminPanel() {
         return "/admin";
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute("users", userService.getAll());
         return "adminusers";
     }
 
-    @GetMapping("/admin/create/product")
+    @GetMapping("/create/product")
     public String addProduct() {
         return "/adminaddproduct";
     }
 
-    @PostMapping("/admin/create/product")
+    @PostMapping("/create/product")
     public String createProduct(@ModelAttribute Product product,
                                 @RequestParam("productSize") List<String> productSizes,
                                 @RequestParam("productQuantity") List<Integer> productQuantities) {
@@ -48,31 +48,31 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/admin/products")
+    @GetMapping("/products")
     public String listProducts(Model model) {
         model.addAttribute("products", productService.getAll());
         return "/adminproducts";
     }
 
-    @PostMapping("/admin/delete/product")
-    public String deleteProductPost(@RequestParam Long id) {
+    @PostMapping("/delete/product")
+    public String deleteProduct(@RequestParam Long id) {
         productService.delete(id);
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/admin/promocodes")
+    @GetMapping("/promocodes")
     public String listPromocodes(Model model) {
         model.addAttribute("promocodes", promoCodeService.getAll());
         return "adminpromocodes";
     }
 
-    @PostMapping("/admin/add/promocode")
+    @PostMapping("/add/promocode")
     public String addPromocode(@ModelAttribute PromoCode promoCode) {
         promoCodeService.add(promoCode);
         return "redirect:/admin/promocodes";
     }
 
-    @PostMapping("/admin/delete/promocode/{id}")
+    @PostMapping("/delete/promocode/{id}")
     public String deletePromocode(@PathVariable Long id) {
         promoCodeService.delete(id);
         return "redirect:/admin/promocodes";

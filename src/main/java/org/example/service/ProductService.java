@@ -27,7 +27,7 @@ public class ProductService {
         if (category == null) {
             return productRepository.findAll();
         }
-        return productRepository.findByProductCategory(category);
+        return productRepository.findByCategory(category);
     }
 
     public Product getById(Long id) {
@@ -43,7 +43,7 @@ public class ProductService {
         for (int i = 0; i < productSizes.size(); i++) {
             sizes.put(productSizes.get(i), productQuantities.get(i));
         }
-        product.setProductSizes(sizes);
+        product.setSizes(sizes);
         productRepository.save(product);
     }
 

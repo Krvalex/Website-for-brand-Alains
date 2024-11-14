@@ -28,16 +28,16 @@
     <h2>Your Favorites</h2>
     <div class="product-item" th:each="product : ${products}">
         <!-- Dynamic image loading -->
-        <img alt="Product Image" th:src="@{'/' + ${product.productImage}}">
+        <img alt="Product Image" th:src="@{'/' + ${product.getImage}}">
 
-        <h3 th:text="${product.productName}"></h3>
-        <p th:text="'Category: ' + ${product.productCategory.displayName}"></p>
-        <p th:text="'Price: $' + ${product.productPrice}"></p>
+        <h3 th:text="${product.getName}"></h3>
+        <p th:text="'Category: ' + ${product.getCategory.displayName}"></p>
+        <p th:text="'Price: $' + ${product.getPrice}"></p>
 
-        <a th:href="@{'/products/' + ${product.productId}}">View Details</a>
+        <a th:href="@{'/products/' + ${product.getId}}">View Details</a>
 
         <!-- Кнопка для удаления из избранного -->
-        <form method="post" style="display: inline;" th:action="@{'/favorites/remove/' + ${product.productId}}">
+        <form method="post" style="display: inline;" th:action="@{'/favorites/remove/' + ${product.getId}}">
             <button type="submit">Remove from Favorites</button>
         </form>
         <hr>

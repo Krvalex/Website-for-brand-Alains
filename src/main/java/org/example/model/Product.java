@@ -17,30 +17,30 @@ import java.util.Map;
 public class Product implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
-    private String productName;
-    private String productDescription;
-    private double productPrice;
+    private Long Id;
+    private String name;
+    private String description;
+    private double price;
 
     @ElementCollection
     @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "size")
     @Column(name = "quantity")
-    private Map<String, Integer> productSizes; // Размер - количество
+    private Map<String, Integer> sizes; // Размер - количество
 
     @Enumerated(EnumType.STRING)
-    private Category productCategory;
+    private Category category;
 
-    private String productImage;
+    private String image;
 
-    public Product(String productName, String productDescription, double productPrice, Map<String, Integer> productSizes,
-                   Category productCategory, String productImage) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.productSizes = productSizes;
-        this.productCategory = productCategory;
-        this.productImage = productImage;
+    public Product(String name, String description, double price, Map<String, Integer> sizes,
+                   Category category, String image) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.sizes = sizes;
+        this.category = category;
+        this.image = image;
     }
 
     @Override

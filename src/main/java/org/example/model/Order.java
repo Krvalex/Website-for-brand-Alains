@@ -19,18 +19,18 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long Id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    private LocalDateTime orderDate;
+    private LocalDateTime date;
 
     @Column(name = "guest_email", nullable = true)
     private String guestEmail;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")
-    private List<OrderItem> products = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 }

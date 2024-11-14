@@ -1,6 +1,6 @@
 package org.example.configuration;
 
-import org.example.service.MyUserDetailsService;
+import org.example.service.SecurityUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,7 +21,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
+        return new SecurityUserDetailsService();
     }
 
     @Bean

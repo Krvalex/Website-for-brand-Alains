@@ -18,9 +18,9 @@ import java.util.List;
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long favoriteId;
+    private Long Id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "favorite_id")
-    private List<FavoriteItem> products = new ArrayList<>();
+    private List<FavoriteItem> favoriteItems = new ArrayList<>();
 }

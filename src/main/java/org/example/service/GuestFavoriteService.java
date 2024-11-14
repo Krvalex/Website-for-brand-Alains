@@ -37,23 +37,23 @@ public class GuestFavoriteService {
 
     public void saveIfNotAlreadyInFavorite(String guestIdentifier, Long productId, HttpSession session) {
         GuestFavorite guestFavorite = getOrCreate(guestIdentifier, session);
-        if (guestFavorite.getProducts().stream().noneMatch(f -> f.getProduct().getProductId().equals(productId))) {
+        if (guestFavorite.getFavoriteItems().stream().noneMatch(f -> f.getProduct().getId().equals(productId))) {
             Product product = productService.getById(productId);
-            guestFavorite.getProducts().add(new FavoriteItem(product));
+            guestFavorite.getFavoriteItems().add(new FavoriteItem(product));
             guestFavoriteRepository.save(guestFavorite);
         }
     }
 
     public List<Product> getProducts(String guestIdentifier, HttpSession session) {
         GuestFavorite guestFavorite = getOrCreate(guestIdentifier, session);
-        return guestFavorite.getProducts().stream()
+        return guestFavorite.getFavoriteItems().stream()
                 .map(FavoriteItem::getProduct)
                 .toList();
     }
 
     public void deleteProduct(String guestIdentifier, Long productId, HttpSession session) {
         GuestFavorite guestFavorite = getOrCreate(guestIdentifier, session);
-        guestFavorite.getProducts().removeIf(f -> f.getProduct().getProductId().equals(productId));
+        guestFavorite.getFavoriteItems().removeIf(f -> f.getProduct().getId().equals(productId));
         guestFavoriteRepository.save(guestFavorite);
     }
 
@@ -66,7 +66,7 @@ public class GuestFavoriteService {
     public void cleanUpIfOld(LocalDateTime expirationTime) {
         List<GuestFavorite> oldFavorites = guestFavoriteRepository.findOldGuestFavorites(expirationTime);
         for (GuestFavorite oldFavorite : oldFavorites) {
-            favoriteItemService.deleteByGuestFavoriteId(oldFavorite.getGuestFavoriteId());
+            favoriteItemService.deleteByGuestFavoriteId(oldFavorite.getId());
         }
         guestFavoriteRepository.deleteAll(oldFavorites);
     }

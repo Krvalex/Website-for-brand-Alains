@@ -44,19 +44,19 @@ public class GuestCartService {
     public void addItem(String guestIdentifier, Product product, String size, int quantity, HttpSession session) {
         GuestCart guestCart = getOrCreate(guestIdentifier, session);
         CartItem cartItem = new CartItem(product, size, quantity);
-        guestCart.getProducts().add(cartItem);
+        guestCart.getCartItems().add(cartItem);
         guestCartRepository.save(guestCart);
     }
 
     public void clear(String guestIdentifier) {
         GuestCart guestCart = guestCartRepository.findByGuestIdentifier(guestIdentifier).orElseThrow();
-        guestCart.getProducts().clear();
+        guestCart.getCartItems().clear();
         guestCartRepository.save(guestCart);
     }
 
     public void deleteProduct(String guestIdentifier, Long cartItemId) {
         GuestCart guestCart = guestCartRepository.findByGuestIdentifier(guestIdentifier).orElseThrow();
-        guestCart.getProducts().removeIf(cartItem -> cartItem.getCartItemId().equals(cartItemId));
+        guestCart.getCartItems().removeIf(cartItem -> cartItem.getId().equals(cartItemId));
         guestCartRepository.save(guestCart);
     }
 
@@ -64,7 +64,7 @@ public class GuestCartService {
     public void cleanUpIfOld(LocalDateTime expirationTime) {
         List<GuestCart> oldCarts = guestCartRepository.findOldGuestCarts(expirationTime);
         for (GuestCart oldCart : oldCarts) {
-            cartItemService.deleteByGuestCartId(oldCart.getGuestCartId());
+            cartItemService.deleteByGuestCartId(oldCart.getId());
         }
         guestCartRepository.deleteAll(oldCarts);
     }

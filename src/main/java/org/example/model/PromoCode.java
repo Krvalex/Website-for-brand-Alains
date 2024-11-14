@@ -15,13 +15,13 @@ import lombok.Setter;
 public class PromoCode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long promocodeId;
+    private Long Id;
 
     private String code;
-    private double discountPercentage;
+    private double discount;
 
-    public PromoCode(String code, double discountPercentage) {
+    public PromoCode(String code, double discount) {
         this.code = code;
-        this.discountPercentage = discountPercentage;
+        this.discount = discount;
     }
 }

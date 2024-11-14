@@ -1,6 +1,9 @@
 package org.example.service;
 
-import org.example.configuration.MyUserDetails;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.example.configuration.SecurityUserDetails;
 import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +14,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class SecurityUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-        return user.map(MyUserDetails::new)
+        return user.map(SecurityUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
     }
 }

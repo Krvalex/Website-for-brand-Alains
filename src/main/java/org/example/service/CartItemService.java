@@ -24,14 +24,14 @@ public class CartItemService {
     public double sum(List<CartItem> items) {
         double sum = 0;
         for (CartItem item : items) {
-            sum += item.getProduct().getProductPrice();
+            sum += item.getProduct().getPrice();
         }
         return sum;
     }
 
     public void addToCart(User user, Product product, String size) {
-        CartItem existingCartItem = user.getCart().getProducts().stream()
-                .filter(item -> item.getProduct().getProductId().equals(product.getProductId()) && item.getSize().equals(size))
+        CartItem existingCartItem = user.getCart().getCartItems().stream()
+                .filter(item -> item.getProduct().getId().equals(product.getId()) && item.getSize().equals(size))
                 .findFirst()
                 .orElse(null);
 
@@ -39,7 +39,7 @@ public class CartItemService {
             existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
         } else {
             CartItem cartItem = new CartItem(product.clone(), size, 1);
-            user.getCart().getProducts().add(cartItem);
+            user.getCart().getCartItems().add(cartItem);
             cartItemRepository.save(cartItem);
         }
     }
@@ -49,7 +49,7 @@ public class CartItemService {
         if (cartItem.getQuantity() > 1) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
         } else {
-            user.getCart().getProducts().remove(cartItem);
+            user.getCart().getCartItems().remove(cartItem);
         }
         cartService.save(user.getCart());
     }
@@ -61,13 +61,13 @@ public class CartItemService {
             String size = cartItem.getSize();
             int requestedQuantity = cartItem.getQuantity();
 
-            if (product.getProductSizes().containsKey(size)) {
-                int availableQuantity = product.getProductSizes().get(size);
+            if (product.getSizes().containsKey(size)) {
+                int availableQuantity = product.getSizes().get(size);
                 if (availableQuantity >= requestedQuantity) {
-                    product.getProductSizes().put(size, availableQuantity - requestedQuantity);
+                    product.getSizes().put(size, availableQuantity - requestedQuantity);
                 } else {
                     errorMessage.append("Недостаточно товара ")
-                            .append(product.getProductName())
+                            .append(product.getName())
                             .append(" размера ")
                             .append(size)
                             .append(". Осталось ")
@@ -76,7 +76,7 @@ public class CartItemService {
                 }
             } else {
                 errorMessage.append("Товар ")
-                        .append(product.getProductName())
+                        .append(product.getName())
                         .append(" размера ")
                         .append(size)
                         .append(" отсутствует.\n");

@@ -39,12 +39,12 @@
         </thead>
         <tbody>
         <tr th:each="cartItem : ${cartItems}">
-            <td th:text="${cartItem.product.productName}"></td>
+            <td th:text="${cartItem.product.getName}"></td>
             <td th:text="${cartItem.size}"></td>
             <td th:text="${cartItem.quantity}"></td>
-            <td th:text="${cartItem.product.productPrice}"></td>
+            <td th:text="${cartItem.product.getPrice}"></td>
             <td>
-                <form method="post" th:action="@{/cart/delete/{cartItemId}(cartItemId=${cartItem.cartItemId})}">
+                <form method="post" th:action="@{/cart/delete/{cartItemId}(cartItemId=${cartItem.getId})}">
                     <button type="submit">Delete</button>
                 </form>
             </td>

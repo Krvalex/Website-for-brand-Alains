@@ -47,7 +47,7 @@
 <!-- Основное содержание страницы -->
 <div class="main-content">
     <h1 class="welcome-text">Alains Shop</h1>
-    <h2>Добро пожаловать, <span th:text="${user != null ? user.username : 'Гость'}"></span>!</h2>
+    <h2>Добро пожаловать, <span th:text="${user != null ? user.getUsername : 'Гость'}"></span>!</h2>
 </div>
 
 <script src="/js/main.js"></script>

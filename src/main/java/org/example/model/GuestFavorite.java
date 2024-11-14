@@ -20,14 +20,14 @@ public class GuestFavorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long guestFavoriteId;
+    private Long Id;
 
     @Column(name = "guest_identifier", nullable = false, unique = true)
     private String guestIdentifier;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "guest_favorite_id")
-    private List<FavoriteItem> products = new ArrayList<>();
+    private List<FavoriteItem> favoriteItems = new ArrayList<>();
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 

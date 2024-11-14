@@ -16,17 +16,17 @@
         <th>Category</th>
     </tr>
     <tr th:each="product : ${products}">
-        <td th:text="${product.productId}">Product ID</td>
-        <td th:text="${product.productName}">Product Name</td>
-        <td th:text="${product.productDescription}">Description</td>
-        <td th:text="${product.productPrice}">Price</td>
+        <td th:text="${product.getId}">Product ID</td>
+        <td th:text="${product.getName}">Product Name</td>
+        <td th:text="${product.getDescription}">Description</td>
+        <td th:text="${product.getPrice}">Price</td>
         <td>
             <ul>
-                <li th:each="entry : ${product.productSizes}"
+                <li th:each="entry : ${product.getSizes}"
                     th:text="${entry.key} + ' - Quantity: ' + ${entry.value}"></li>
             </ul>
         </td>
-        <td th:text="${product.productCategory}">Category</td>
+        <td th:text="${product.getCategory}">Category</td>
     </tr>
 </table>
 <hr>

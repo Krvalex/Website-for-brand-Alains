@@ -30,18 +30,18 @@ public class CartController {
     GuestCartService guestCartService;
 
     @GetMapping
-    public String getCart(Principal principal, HttpSession session, Model model) {
+    public String get(Principal principal, HttpSession session, Model model) {
         List<CartItem> cartItems;
         double sum;
         if (principal == null) { //если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
-            cartItems = guestCart.getProducts();
+            cartItems = guestCart.getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            cartItems = user.getCart().getProducts();
+            cartItems = user.getCart().getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
@@ -53,7 +53,7 @@ public class CartController {
     }
 
     @PostMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId,
+    public String addProduct(@PathVariable Long productId,
                             @RequestParam String size,
                             Principal principal,
                             HttpSession session,
@@ -84,12 +84,12 @@ public class CartController {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
-            cartItems = guestCart.getProducts();
+            cartItems = guestCart.getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            cartItems = user.getCart().getProducts();
+            cartItems = user.getCart().getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
@@ -119,12 +119,12 @@ public class CartController {
         if (principal == null) { // если гость
             guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
-            cartItems = guestCart.getProducts();
+            cartItems = guestCart.getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            cartItems = user.getCart().getProducts();
+            cartItems = user.getCart().getCartItems();
             sum = cartItemService.sum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
@@ -134,9 +134,9 @@ public class CartController {
         if ("yes".equals(hasPromoCode) && "true".equals(applyPromoCode)) {
             PromoCode promo = promoCodeService.findByCode(promoCode);
             if (promo != null) {
-                double discount = sum * (promo.getDiscountPercentage() / 100);
+                double discount = sum * (promo.getDiscount() / 100);
                 sum -= discount;
-                model.addAttribute("discountMessage", "Скидка " + promo.getDiscountPercentage() + "% применена!");
+                model.addAttribute("discountMessage", "Скидка " + promo.getDiscount() + "% применена!");
             } else {
                 model.addAttribute("errorMessage", "Недействительный промокод.");
             }

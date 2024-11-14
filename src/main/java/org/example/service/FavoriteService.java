@@ -21,25 +21,25 @@ public class FavoriteService {
     ProductService productService;
 
     public void deleteProduct(User user, Long productId) {
-        List<FavoriteItem> products = user.getFavorite().getProducts();
-        products.removeIf(item -> item.getProduct().getProductId().equals(productId));
+        List<FavoriteItem> products = user.getFavorite().getFavoriteItems();
+        products.removeIf(item -> item.getProduct().getId().equals(productId));
         favoriteRepository.save(user.getFavorite());
     }
 
     public void saveIfNotAlreadyInFavorite(User user, Long productId) {
         Product product = productService.getById(productId);
-        boolean isAlreadyFavorite = user.getFavorite().getProducts()
+        boolean isAlreadyFavorite = user.getFavorite().getFavoriteItems()
                 .stream()
-                .anyMatch(item -> item.getProduct().getProductId().equals(productId));
+                .anyMatch(item -> item.getProduct().getId().equals(productId));
         if (!isAlreadyFavorite) {
             FavoriteItem favoriteItem = new FavoriteItem(product.clone());
-            user.getFavorite().getProducts().add(favoriteItem);
+            user.getFavorite().getFavoriteItems().add(favoriteItem);
             favoriteRepository.save(user.getFavorite());
         }
     }
 
     public List<Product> getProducts(User user) {
-        return user.getFavorite().getProducts()
+        return user.getFavorite().getFavoriteItems()
                 .stream()
                 .map(FavoriteItem::getProduct)
                 .collect(Collectors.toList());

@@ -26,9 +26,9 @@ public class OrderService {
 
     public void createUserOrder(List<CartItem> cartItems, User user) {
         Order order = new Order();
-        order.setOrderDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        order.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         for (CartItem cartItem : cartItems) {
-            order.getProducts().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
+            order.getOrderItems().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
         }
         order.setUser(user);
         orderRepository.save(order);
@@ -38,9 +38,9 @@ public class OrderService {
 
     public void createGuestOrder(List<CartItem> cartItems, String guestEmail, String guestIdentifier) {
         Order order = new Order();
-        order.setOrderDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        order.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         for (CartItem cartItem : cartItems) {
-            order.getProducts().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
+            order.getOrderItems().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
         }
         order.setGuestEmail(guestEmail);
         orderRepository.save(order);

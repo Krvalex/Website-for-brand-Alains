@@ -31,7 +31,7 @@
         <h1>Account Information</h1>
         <div class="user-details">
             <div class="detail">
-                <span th:text="${user.username}"></span>
+                <span th:text="${user.getUsername}"></span>
             </div>
         </div>
     </div>
@@ -49,12 +49,12 @@
             </thead>
             <tbody>
             <tr th:each="order : ${orders}">
-                <td th:text="${order.orderId}"></td>
-                <td th:text="${order.orderDate}"></td>
+                <td th:text="${order.getId}"></td>
+                <td th:text="${order.getDate}"></td>
                 <td>
                     <ul>
-                        <li th:each="item : ${order.products}"
-                            th:text="${item.product.productName} + ' (Size: ' + ${item.size} + ', Quantity: ' + ${item.quantity} + ')'"></li>
+                        <li th:each="item : ${order.getOrderItems}"
+                            th:text="${item.product.getName} + ' (Size: ' + ${item.size} + ', Quantity: ' + ${item.quantity} + ')'"></li>
                     </ul>
                 </td>
             </tr>
