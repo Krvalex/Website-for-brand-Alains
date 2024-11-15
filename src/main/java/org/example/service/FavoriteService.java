@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.example.model.FavoriteItem;
 import org.example.model.Product;
 import org.example.model.User;
+import org.example.model.enums.Category;
 import org.example.repository.FavoriteRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,14 @@ public class FavoriteService {
         return user.getFavorite().getFavoriteItems()
                 .stream()
                 .map(FavoriteItem::getProduct)
+                .collect(Collectors.toList());
+    }
+
+    public List<Product> getProductsByCategory(User user, Category category) {
+        return user.getFavorite().getFavoriteItems()
+                .stream()
+                .map(FavoriteItem::getProduct)
+                .filter(product -> product.getCategory() == category) // Фильтрация по категории
                 .collect(Collectors.toList());
     }
 }

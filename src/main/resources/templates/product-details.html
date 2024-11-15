@@ -4,71 +4,11 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Product Details</title>
-    <link href="/css/product-details.css" rel="stylesheet">
+    <link href="/css/navigation.css" rel="stylesheet">
 </head>
-<body class="cart">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
-</nav>
+<body>
+<div th:replace="navigation.html :: navigation"></div>
 
-<img alt="Product Image" style="max-width: 300px; height: auto; object-fit: cover; margin-bottom: 20px;"
-     th:src="@{'/' + ${product.getImage}}">
-
-<div class="product-info">
-    <h1 th:text="${product.getName}"></h1>
-    <div class="product-details">
-        <dl>
-            <dt>Description:</dt>
-            <dd th:text="${product.getDescription}"></dd>
-            <dt>Price:</dt>
-            <dd th:text="${product.getPrice}"></dd>
-            <dt>Size:</dt>
-            <select id="size" name="size" onchange="updateHiddenSize(this)">
-                <option selected value="select size">Select Size</option>
-                <option th:each="entry : ${productSizes}"
-                        th:text="${entry.key} + ' (' + ${entry.value} + ' left)'"
-                        th:value="${entry.key}">
-                </option>
-            </select>
-            <dt>Category:</dt>
-            <dd th:text="${product.getCategory}"></dd>
-        </dl>
-
-        <!-- Форма для добавления в корзину -->
-        <form method="post" th:action="@{'/cart/add/' + ${product.getId}}">
-            <input id="hiddenSize" name="size" type="hidden">
-            <button type="submit">Add to Cart</button>
-        </form>
-
-        <!-- Форма для добавления в избранное -->
-        <form method="post" th:action="@{'/favorites/' + ${product.getId}}">
-            <button type="submit">Add to Favorite</button>
-        </form>
-    </div>
-    <div style="color: red; margin-top: 10px;" th:if="${error}">
-        <p th:text="${error}"></p>
-    </div>
-</div>
-
-<script>
-    function updateHiddenSize(select) {
-        document.getElementById('hiddenSize').value = select.value;
-    }
-</script>
+<script src="/js/main.js"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@
     <h2>Your Favorites</h2>
     <div class="product-item" th:each="product : ${products}">
         <!-- Dynamic image loading -->
-        <img alt="Product Image" th:src="@{'/' + ${product.getImage}}">
+        <img alt="Product Image" th:src="@{'/' + ${product.getImageFront}}">
 
         <h3 th:text="${product.getName}"></h3>
         <p th:text="'Category: ' + ${product.getCategory.displayName}"></p>

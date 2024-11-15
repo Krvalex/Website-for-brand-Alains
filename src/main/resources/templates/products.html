@@ -10,25 +10,39 @@
 <div th:replace="navigation.html :: navigation"></div>
 
 <div class="products-page">
-    <h2>Все товары</h2>
+    <!-- Динамически меняем заголовок -->
+    <h2 th:text="'Все товары' == ${category} ? 'Все товары' : ${category}"></h2>
 
     <!-- Список товаров -->
     <div class="product-grid">
         <div class="product-card" th:each="product : ${products}">
-            <!-- Сердечко для добавления в избранное -->
-            <span class="heart-icon"
-                  onclick="toggleFavorite(this)"
-                  th:classappend="${favoriteProducts.contains(product)} ? 'active' : ''"
-                  th:data-product-id="${product.id}">
-    <img alt="Favorite Icon"
-         th:src="@{${favoriteProducts.contains(product) ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
-</span>
+            <!-- Оборачиваем карточку товара в ссылку, которая ведет на страницу деталей товара -->
+            <a class="product-card-link" th:href="@{/products/{id}(id=${product.id})}">
+                <!-- Сердечко для добавления в избранное -->
+                <span class="heart-icon"
+                      onclick="toggleFavorite(this)"
+                      th:classappend="${favoriteProducts.contains(product)} ? 'active' : ''"
+                      th:data-product-id="${product.id}">
+                <img alt="Favorite Icon"
+                     th:src="@{${favoriteProducts.contains(product) ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
+            </span>
 
-            <img alt="Product Image" class="product-image" loading="lazy" th:src="@{${product.image}}">
-            <h3 class="product-name" th:text="${product.name}"></h3>
-            <p class="product-price" th:text="${product.price} + ' ₽'"></p>
+                <!-- Контейнер для изображений товара -->
+                <div class="product-image-wrapper">
+                    <!-- Изображение товара (переднее) -->
+                    <img alt="Product Front" class="product-image product-image-front" loading="lazy"
+                         th:src="@{${product.getImageFront}}">
+                    <!-- Изображение товара (заднее) -->
+                    <img alt="Product Back" class="product-image product-image-back" loading="lazy"
+                         th:src="@{${product.getImageBack}}">
+                </div>
+
+                <h3 class="product-name" th:text="${product.name}"></h3>
+                <p class="product-price" th:text="${product.price} + ' ₽'"></p>
+            </a>
         </div>
     </div>
+
 
     <script src="/js/main.js"></script>
 </div>

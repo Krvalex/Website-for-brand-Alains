@@ -79,3 +79,4 @@ window.addEventListener('scroll', handleScroll);
 
 // Вызываем функцию один раз при загрузке страницы, чтобы карточки, которые уже видны, появились сразу
 document.addEventListener('DOMContentLoaded', handleScroll);
+

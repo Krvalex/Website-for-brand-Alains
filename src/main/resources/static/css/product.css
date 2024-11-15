@@ -39,10 +39,10 @@ body {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1s ease, transform 1s ease;
-    position: relative; /* Убедитесь, что это значение не конфликтует с z-index */
+    position: relative; /* Обязательно для правильного позиционирования */
     text-decoration: none;
     color: inherit;
-    z-index: 1; /* Если необходимо, можно установить z-index для карточек, но не более 100 */
+    z-index: 1; /* Позиционируем карточку с изображениями */
 }
 
 /* Когда карточка появляется в области видимости */
@@ -57,13 +57,39 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Изображение товара */
-.product-image {
+/* Контейнер для изображения товара */
+.product-image-wrapper {
+    position: relative;
     width: 100%;
-    height: auto;
-    max-width: 620px;
+    height: 0;
+    padding-top: 100%; /* Это делает контейнер квадратным */
+    overflow: hidden;
     border-radius: 8px;
-    margin-bottom: 15px;
+}
+
+/* Изображение товара (переднее) */
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Подгонка изображения по размеру контейнера */
+    transition: opacity 0.3s ease; /* Плавное изменение прозрачности */
+}
+
+/* Изображение сзади скрыто по умолчанию */
+.product-image-back {
+    opacity: 0;
+}
+
+/* Когда карточка находится в состоянии hover, показываем заднее изображение */
+.product-card:hover .product-image-front {
+    opacity: 0; /* Скрываем переднее изображение */
+}
+
+.product-card:hover .product-image-back {
+    opacity: 1; /* Показываем заднее изображение */
 }
 
 /* Название товара */
@@ -77,19 +103,8 @@ body {
 .product-price {
     font-size: 1em;
     color: #333;
-    font-weight: normal; /* Обычный шрифт */
+    font-weight: normal;
     margin: 5px 0;
-}
-
-/* Описание товара */
-.product-description {
-    font-size: 0.9em;
-    color: #777;
-    margin: 10px 0;
-    height: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 /* Кнопка с сердечком */
@@ -98,6 +113,7 @@ body {
     top: 10px;
     left: 10px;
     margin: 0;
+    z-index: 2; /* Сердечко всегда должно быть над изображениями */
 }
 
 .favorite-button {
@@ -110,34 +126,53 @@ body {
 /* Сердечко в правом верхнем углу карточки */
 .heart-icon {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #ffffff; /* Белый фон кружка */
-    border-radius: 50%; /* Круглая форма */
-    width: 30px; /* Фиксированный размер круга */
+    top: 10px; /* Располагаем на расстоянии от верхнего края */
+    right: 10px; /* Располагаем на расстоянии от правого края */
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 30px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Лёгкая тень */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2; /* Сердечко всегда должно быть поверх изображения */
 }
 
 .heart-icon:hover {
-    background-color: #f8f8f8; /* Лёгкий серый фон при наведении */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Увеличенная тень при наведении */
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .heart-icon.active {
-    background-color: #f9ecec; /* Светло-красный фон для активного сердечка */
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Красноватая тень */
+    background-color: #f9ecec;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
 }
 
 /* Изображение сердечка */
 .heart-icon img {
-    width: 60%; /* Уменьшаем размер изображения внутри круга */
+    width: 60%;
     height: 60%;
-    object-fit: contain; /* Подгоняем изображение под круг */
+    object-fit: contain;
 }
 
+/* Дополнительные стили для анимации появления карточек */
+.product-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Стили для ссылки, оборачивающей карточку товара */
+.product-card-link {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Наследуем цвет от родительского элемента */
+    display: block; /* Делаем ссылку блочной, чтобы она занимала всю карточку */
+}

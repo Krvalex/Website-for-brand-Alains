@@ -31,16 +31,18 @@ public class Product implements Cloneable {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    private String image;
+    private String imageFront;
+    private String imageBack;
 
     public Product(String name, String description, int price, Map<String, Integer> sizes,
-                   Category category, String image) {
+                   Category category, String imageFront, String imageBack) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.sizes = sizes;
         this.category = category;
-        this.image = image;
+        this.imageFront = imageFront;
+        this.imageBack = imageBack;
     }
 
     @Override

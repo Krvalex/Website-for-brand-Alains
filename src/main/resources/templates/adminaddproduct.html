@@ -9,7 +9,7 @@
             div.classList.add("size-field");
 
             const sizeSelect = document.createElement("select");
-            sizeSelect.name = "productSize";
+            sizeSelect.name = "sizes";
             sizeSelect.required = true;
             sizeSelect.innerHTML = `
                 <option value="XS">XS</option>
@@ -23,7 +23,7 @@
 
             const quantityInput = document.createElement("input");
             quantityInput.type = "number";
-            quantityInput.name = "productQuantity";
+            quantityInput.name = "quantity";
             quantityInput.required = true;
             quantityInput.placeholder = "Количество";
             div.appendChild(quantityInput);
@@ -35,19 +35,19 @@
 <body>
 <h1>Add New Product</h1>
 <form action="/admin/create/product" method="post">
-    <label for="productName">Название товара:</label>
-    <input id="productName" name="productName" required type="text"><br><br>
+    <label for="name">Название товара:</label>
+    <input id="name" name="name" required type="text"><br><br>
 
-    <label for="productDescription">Описание товара:</label>
-    <textarea id="productDescription" name="productDescription" required></textarea><br><br>
+    <label for="description">Описание товара:</label>
+    <textarea id="description" name="description" required></textarea><br><br>
 
-    <label for="productPrice">Цена товара:</label>
-    <input id="productPrice" name="productPrice" required step="0.01" type="number"><br><br>
+    <label for="price">Цена товара:</label>
+    <input id="price" name="price" required step="0.01" type="number"><br><br>
 
     <label>Размер и количество:</label><br>
     <div id="sizeFieldsContainer">
         <div class="size-field">
-            <select name="productSize" required>
+            <select name="sizes" required>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
@@ -55,20 +55,23 @@
                 <option value="XL">XL</option>
                 <option value="XLL">XXL</option>
             </select>
-            <input name="productQuantity" placeholder="Количество" required type="number">
+            <input name="quantity" placeholder="Количество" required type="number">
         </div>
     </div>
     <button onclick="addSizeField()" type="button">Добавить размер</button>
     <br><br>
 
-    <label for="productCategory">Категория товара:</label>
-    <select id="productCategory" name="productCategory" required>
+    <label for="category">Категория товара:</label>
+    <select id="category" name="category" required>
         <option value="T_SHIRTS">T-Shirt</option>
         <option value="HOODIES">Hoodie</option>
     </select><br><br>
 
-    <label for="productImage">Ссылка на изображение товара:</label>
-    <input id="productImage" name="productImage" required type="text"><br><br>
+    <label for="imageFront">Ссылка на изображение товара спереди:</label>
+    <input id="imageFront" name="imageFront" required type="text"><br><br>
+
+    <label for="imageBack">Ссылка на изображение товара сзади:</label>
+    <input id="imageBack" name="imageBack" required type="text"><br><br>
 
     <input type="submit" value="Добавить товар">
 </form>

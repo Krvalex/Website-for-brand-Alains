@@ -43,26 +43,48 @@ public class ProductController {
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
         model.addAttribute("favoriteProducts", favoriteProducts);
+
+        // Добавляем информацию о категории для динамического заголовка
+        model.addAttribute("category", category != null ? category.name() : "Все товары");
         return "products";
     }
 
     @GetMapping("/tshirts")
     public String getTshirts(Model model, Principal principal) {
         List<Product> products = productService.getByCategory(Category.T_SHIRTS);
+        List<Product> favoriteProducts = new ArrayList<>();
+        if (principal != null) {
+            User user = userService.getByPrincipal(principal);
+            favoriteProducts = favoriteService.getProductsByCategory(user, Category.T_SHIRTS);
+        }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
+        model.addAttribute("favoriteProducts", favoriteProducts);
+
+        // Устанавливаем категорию в модель
+        model.addAttribute("category", "Футболки");
         return "products";
     }
 
     @GetMapping("/hoodies")
     public String getHoodies(Model model, Principal principal) {
         List<Product> products = productService.getByCategory(Category.HOODIES);
+        List<Product> favoriteProducts = new ArrayList<>();
+        if (principal != null) {
+            User user = userService.getByPrincipal(principal);
+            favoriteProducts = favoriteService.getProductsByCategory(user, Category.HOODIES);
+        }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
+        model.addAttribute("favoriteProducts", favoriteProducts);
+
+        // Устанавливаем категорию в модель
+        model.addAttribute("category", "Худи");
         return "products";
     }
+
 
     @GetMapping("/{id}")
     public String getById(@PathVariable Long id, Model model) {
