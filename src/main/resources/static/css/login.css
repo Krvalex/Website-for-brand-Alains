@@ -1,0 +1,129 @@
+/* Общие стили */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Контейнер для формы */
+.login-container {
+    position: relative; /* Новый стиль для привязки логотипа */
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    background: #333333;
+    color: #ffffff;
+    padding: 40px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Логотип в правом верхнем углу */
+.login-logo {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    width: 100px; /* Задайте нужный размер */
+    height: auto; /* Сохраняет пропорции */
+}
+
+/* Заголовок */
+.login-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Текст под заголовком (вопрос о регистрации) */
+.registration-prompt {
+    font-size: 0.9em;
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.registration-prompt a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+/* Форма */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%; /* Растянуть форму на всю ширину контейнера */
+}
+
+/* Метки для полей ввода */
+.login-form label {
+    align-self: flex-start;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+/* Поля ввода */
+.login-form input {
+    width: 100%; /* Полная ширина внутри контейнера */
+    padding: 15px;
+    border: 1px solid #666666;
+    border-radius: 25px; /* Закругленные края */
+    font-size: 1em;
+    color: #333;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Учитывать padding и border в ширине */
+}
+
+.login-form input::placeholder {
+    color: #cccccc;
+}
+
+/* Эффект при фокусе на поле ввода */
+.login-form input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+/* Кнопка */
+.login-button {
+    width: 100%; /* Полная ширина */
+    padding: 15px;
+    font-size: 1em;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px; /* Закругленные края */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    box-sizing: border-box; /* Учитывать padding в ширине */
+}
+
+/* Эффект при наведении на кнопку */
+.login-button:hover {
+    background-color: #444444;
+}
+
+/* Ссылка на восстановление пароля */
+.forgot-password {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.forgot-password a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    color: #5cb3fd;
+}

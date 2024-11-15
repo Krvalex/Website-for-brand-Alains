@@ -38,7 +38,7 @@ public class FavoriteController {
             User user = userService.getByPrincipal(principal);
             favoriteService.saveIfNotAlreadyInFavorite(user, productId);
         }
-        return "redirect:/products/" + productId;
+        return "redirect:/products";
     }
 
     @GetMapping

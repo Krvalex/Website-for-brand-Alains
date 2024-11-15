@@ -3,53 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Alains Shop</title>
+    <title>Page Title</title>
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
 </head>
-<body class="home">
-
-<!-- Навигационная полоса -->
-<nav class="navbar">
-    <!-- Левая часть: Кнопка для открытия каталога (теперь только значок) -->
-    <div class="navbar-left">
-        <button class="menu-button" onclick="toggleMenu()">☰</button>
-    </div>
-
-    <!-- Центр: Логотип бренда -->
-    <div class="navbar-center">
-        <img alt="Alains Shop Logo" class="logo" src="/images/logo.png">
-    </div>
-
-    <!-- Правая часть: Корзина, Избранное, Аккаунт -->
-    <div class="navbar-right">
-        <a class="icon-link" href="/cart">
-            <img alt="Cart" src="/images/cart.png">
-        </a>
-        <a class="icon-link" href="/favorites">
-            <img alt="Favorites" src="/images/favorites.png">
-        </a>
-        <a class="icon-link" href="/users/account">
-            <img alt="Account" src="/images/account.png">
-        </a>
-    </div>
-</nav>
-
-<!-- Выдвигающееся боковое меню каталога -->
-<div class="side-menu" id="sideMenu">
-    <button class="close-btn" onclick="toggleMenu()">&times;</button>
-    <a href="/products/tshirts">Футболки</a>
-    <a href="/products/hoodies">Худи</a>
-    <a href="/products">Уход</a>
-    <a href="/contacts">Контакты</a>
-</div>
-
-<!-- Основное содержание страницы -->
-<div class="main-content">
-    <h1 class="welcome-text">Alains Shop</h1>
-    <h2>Добро пожаловать, <span th:text="${user != null ? user.getUsername : 'Гость'}"></span>!</h2>
-</div>
-
+<body>
+<div th:replace="navigation.html :: navigation"></div>
+<!-- Остальной контент страницы -->
 <script src="/js/main.js"></script>
 </body>
 </html>

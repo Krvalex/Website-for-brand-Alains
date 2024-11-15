@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Alains Shop</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Регистрация - Alains Shop</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/registration.css" rel="stylesheet">
 </head>
 <body>
-<h1>Alains Shop</h1>
-<hr>
-<h4>Регистрация</h4>
-<form action="/users/registration" method="post">
-    Имя пользователя: <input name="username" required type="email"><br><br>
-    Пароль: <input name="password" required type="password"><br><br>
-    <input type="submit" value="Зарегистрироваться"/>
-</form>
-<span style="color: red" th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
+<div th:replace="navigation.html :: navigation"></div>
+
+<div class="registration-container">
+    <!-- Логотип в правом верхнем углу -->
+    <img alt="Registration Logo" class="registration-logo" src="/images/various/loginlogo.png">
+
+    <h4 class="registration-title">Регистрация</h4>
+    <p class="login-prompt">Уже есть аккаунт? <a href="/users/login">Войти</a></p>
+
+    <form action="/users/registration" class="registration-form" method="post">
+        <input id="username" name="username" placeholder="Введите ваш email" required type="email">
+        <input id="password" name="password" placeholder="Введите пароль" required type="password">
+        <input id="confirm-password" name="confirm-password" placeholder="Повторите пароль" required type="password">
+        <button class="registration-button" type="submit">Зарегистрироваться</button>
+    </form>
+
+    <span style="color: red;" th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
+</div>
+
+<script src="/js/main.js"></script>
 </body>
 </html>

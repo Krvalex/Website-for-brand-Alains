@@ -21,7 +21,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Principal principal, Model model) {
         User user = userService.getByPrincipal(principal);
+        int cartItemsCount = user != null ? user.getCart().getCartItems().size() : 0;
         model.addAttribute("user", user);
+        model.addAttribute("cartItemsCount", cartItemsCount);
         return "home";
     }
 }

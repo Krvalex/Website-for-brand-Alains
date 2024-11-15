@@ -20,7 +20,7 @@ public class Product implements Cloneable {
     private Long Id;
     private String name;
     private String description;
-    private double price;
+    private int price;
 
     @ElementCollection
     @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
@@ -33,7 +33,7 @@ public class Product implements Cloneable {
 
     private String image;
 
-    public Product(String name, String description, double price, Map<String, Integer> sizes,
+    public Product(String name, String description, int price, Map<String, Integer> sizes,
                    Category category, String image) {
         this.name = name;
         this.description = description;

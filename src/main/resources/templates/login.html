@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Alains Shop</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Авторизация</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
 </head>
 <body>
-<h1>Alains Shop</h1>
-<hr>
-<h4>Авторизация</h4>
-<form action="/users/login" method="post">
-    Эл. почта: <input name="username" required type="email"><br><br>
-    Пароль: <input name="password" required type="password"><br><br>
-    <input type="submit" value="Вход"/>
-</form>
-<a href="/users/registration">Зарегистрироваться</a>
+<div th:replace="navigation.html :: navigation"></div>
+
+<div class="login-container">
+    <!-- Логотип в правом верхнем углу -->
+    <img alt="Login Logo" class="login-logo" src="/images/various/loginlogo.png">
+
+    <h4 class="login-title">Авторизация</h4>
+    <p class="registration-prompt">Ещё не зарегистрированы? <a href="/users/registration">Зарегистрироваться</a></p>
+
+    <form action="/users/login" class="login-form" method="post">
+        <input id="username" name="username" placeholder="Ваш email" required type="email">
+        <input id="password" name="password" placeholder="Введите пароль" required type="password">
+        <button class="login-button" type="submit">Войти</button>
+    </form>
+
+    <div class="forgot-password">
+        Забыли пароль? <a href="/users/reset-password">Восстановить</a>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
 </body>
 </html>

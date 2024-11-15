@@ -3,55 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
 </head>
-<body class="products">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
-</nav>
+<body>
+<div th:replace="navigation.html :: navigation"></div>
 
-<div class="main-content">
-    <h2>Available Products</h2>
+<div class="products-page">
+    <h2>Все товары</h2>
 
-    <form method="GET" th:action="@{/products}">
-        <select name="category" required="required">
-            <option disabled selected value="">All Categorise</option>
-            <option th:each="category : ${categories}"
-                    th:text="${category.displayName}"
-                    th:value="${category}">
-            </option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
+    <!-- Список товаров -->
+    <div class="product-grid">
+        <div class="product-card" th:each="product : ${products}">
+            <!-- Сердечко для добавления в избранное -->
+            <span class="heart-icon"
+                  onclick="toggleFavorite(this)"
+                  th:classappend="${favoriteProducts.contains(product)} ? 'active' : ''"
+                  th:data-product-id="${product.id}">
+    <img alt="Favorite Icon"
+         th:src="@{${favoriteProducts.contains(product) ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
+</span>
 
-    <div class="product-item" th:each="product : ${products}">
-        <!-- Dynamic image loading -->
-        <img alt="Product Image" th:src="@{'/' + ${product.getImage}}">
-
-        <h3 th:text="${product.getName}"></h3>
-        <p th:text="'Category: ' + ${product.getCategory.displayName}"></p>
-        <p th:text="'Price: $' + ${product.getPrice}"></p>
-
-        <a th:href="@{'/products/' + ${product.getId}}">View Details</a>
-
-        <hr>
+            <img alt="Product Image" class="product-image" loading="lazy" th:src="@{${product.image}}">
+            <h3 class="product-name" th:text="${product.name}"></h3>
+            <p class="product-price" th:text="${product.price} + ' ₽'"></p>
+        </div>
     </div>
-</div>
 
+    <script src="/js/main.js"></script>
+</div>
 </body>
 </html>

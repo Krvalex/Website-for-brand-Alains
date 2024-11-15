@@ -1,0 +1,143 @@
+/* Общие стили для страницы товаров */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.products-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 40px; /* Отступ для избежания перекрытия навигацией */
+}
+
+/* Заголовок */
+.products-page h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Сетка товаров */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.product-card {
+    display: block;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+    position: relative; /* Убедитесь, что это значение не конфликтует с z-index */
+    text-decoration: none;
+    color: inherit;
+    z-index: 1; /* Если необходимо, можно установить z-index для карточек, но не более 100 */
+}
+
+/* Когда карточка появляется в области видимости */
+.product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Добавление эффекта hover для карточек товара */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Изображение товара */
+.product-image {
+    width: 100%;
+    height: auto;
+    max-width: 620px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Название товара */
+.product-name {
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Цена товара */
+.product-price {
+    font-size: 1em;
+    color: #333;
+    font-weight: normal; /* Обычный шрифт */
+    margin: 5px 0;
+}
+
+/* Описание товара */
+.product-description {
+    font-size: 0.9em;
+    color: #777;
+    margin: 10px 0;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Кнопка с сердечком */
+.favorite-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Сердечко в правом верхнем углу карточки */
+.heart-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ffffff; /* Белый фон кружка */
+    border-radius: 50%; /* Круглая форма */
+    width: 30px; /* Фиксированный размер круга */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Лёгкая тень */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heart-icon:hover {
+    background-color: #f8f8f8; /* Лёгкий серый фон при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Увеличенная тень при наведении */
+}
+
+.heart-icon.active {
+    background-color: #f9ecec; /* Светло-красный фон для активного сердечка */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Красноватая тень */
+}
+
+/* Изображение сердечка */
+.heart-icon img {
+    width: 60%; /* Уменьшаем размер изображения внутри круга */
+    height: 60%;
+    object-fit: contain; /* Подгоняем изображение под круг */
+}
+

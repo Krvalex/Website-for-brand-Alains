@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<div th:fragment="navigation" xmlns:th="http://www.thymeleaf.org">
+    <!-- Полупрозрачный фон для затемнения -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div> <!-- Клик по фону закрывает меню -->
+
+    <!-- Навигационная полоса -->
+    <nav class="navbar">
+        <!-- Левая часть: Кнопка для открытия каталога -->
+        <div class="navbar-left">
+            <button class="menu-button" onclick="toggleMenu()">
+                <span class="menu-icon">&#9776;</span>
+                <span class="close-icon" style="display: none;">&times;</span>
+            </button>
+        </div>
+
+        <!-- Центр: Логотип бренда -->
+        <div class="navbar-center">
+            <a href="/"> <!-- Ссылка на главную страницу -->
+                <img alt="Alains Shop Logo" class="logo" src="/images/various/logo.png">
+            </a>
+        </div>
+
+        <!-- Правая часть: Корзина, Избранное, Аккаунт -->
+        <div class="navbar-right">
+            <a class="icon-link" href="/cart">
+                <div class="cart-icon-wrapper">
+                    <img alt="Cart" src="/images/various/cart.png">
+                    <span class="cart-count" th:text="${cartItemsCount}">0</span>
+                </div>
+            </a>
+            <a class="icon-link" href="/favorites">
+                <img alt="Favorites" src="/images/various/favorites.png">
+            </a>
+            <a class="icon-link" href="/users/account">
+                <img alt="Account" src="/images/various/account.png">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Выдвигающееся боковое меню -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        <div class="menu-divider"></div>
+        <a href="/products">ВСЕ ТОВАРЫ</a>
+        <a href="/products/tshirts">ФУТБОЛКИ</a>
+        <a href="/products/hoodies">ХУДИ</a>
+        <a href="/products">УХОД</a>
+        <a href="/products">КОНТАКТЫ</a>
+    </div>
+</div>

@@ -1,175 +1,225 @@
-/* navigation.css */
+/* Базовый стиль для всего сайта */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Основной шрифт для всего сайта */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Навигационная полоса */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px; /* Сделаем немного меньше padding для снижения высоты */
-    background-color: #333;
-    color: white;
+    padding: 5px 20px;
+    background-color: white;
+    color: black;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
-    height: 50px; /* Фиксируем высоту навигационной панели */
+    z-index: 1000; /* Убедитесь, что navbar не перекрывает меню */
+    height: 50px;
 }
 
-/* Левая часть: Кнопка для открытия каталога (теперь только значок) */
-.navbar-left {
-    display: flex;
-    align-items: center;
-}
-
+/* Кнопка для открытия каталога */
 .menu-button {
-    background-color: #333; /* Устанавливаем такой же цвет фона, как у полосы навигации */
-    color: white;
-    font-size: 1.4em; /* Немного увеличиваем шрифт */
-    padding: 12px 20px; /* Увеличиваем размер кнопки */
+    background-color: white;
+    color: black;
+    font-size: 1.4em;
+    padding: 12px 2px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Плавный переход для фона и масштабирования */
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Фиксированная ширина для меню */
+    margin-left: -20px; /* Смещение кнопки левее */
 }
 
 .menu-button:hover {
-    background-color: #333; /* Тот же цвет, что и у полосы навигации */
-    transform: scale(1.1); /* Увеличиваем кнопку на 10% при наведении */
+    transform: scale(1.1); /* Увеличение кнопки на 10% при наведении */
 }
 
-/* Центр: Логотип */
-.navbar-center {
-    flex-grow: 1; /* Логотип будет занимать доступное пространство */
-    text-align: center;
+/* Иконки для кнопки каталога */
+.menu-icon,
+.close-icon {
+    font-size: 1.4em;
+    line-height: 1;
+    vertical-align: middle;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.menu-button .menu-icon {
+    display: inline;
+}
+
+.menu-button .close-icon {
+    display: none;
+}
+
+.side-menu.open .menu-icon {
+    display: none;
+}
+
+.side-menu.open .close-icon {
+    display: inline;
 }
 
 /* Логотип */
 .logo {
-    height: 230px; /* Увеличиваем логотип */
-    object-fit: contain; /* Сохраняем пропорции */
-    margin-top: 3px; /* Немного поднимем логотип */
-    margin-left: 42px; /* Добавляем отступ слева, чтобы сдвинуть логотип правее */
+    height: 230px;
+    object-fit: contain;
+    margin-top: 3px;
+    margin-left: 90px;
+    position: relative;
+}
+
+.logo-link {
+    display: inline-block;
+    text-decoration: none;
 }
 
 /* Правая часть: Корзина, Избранное, Аккаунт */
 .navbar-right {
     display: flex;
     align-items: center;
+    margin-right: 30px; /* Убираем смещение значков левее */
 }
 
-/* Общий стиль для иконок */
-.icon-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-    margin-left: 15px;
+.navbar .icon-link {
+    margin-left: -5px; /* Смещает иконки немного левее */
 }
 
-/* Эффекты для иконок */
+/* Иконки в правой части навигации с уменьшенными размерами и кружком */
 .navbar .icon-link img {
-    width: 25px; /* Уменьшаем размер значков */
-    height: 25px; /* Уменьшаем размер значков */
-    border-radius: 50%; /* Делаем картинку круглой */
-    background-color: white; /* Добавляем белый фон */
-    padding: 5px; /* Немного добавляем отступов, чтобы фон был виден */
-    object-fit: cover; /* Сохраняем пропорции изображения */
+    width: 25px; /* Уменьшенный размер иконок */
+    height: 25px;
+    border-radius: 50%; /* Круглая форма */
+    background-color: white; /* Белый фон */
+    padding: 4px; /* Уменьшенный отступ внутри круга */
+    object-fit: cover;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); /* Меньшая тень */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 20px; /* Расстояние между значками */
 }
 
 /* Эффект при наведении на иконки */
-.navbar .icon-link:hover {
-    transform: scale(1.2); /* Увеличиваем иконки при наведении */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Добавляем тень вокруг значка */
-    filter: brightness(1.3); /* Яркость увеличивается при наведении */
+.navbar .icon-link:hover img {
+    transform: scale(1.1); /* Лёгкое увеличение при наведении */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Небольшая тень при наведении */
 }
 
-/* Индивидуальные стили для иконок (с градиентами и цветами фона) */
-
-/* Корзина */
-.navbar .icon-link img[src*="cart"] {
-    background: linear-gradient(145deg, #f39c12, #e67e22); /* Градиентный фон для корзины */
-    padding: 5px;
-    border-radius: 50%; /* Круглый фон */
+/* Полупрозрачный фон для затемнения */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Черный фон с прозрачностью */
+    display: none; /* Скрыт по умолчанию */
+    z-index: 800; /* Задний план, но выше контента */
 }
 
-/* Избранное */
-.navbar .icon-link img[src*="favorites"] {
-    background: linear-gradient(145deg, #e74c3c, #c0392b); /* Градиент для избранного */
-    padding: 5px;
-    border-radius: 50%;
-}
-
-/* Аккаунт */
-.navbar .icon-link img[src*="account"] {
-    background: linear-gradient(145deg, #3498db, #2980b9); /* Градиент для аккаунта */
-    padding: 5px;
-    border-radius: 50%;
-}
-
-/* Для отступа справа */
-.icon-link img {
-    margin-right: 10px; /* Добавляем отступ справа */
-}
-
-.icon-link:hover {
-    color: #ddd;
-}
-
-/* Стили для бокового меню */
+/* Выдвигающееся навигационное меню */
 .side-menu {
     position: fixed;
     top: 0;
-    left: -250px;
-    width: 200px; /* Уменьшаем ширину меню */
+    left: -250px; /* Начальная позиция вне экрана */
+    width: 250px; /* Ширина меню */
     height: 100%;
-    background-color: #444;
-    color: white;
+    background-color: white;
+    color: black;
     overflow-x: hidden;
     transition: left 0.3s ease;
-    padding-top: 60px; /* Сдвигаем меню немного вниз */
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравнивание по левому краю */
-    font-family: Calibri, sans-serif; /* Шрифт Calibri */
+    align-items: flex-start;
+    font-family: Calibri, sans-serif;
+    z-index: 900; /* Обеспечим, чтобы меню было поверх всех элементов */
 }
 
-/* Ссылки внутри бокового меню */
+/* Класс для открытия меню */
+.side-menu.open {
+    left: 0; /* Сдвигаем меню в видимую область */
+}
+
+/* Показать фон, когда меню открыто */
+.side-menu.open ~ .overlay {
+    display: block; /* Показываем фон, когда меню открыто */
+}
+
+/* Ссылки в боковом меню */
 .side-menu a {
-    display: block; /* Ссылки становятся блочными */
-    padding: 12px 20px; /* Увеличиваем отступы */
+    display: block;
+    position: relative;
+    padding: 8px 35px; /* Увеличим отступ слева, чтобы сделать ссылки правее */
     text-decoration: none;
-    color: white;
-    font-size: 1.3em; /* Увеличиваем размер текста */
-    transition: color 0.3s ease; /* Плавный переход для изменения цвета */
-    margin-bottom: 5px; /* Уменьшаем отступ между ссылками */
+    color: black;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    overflow: hidden;
+    transition: color 0.3s ease;
 }
 
 /* Эффект при наведении на ссылки */
-.side-menu a:hover {
-    color: #f39c12; /* Изменяем цвет текста */
-    /* Фон не меняется */
+.side-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transform: scaleX(0); /* Изначально невидимо */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease; /* Плавное появление */
+}
+
+.side-menu a:hover::after {
+    transform: scaleX(1); /* Подчёркивание выдвигается слева направо */
+    transform-origin: bottom left;
 }
 
 /* Кнопка закрытия бокового меню */
 .close-btn {
-    font-size: 1.5em;
+    font-size: 1.4em; /* Увеличим размер значка закрытия, чтобы он был одинаковым */
     background: none;
     border: none;
-    color: white;
+    color: black;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
 }
 
-/* Убираем слово "Меню" */
-.side-menu h2 {
-    /*display: none; !* Убираем заголовок *!*/
-}
-
 /* Открытое состояние бокового меню */
 .side-menu.open {
-    left: 0;
+    left: 0; /* Сдвигаем меню в видимую область */
+}
+
+.cart-icon-wrapper {
+    position: relative; /* Это позволит точно позиционировать счетчик относительно значка корзины */
+    display: inline-block;
+}
+
+/* Стили для маленького кружка с числом товаров */
+.cart-count {
+    position: absolute;
+    top: -5px; /* Смещение для точного позиционирования */
+    right: -9px;
+    background-color: #A8F0FF; /* Цвет фона кружка */
+    color: black;
+    font-size: 0.7em;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
