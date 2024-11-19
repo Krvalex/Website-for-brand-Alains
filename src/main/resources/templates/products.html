@@ -7,7 +7,7 @@
     <link href="/css/product.css" rel="stylesheet">
 </head>
 <body>
-<div th:replace="navigation.html :: navigation"></div>
+<div th:replace="~{navigation.html :: navigation}"></div>
 
 <div class="products-page">
     <!-- Динамически меняем заголовок -->
@@ -20,23 +20,19 @@
             <a class="product-card-link" th:href="@{/products/{id}(id=${product.id})}">
                 <!-- Сердечко для добавления в избранное -->
                 <span class="heart-icon"
-                      onclick="toggleFavorite(this)"
+                      onclick="toggleFavorite(this); event.preventDefault(); event.stopPropagation();"
                       th:classappend="${favoriteProducts.contains(product)} ? 'active' : ''"
                       th:data-product-id="${product.id}">
-                <img alt="Favorite Icon"
-                     th:src="@{${favoriteProducts.contains(product) ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
-            </span>
-
+        <img alt="Favorite Icon"
+             th:src="@{${favoriteProducts.contains(product) ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
+    </span>
                 <!-- Контейнер для изображений товара -->
                 <div class="product-image-wrapper">
-                    <!-- Изображение товара (переднее) -->
                     <img alt="Product Front" class="product-image product-image-front" loading="lazy"
                          th:src="@{${product.getImageFront}}">
-                    <!-- Изображение товара (заднее) -->
                     <img alt="Product Back" class="product-image product-image-back" loading="lazy"
                          th:src="@{${product.getImageBack}}">
                 </div>
-
                 <h3 class="product-name" th:text="${product.name}"></h3>
                 <p class="product-price" th:text="${product.price} + ' ₽'"></p>
             </a>

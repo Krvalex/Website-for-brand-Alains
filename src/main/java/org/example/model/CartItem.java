@@ -31,4 +31,10 @@ public class CartItem {
         this.product = product;
         this.size = size;
     }
+
+    public String getFormattedTotalPrice() {
+        int pricePerUnit = Integer.parseInt(product.getPrice().replace(" ", ""));
+        int totalPrice = pricePerUnit * quantity;
+        return String.format("%,d", totalPrice).replace(",", " ");
+    }
 }

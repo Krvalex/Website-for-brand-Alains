@@ -1,0 +1,157 @@
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-container {
+    max-width: 750px; /* Увеличиваем ширину контейнера */
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cart-items {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    gap: 20px; /* Увеличиваем расстояние между элементами */
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-image img {
+    width: 100px; /* Увеличиваем размер изображения */
+    height: 100px;
+    object-fit: contain;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.item-details {
+    flex: 2;
+    padding-left: 20px;
+    max-width: 300px; /* Ограничиваем ширину текста */
+}
+
+.item-details h3 {
+    font-size: 1em;
+    color: #000;
+    margin: 0 0 5px;
+}
+
+.item-details p {
+    font-size: 0.9em;
+    color: #777;
+    margin: 0;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #ddd;
+}
+
+.item-price {
+    text-align: right;
+}
+
+.item-price p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+.remove-item-btn {
+    background-color: #f44336; /* Красный фон для кнопки */
+    border: none;
+    font-size: 1em; /* Уменьшаем размер текста крестика для кнопки */
+    color: #fff; /* Белый крестик */
+    cursor: pointer;
+    width: 30px; /* Ширина кружка */
+    height: 30px; /* Высота кружка */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Делаем кнопку круглой */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px; /* Отступ от цены */
+    position: relative;
+}
+
+.remove-item-btn:hover {
+    background-color: #d32f2f; /* Темно-красный фон при наведении */
+    transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cart-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.checkout-btn {
+    display: block; /* Делает <a> блочным, как <button> */
+    width: 100%; /* Полная ширина, как у кнопки */
+    padding: 15px 0;
+    background-color: #000; /* Черный фон */
+    color: #fff; /* Белый текст */
+    text-align: center;
+    text-decoration: none; /* Убирает подчеркивание */
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #333; /* Темнее при наведении */
+}

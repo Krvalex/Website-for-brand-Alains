@@ -10,7 +10,9 @@ import org.example.model.User;
 import org.example.repository.CartItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -21,12 +23,15 @@ public class CartItemService {
 
     CartService cartService;
 
-    public double sum(List<CartItem> items) {
+    public String formatSum(List<CartItem> items) {
         double sum = 0;
         for (CartItem item : items) {
-            sum += item.getProduct().getPrice();
+            double price = Double.parseDouble(item.getProduct().getPrice().replace(" ", ""));
+            sum += price * item.getQuantity(); // Учитываем количество
         }
-        return sum;
+
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("ru", "RU"));
+        return formatter.format(sum);
     }
 
     public void addToCart(User user, Product product, String size) {
@@ -45,6 +50,12 @@ public class CartItemService {
     }
 
     public void deleteProduct(User user, Long cartItemId) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
+        user.getCart().getCartItems().remove(cartItem);
+        cartService.save(user.getCart());
+    }
+
+    public void decrementProduct(User user, Long cartItemId) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
         if (cartItem.getQuantity() > 1) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
@@ -89,5 +100,11 @@ public class CartItemService {
 
     public void deleteByGuestCartId(Long guestCartId) {
         cartItemRepository.deleteByGuestCartId(guestCartId);
+    }
+
+    public void incrementProduct(User user, Long cartItemId) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
+        cartItem.setQuantity(cartItem.getQuantity() + 1);
+        cartService.save(user.getCart());
     }
 }

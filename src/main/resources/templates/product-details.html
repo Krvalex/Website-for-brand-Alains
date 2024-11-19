@@ -5,10 +5,87 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Product Details</title>
     <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/product-details.css" rel="stylesheet">
 </head>
 <body>
-<div th:replace="navigation.html :: navigation"></div>
+<div th:replace="~{navigation.html :: navigation}"></div>
+<div class="back-button-wrapper">
+    <a class="back-button" href="javascript:history.back()">
+        <span class="back-arrow">&#8592;</span> ВЕРНУТЬСЯ
+    </a>
+</div>
+<div class="product-details">
+    <!-- Изображения товара -->
+    <div class="product-images">
+        <img alt="Product Front" class="product-image-main" th:src="@{${product.imageFront}}">
+        <img alt="Product Back" class="product-image-secondary" th:src="@{${product.imageBack}}">
+    </div>
 
+    <!-- Детали товара -->
+    <div class="product-info-wrapper">
+        <div class="product-info">
+            <h1 class="product-name" th:text="${product.name}"></h1>
+            <div class="price-wrapper">
+                <p class="product-price" th:text="${product.price} + ' ₽'"></p>
+                <p class="product-price-discounted" th:text="${oldPrice} + ' ₽'"></p>
+            </div>
+            <pre class="product-description" th:text="${product.description}"></pre>
+            <p class="product-note">
+                *Готовое изделие может иметь незначительные<br>
+                отклонения до 2 см.<br>
+                Тональность нанесения и изделия могут<br>
+                незначительно отличаться от заявленного<br>
+                макета.
+            </p>
+            <!-- Выбор размера -->
+            <div class="size-selection">
+                <div class="size-options">
+                    <!-- Пример доступных и недоступных размеров -->
+                    <button class="size-option" data-size="XS" th:classappend="${product.sizes['XS'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['XS']}"
+                            th:disabled="${product.sizes['XS'] == 0}"
+                            type="button">XS
+                    </button>
+                    <button class="size-option" data-size="S" th:classappend="${product.sizes['S'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['S']}"
+                            th:disabled="${product.sizes['S'] == 0}"
+                            type="button">S
+                    </button>
+                    <button class="size-option" data-size="M" th:classappend="${product.sizes['M'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['M']}"
+                            th:disabled="${product.sizes['M'] == 0}"
+                            type="button">M
+                    </button>
+                    <button class="size-option" data-size="L" th:classappend="${product.sizes['L'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['L']}"
+                            th:disabled="${product.sizes['L'] == 0}"
+                            type="button">L
+                    </button>
+                    <button class="size-option" data-size="XL" th:classappend="${product.sizes['XL'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['XL']}"
+                            th:disabled="${product.sizes['XL'] == 0}"
+                            type="button">XL
+                    </button>
+                    <button class="size-option" data-size="XXL" th:classappend="${product.sizes['XXL'] == 0} ? 'disabled' : ''" th:data-quantity="${product.sizes['XXL']}"
+                            th:disabled="${product.sizes['XXL'] == 0}"
+                            type="button">XXL
+                    </button>
+                </div>
+                <form class="size-selection-form" method="post"
+                      th:action="@{/cart/add/{productId}(productId=${product.Id})}">
+                    <input id="selected-size" name="size" required type="hidden">
+                    <button class="add-to-cart-btn" type="submit">Добавить в корзину</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Уведомление об ошибке -->
+<div class="notification error" id="errorNotification">
+    <button class="close-notification" onclick="closeNotification('errorNotification')">&times;</button>
+    <p>Пожалуйста, выберите размер товара.</p>
+</div>
+
+<!-- Уведомление об успехе -->
+<div class="notification success" id="successNotification">
+    <button class="close-notification" onclick="closeNotification('successNotification')">&times;</button>
+    <p>Товар успешно добавлен в корзину.</p>
+</div>
 <script src="/js/main.js"></script>
 </body>
 </html>

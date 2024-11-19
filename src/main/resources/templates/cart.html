@@ -3,60 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
-    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/cart.css" rel="stylesheet">
 </head>
 <body class="cart">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
-</nav>
-<div class="main-content">
-    <h2>Your Cart</h2>
+<div th:replace="~{navigation.html :: navigation}"></div>
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Size</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cartItem : ${cartItems}">
-            <td th:text="${cartItem.product.getName}"></td>
-            <td th:text="${cartItem.size}"></td>
-            <td th:text="${cartItem.quantity}"></td>
-            <td th:text="${cartItem.product.getPrice}"></td>
-            <td>
-                <form method="post" th:action="@{/cart/delete/{cartItemId}(cartItemId=${cartItem.getId})}">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <p>Total Price: <span th:text="${sum}"></span></p>
-    <a class="buy-now-button" th:href="@{/cart/cartdetails}">Buy Now</a>
-    <div class="error" th:if="${errorMessage != null}">
-        <p th:text="${errorMessage}"></p>
+<div class="cart-container">
+    <h2>Ваш заказ</h2>
+    <div class="cart-items">
+        <div class="cart-item" th:each="item : ${cartItems}">
+            <div class="item-image">
+                <img alt="Product Image" th:src="@{${item.product.imageFront}}">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name" th:text="${item.product.name}"></h3>
+                <p class="item-size" th:text="'Размер: ' + ${item.size}"></p>
+            </div>
+            <div class="item-quantity">
+                <button class="quantity-btn decrease" onclick="updateCartItemQuantity(this, 'decrement')"
+                        th:data-id="${item.id}">-
+                </button>
+                <span th:text="${item.quantity}">1</span>
+                <button class="quantity-btn increase" onclick="updateCartItemQuantity(this, 'increment')"
+                        th:data-id="${item.id}">+
+                </button>
+            </div>
+            <div class="item-price">
+                <p th:data-price-per-unit="${item.product.price}"
+                   th:text="${item.getFormattedTotalPrice()} + ' ₽'"></p>
+            </div>
+            <button class="remove-item-btn" onclick="deleteCartItem(this)" th:data-id="${item.id}">×</button>
+        </div>
+    </div>
+    <div class="cart-summary">
+        <p class="cart-total">Сумма: <span th:text="${sum} + ' ₽'"></span></p>
+        <a class="checkout-btn" href="/cart/cartdetails">Оформить</a>
     </div>
 </div>
+<script src="/js/main.js"></script>
 </body>
 </html>

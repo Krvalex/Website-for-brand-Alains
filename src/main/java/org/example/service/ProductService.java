@@ -8,8 +8,10 @@ import org.example.model.enums.Category;
 import org.example.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -47,4 +49,9 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public String getOldPrice(String price) {
+        double oldPrice = Double.parseDouble(price.replace(" ", "")) + 1000;
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("ru", "RU"));
+        return formatter.format(oldPrice);
+    }
 }

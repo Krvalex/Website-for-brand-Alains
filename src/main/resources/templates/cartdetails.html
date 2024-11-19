@@ -1,104 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Cart Details</title>
-    <link href="/css/styles.css" rel="stylesheet">
-    <script>
-        function togglePromoCodeField() {
-            const promoCodeField = document.getElementById('promoCodeField');
-            const promoCodeYes = document.getElementById('hasPromoCodeYes');
-            promoCodeField.style.display = promoCodeYes.checked ? 'block' : 'none';
-        }
-
-        function setAddressRequired(isRequired) {
-            const addressField = document.getElementById('address');
-            if (isRequired) {
-                addressField.setAttribute('required', 'required');
-            } else {
-                addressField.removeAttribute('required');
-            }
-        }
-
-        function applyPromoCode() {
-            setAddressRequired(false);
-        }
-
-        function placeOrder() {
-            setAddressRequired(true);
-        }
-    </script>
+    <title>Checkout</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/cartdetails.css" rel="stylesheet">
 </head>
-<body class="cartDetails">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
-</nav>
-<div class="main-content">
-    <form method="post" th:action="@{/cart/cartdetails}">
-        <label for="name">Email:</label>
-        <input id="name" name="name" required th:value="${user != null ? user.getUsername : ''}" type="text">
-        <br>
-        <label for="address">Address:</label>
-        <input id="address" name="address" th:value="${address != null ? address : ''}" type="text">
-        <br>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
 
-        <h3>Do you have a promo code?</h3>
-        <label>
-            <input id="hasPromoCodeYes" name="hasPromoCode" onclick="togglePromoCodeField()" type="radio" value="yes">
-            Yes
-        </label>
-        <label>
-            <input checked id="hasPromoCodeNo" name="hasPromoCode" onclick="togglePromoCodeField()" type="radio"
-                   value="no"> No
-        </label>
+<div class="checkout-container">
+    <!-- Левая часть: форма -->
+    <div class="checkout-form">
+        <h2>Оформление заказа</h2>
+        <form action="/checkout" method="post">
+            <label for="name">Ваше имя</label>
+            <input id="name" name="name" placeholder="Введите ваше имя" required type="text">
 
-        <div id="promoCodeField" style="display: none;">
-            <label for="promoCode">Promo Code:</label>
-            <input id="promoCode" name="promoCode" type="text">
-            <button name="applyPromoCode" onclick="applyPromoCode()" type="submit" value="true">Применить промокод
-            </button>
+            <label for="email">Почта</label>
+            <input id="email" name="email" placeholder="Введите вашу почту" required type="email">
+
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" placeholder="+7 (999) 999-99-99" required type="tel">
+
+            <label for="promo-code">Промокод</label>
+            <input id="promo-code" name="promoCode" placeholder="Введите промокод" type="text">
+
+            <button class="checkout-btn" type="submit">Оформить заказ</button>
+        </form>
+    </div>
+
+    <!-- Правая часть: список товаров -->
+    <div class="cart-summary-container">
+        <h2>Ваш заказ</h2>
+        <div class="cart-items">
+            <div class="cart-item" th:each="item : ${cartItems}">
+                <div class="item-image">
+                    <img alt="Product Image" th:src="@{${item.product.imageFront}}">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-name" th:text="${item.product.name}"></h3>
+                    <p class="item-size" th:text="'Размер: ' + ${item.size}"></p>
+                </div>
+                <div class="item-quantity">
+                    <p>Количество: <span th:text="${item.quantity}"></span></p>
+                </div>
+                <div class="item-price">
+                    <p th:text="${item.getFormattedTotalPrice()} + ' ₽'"></p>
+                </div>
+            </div>
         </div>
 
-        <h3>Cart Items</h3>
-        <table border="1">
-            <tr>
-                <th>Product Name</th>
-                <th>Size</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-            <tr th:each="cartItem : ${cartItems}">
-                <td th:text="${cartItem.product.getName}"></td>
-                <td th:text="${cartItem.size}"></td>
-                <td th:text="${cartItem.quantity}"></td>
-                <td th:text="${cartItem.product.getPrice}"></td>
-            </tr>
-        </table>
-        <br>
-        <h3>Total Price</h3>
-        <p th:text="${sum}"></p>
-        <p style="color: green;" th:if="${discountMessage != null}" th:text="${discountMessage}"></p>
-        <p style="color: red;" th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
-        <br>
-
-        <button name="applyPromoCode" onclick="placeOrder()" type="submit" value="false">Place Order</button>
-    </form>
+        <!-- Итоговые суммы -->
+        <div class="cart-summary">
+            <p>Сумма: <span th:text="${sum} + ' ₽'"></span></p>
+        </div>
+    </div>
 </div>
+
+<script src="/js/main.js"></script>
 </body>
 </html>

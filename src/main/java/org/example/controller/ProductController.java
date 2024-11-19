@@ -90,8 +90,10 @@ public class ProductController {
     public String getById(@PathVariable Long id, Model model) {
         Product product = productService.getById(id);
         Map<String, Integer> productSizes = product.getSizes(); // Получаем карту размеров и количества
+        String oldPrice = productService.getOldPrice(product.getPrice());
         model.addAttribute("product", product);
         model.addAttribute("productSizes", productSizes);
+        model.addAttribute("oldPrice", oldPrice);
         return "product-details";
     }
 }

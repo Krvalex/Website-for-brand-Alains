@@ -68,4 +68,26 @@ public class GuestCartService {
         }
         guestCartRepository.deleteAll(oldCarts);
     }
+
+    public void incrementProduct(String guestIdentifier, Long cartItemId) {
+        GuestCart guestCart = guestCartRepository.findByGuestIdentifier(guestIdentifier).orElseThrow();
+        for (CartItem cartItem : guestCart.getCartItems()) {
+            if (cartItem.getId().equals(cartItemId)) {
+                cartItem.setQuantity(cartItem.getQuantity() + 1);
+                break;
+            }
+        }
+        guestCartRepository.save(guestCart);
+    }
+
+    public void decrementProduct(String guestIdentifier, Long cartItemId) {
+        GuestCart guestCart = guestCartRepository.findByGuestIdentifier(guestIdentifier).orElseThrow();
+        for (CartItem cartItem : guestCart.getCartItems()) {
+            if (cartItem.getId().equals(cartItemId)) {
+                cartItem.setQuantity(cartItem.getQuantity() - 1);
+                break;
+            }
+        }
+        guestCartRepository.save(guestCart);
+    }
 }
