@@ -38,9 +38,14 @@
     </div>
     <div class="cart-summary">
         <p class="cart-total">Сумма: <span th:text="${sum} + ' ₽'"></span></p>
-        <a class="checkout-btn" href="/cart/cartdetails">Оформить</a>
+        <a class="checkout-btn" href="/cart/details">Оформить</a>
     </div>
 </div>
+<div class="notification error" id="stockErrorNotification" th:if="${error}">
+    <button class="close-notification" onclick="closeNotification('stockErrorNotification')">&times;</button>
+    <p th:text="${error}"></p>
+</div>
 <script src="/js/main.js"></script>
+<script src="/js/cart.js"></script>
 </body>
 </html>

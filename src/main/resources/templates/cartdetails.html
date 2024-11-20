@@ -13,18 +13,48 @@
     <!-- Левая часть: форма -->
     <div class="checkout-form">
         <h2>Оформление заказа</h2>
-        <form action="/checkout" method="post">
-            <label for="name">Ваше имя</label>
-            <input id="name" name="name" placeholder="Введите ваше имя" required type="text">
+        <form action="/cart/details" id="checkoutForm" method="post">
+            <label for="FIO">ФИО</label>
+            <input id="FIO" name="FIO" placeholder="Иванов Иван Иванович" required type="text">
 
             <label for="email">Почта</label>
-            <input id="email" name="email" placeholder="Введите вашу почту" required type="email">
+            <input id="email" name="email" placeholder="ivanivanov@mail.ru" required type="email">
 
             <label for="phone">Телефон</label>
             <input id="phone" name="phone" placeholder="+7 (999) 999-99-99" required type="tel">
 
+            <label for="city">Город</label>
+            <select id="city" name="city" required>
+                <option disabled selected value="">Выберите ваш город</option>
+                <option value="Москва">Москва</option>
+                <option value="Санкт-Петербург">Санкт-Петербург</option>
+                <option value="Новосибирск">Новосибирск</option>
+                <option value="Екатеринбург">Екатеринбург</option>
+                <option value="Казань">Казань</option>
+                <option value="Нижний Новгород">Нижний Новгород</option>
+                <option value="Челябинск">Челябинск</option>
+                <option value="Самара">Самара</option>
+                <option value="Омск">Омск</option>
+                <option value="Ростов-на-Дону">Ростов-на-Дону</option>
+            </select>
+
+            <label for="deliveryMethod">Способ доставки</label>
+            <select id="deliveryMethod" name="deliveryMethod" required>
+                <option disabled selected value="">Выберите способ доставки</option>
+                <option value="Яндекс">Яндекс</option>
+                <option value="СДЭК">СДЭК</option>
+                <option value="Почта России">Почта России</option>
+                <option value="Kazan Express">Kazan Express</option>
+                <option value="Boxberry">Boxberry</option>
+            </select>
+
             <label for="promo-code">Промокод</label>
-            <input id="promo-code" name="promoCode" placeholder="Введите промокод" type="text">
+            <div class="promo-code-container">
+                <input id="promo-code" name="promoCode" placeholder="Введите промокод" type="text">
+                <button class="apply-promo-btn" type="button">Применить</button>
+            </div>
+
+            <input id="totalSum" name="totalSum" type="hidden" value="">
 
             <button class="checkout-btn" type="submit">Оформить заказ</button>
         </form>
@@ -53,11 +83,23 @@
 
         <!-- Итоговые суммы -->
         <div class="cart-summary">
-            <p>Сумма: <span th:text="${sum} + ' ₽'"></span></p>
+            <p>Сумма: <span th:text="${sum} + ' ₽'">0 ₽</span></p>
         </div>
     </div>
 </div>
 
-<script src="/js/main.js"></script>
+<!-- Уведомление об ошибке -->
+<div class="notification error" id="promoErrorNotification">
+    <button class="close-notification" onclick="closeNotification('promoErrorNotification')">&times;</button>
+    <p>Промокод недействителен.</p>
+</div>
+
+<!-- Уведомление об успехе -->
+<div class="notification success" id="promoSuccessNotification">
+    <button class="close-notification" onclick="closeNotification('promoSuccessNotification')">&times;</button>
+    <p>Промокод успешно применен!</p>
+</div>
+
+<script src="/js/promoCodeHandler.js"></script>
 </body>
 </html>

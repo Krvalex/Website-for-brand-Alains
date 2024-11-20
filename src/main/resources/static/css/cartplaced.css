@@ -1,0 +1,86 @@
+/* Базовый стиль для страницы cartplaced */
+body.cart-placed {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Учитываем наличие навигационной полосы */
+    align-items: center;
+}
+
+/* Исправление для фиксированной навигационной полосы */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Контейнер подтверждения заказа */
+.cart-placed-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    margin-top: 250px; /* Учитываем высоту навигационной полосы */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Заголовок сообщения */
+.cart-placed-message h1 {
+    font-size: 1.8em;
+    color: #4caf50; /* Зеленый цвет для успеха */
+    margin-bottom: 10px;
+}
+
+/* Описание */
+.cart-placed-message p {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Анимация изображения */
+.cart-placed-animation img {
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+    animation: bounce 1.5s infinite;
+}
+
+/* Анимация прыжка */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Таймер редиректа */
+.cart-placed-timer {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 15px;
+}

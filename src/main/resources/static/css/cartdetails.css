@@ -140,3 +140,109 @@ body {
     font-weight: bold;
     color: #000;
 }
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+    appearance: none; /* Убираем стандартный стиль браузера */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Позиция галочки */
+    background-size: 12px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.promo-code-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между полем и кнопкой */
+}
+
+.promo-code-container input {
+    flex: 1; /* Поле занимает доступное пространство */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.apply-promo-btn {
+    padding: 10px 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: -20px; /* Поднимаем кнопку выше */
+}
+
+.apply-promo-btn:hover {
+    background-color: #333;
+}
+
+/* Основные стили уведомлений */
+.notification {
+    position: fixed;
+    bottom: -100px; /* Начальная позиция скрыта */
+    right: 20px;
+    width: 250px;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Прозрачность для скрытого состояния */
+    transform: translateY(0); /* Начальное положение */
+    transition: all 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+/* Уведомление об ошибке */
+.notification.error {
+    background-color: #f44336; /* Красный фон */
+    border: 2px solid #ff7961; /* Красный контур */
+}
+
+/* Уведомление об успехе */
+.notification.success {
+    background-color: #4caf50; /* Зеленый фон */
+    border: 2px solid #81c784; /* Зеленый контур */
+}
+
+/* Кнопка закрытия уведомления */
+.close-notification {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-notification:hover {
+    color: #ddd; /* Легкое осветление кнопки при наведении */
+}
+
+/* Показываем уведомление */
+.notification.show {
+    bottom: 20px; /* Уведомление выдвигается из правого нижнего угла */
+    opacity: 1;
+}

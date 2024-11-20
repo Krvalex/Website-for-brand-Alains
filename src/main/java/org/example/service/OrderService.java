@@ -24,9 +24,10 @@ public class OrderService {
     GuestCartService guestCartService;
     CartService cartService;
 
-    public void createUserOrder(List<CartItem> cartItems, User user) {
-        Order order = new Order();
-        order.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+    public void createUserOrder(List<CartItem> cartItems, User user,
+                                String FIO, String email, String phone, String city,
+                                String deliveryMethod, double totalSum) {
+        Order order = new Order(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), FIO, email, phone, city, deliveryMethod, totalSum);
         for (CartItem cartItem : cartItems) {
             order.getOrderItems().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
         }
@@ -36,13 +37,13 @@ public class OrderService {
         cartService.save(user.getCart());
     }
 
-    public void createGuestOrder(List<CartItem> cartItems, String guestEmail, String guestIdentifier) {
-        Order order = new Order();
-        order.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+    public void createGuestOrder(List<CartItem> cartItems, String guestIdentifier,
+                                 String FIO, String email, String phone, String city,
+                                 String deliveryMethod, double totalSum) {
+        Order order = new Order(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), FIO, email, phone, city, deliveryMethod, totalSum);
         for (CartItem cartItem : cartItems) {
             order.getOrderItems().add(new OrderItem(cartItem.getProduct(), cartItem.getSize(), cartItem.getQuantity()));
         }
-        order.setGuestEmail(guestEmail);
         orderRepository.save(order);
         guestCartService.clear(guestIdentifier);
     }
