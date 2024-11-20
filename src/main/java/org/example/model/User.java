@@ -34,7 +34,7 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_favorite_id")
-    private Favorite favorite = new Favorite();
+    private Favorites favorites = new Favorites();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();

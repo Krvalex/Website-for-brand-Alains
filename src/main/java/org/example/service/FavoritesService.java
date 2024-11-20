@@ -7,7 +7,7 @@ import org.example.model.FavoriteItem;
 import org.example.model.Product;
 import org.example.model.User;
 import org.example.model.enums.Category;
-import org.example.repository.FavoriteRepository;
+import org.example.repository.FavoritesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,38 +16,38 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 @Service
-public class FavoriteService {
+public class FavoritesService {
 
-    FavoriteRepository favoriteRepository;
+    FavoritesRepository favoritesRepository;
     ProductService productService;
 
-    public void deleteProduct(User user, Long productId) {
-        List<FavoriteItem> products = user.getFavorite().getFavoriteItems();
-        products.removeIf(item -> item.getProduct().getId().equals(productId));
-        favoriteRepository.save(user.getFavorite());
+    public void deleteProduct(User user, Long favoriteItemId) {
+        List<FavoriteItem> products = user.getFavorites().getFavoriteItems();
+        products.removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
+        favoritesRepository.save(user.getFavorites());
     }
 
     public void saveIfNotAlreadyInFavorite(User user, Long productId) {
         Product product = productService.getById(productId);
-        boolean isAlreadyFavorite = user.getFavorite().getFavoriteItems()
+        boolean isAlreadyFavorite = user.getFavorites().getFavoriteItems()
                 .stream()
                 .anyMatch(item -> item.getProduct().getId().equals(productId));
         if (!isAlreadyFavorite) {
             FavoriteItem favoriteItem = new FavoriteItem(product.clone());
-            user.getFavorite().getFavoriteItems().add(favoriteItem);
-            favoriteRepository.save(user.getFavorite());
+            user.getFavorites().getFavoriteItems().add(favoriteItem);
+            favoritesRepository.save(user.getFavorites());
         }
     }
 
     public List<Product> getProducts(User user) {
-        return user.getFavorite().getFavoriteItems()
+        return user.getFavorites().getFavoriteItems()
                 .stream()
                 .map(FavoriteItem::getProduct)
                 .collect(Collectors.toList());
     }
 
     public List<Product> getProductsByCategory(User user, Category category) {
-        return user.getFavorite().getFavoriteItems()
+        return user.getFavorites().getFavoriteItems()
                 .stream()
                 .map(FavoriteItem::getProduct)
                 .filter(product -> product.getCategory() == category) // Фильтрация по категории

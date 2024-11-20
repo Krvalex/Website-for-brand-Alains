@@ -2,46 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cart</title>
-    <link href="/css/styles.css" rel="stylesheet">
+    <title>Favorites</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/favorites.css" rel="stylesheet">
 </head>
-<body class="cart">
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li><a th:href="@{/favorites}">Favorites</a></li>
-        <li th:if="${user != null}">
-            <form action="/users/account" style="display:inline;">
-                <button type="submit">Account</button>
-            </form>
-        </li>
-        <li th:unless="${user != null}">
-            <form action="/users/login" method="post" style="display:inline;">
-                <button type="submit">Log in</button>
-            </form>
-        </li>
-    </ul>
-</nav>
-<div class="main-content">
-    <h2>Your Favorites</h2>
-    <div class="product-item" th:each="product : ${products}">
-        <!-- Dynamic image loading -->
-        <img alt="Product Image" th:src="@{'/' + ${product.getImageFront}}">
+<body class="favorites">
+<div th:replace="~{navigation.html :: navigation}"></div>
 
-        <h3 th:text="${product.getName}"></h3>
-        <p th:text="'Category: ' + ${product.getCategory.displayName}"></p>
-        <p th:text="'Price: $' + ${product.getPrice}"></p>
+<div class="favorites-container">
+    <h2>Избранное</h2>
 
-        <a th:href="@{'/products/' + ${product.getId}}">View Details</a>
+    <!-- Сообщение при отсутствии избранных товаров -->
+    <div class="empty-favorites-message" th:if="${favoriteItems.isEmpty()}">
+        <p>Список избранного пуст. Добавьте товары, чтобы сохранить их здесь.</p>
+    </div>
 
-        <!-- Кнопка для удаления из избранного -->
-        <form method="post" style="display: inline;" th:action="@{'/favorites/remove/' + ${product.getId}}">
-            <button type="submit">Remove from Favorites</button>
-        </form>
-        <hr>
+    <!-- Список избранных товаров -->
+    <div class="favorite-items" th:if="${not favoriteItems.isEmpty()}">
+        <div class="favorite-item" th:each="item : ${favoriteItems}">
+            <div class="item-image">
+                <img alt="Product Image" th:src="@{${item.product.imageFront}}">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name" th:text="${item.product.name}"></h3>
+                <p class="item-price" th:text="${item.product.price} + ' ₽'"></p>
+            </div>
+            <button class="remove-item-btn" onclick="removeFavoriteItem(this)" th:data-id="${item.id}">×</button>
+        </div>
     </div>
 </div>
+
+<script src="/js/navigation.js"></script>
+<script src="/js/favorites.js"></script>
 </body>
 </html>

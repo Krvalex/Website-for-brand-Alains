@@ -95,7 +95,7 @@ public class CartController {
         }
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("sum", sum);
-        return "cartdetails";
+        return "cartDetails";
     }
 
     @PostMapping("/details")
@@ -126,7 +126,7 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", "Недостаточное количество товара на складе.");
             return "redirect:/cart";
         }
-        return "cartplaced";
+        return "cartPlaced";
     }
 
     @PostMapping("/decrement/{cartItemId}")

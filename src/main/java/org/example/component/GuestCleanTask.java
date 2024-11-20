@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.example.service.GuestCartService;
-import org.example.service.GuestFavoriteService;
+import org.example.service.GuestFavoritesService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,13 +20,13 @@ import java.time.LocalDateTime;
 public class GuestCleanTask {
 
     GuestCartService guestCartService;
-    GuestFavoriteService guestFavoriteService;
+    GuestFavoritesService guestFavoritesService;
 
     @Scheduled(fixedRate = 86400000)
     public void cleanUpGuestData() {
         LocalDateTime expirationTime = LocalDateTime.now().minusDays(1);
         guestCartService.cleanUpIfOld(expirationTime);
-        guestFavoriteService.cleanUpIfOld(expirationTime);
+        guestFavoritesService.cleanUpIfOld(expirationTime);
         System.out.println("Cleanup completed.");
     }
 }

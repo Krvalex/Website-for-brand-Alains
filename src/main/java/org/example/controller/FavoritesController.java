@@ -4,10 +4,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.example.model.Product;
+import org.example.model.FavoriteItem;
+import org.example.model.GuestFavorites;
 import org.example.model.User;
-import org.example.service.FavoriteService;
-import org.example.service.GuestFavoriteService;
+import org.example.service.FavoritesService;
+import org.example.service.GuestFavoritesService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,47 +24,48 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/favorites")
-public class FavoriteController {
+public class FavoritesController {
 
-    FavoriteService favoriteService;
+    FavoritesService favoritesService;
     UserService userService;
-    GuestFavoriteService guestFavoriteService;
+    GuestFavoritesService guestFavoritesService;
 
     @PostMapping("/{productId}")
     public String add(@PathVariable Long productId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            guestFavoriteService.saveIfNotAlreadyInFavorite(guestIdentifier, productId, session);
+            guestFavoritesService.saveIfNotAlreadyInFavorite(guestIdentifier, productId, session);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            favoriteService.saveIfNotAlreadyInFavorite(user, productId);
+            favoritesService.saveIfNotAlreadyInFavorite(user, productId);
         }
         return "redirect:/products";
     }
 
     @GetMapping
     public String get(Principal principal, HttpSession session, Model model) {
-        List<Product> products;
+        List<FavoriteItem> favoriteItems;
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            products = guestFavoriteService.getProducts(guestIdentifier, session);
+            GuestFavorites guestFavorites = guestFavoritesService.getOrCreate(guestIdentifier, session);
+            favoriteItems = guestFavorites.getFavoriteItems();
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            products = favoriteService.getProducts(user);
+            favoriteItems = user.getFavorites().getFavoriteItems();
             model.addAttribute("user", user);
         }
-        model.addAttribute("products", products);
+        model.addAttribute("favoriteItems", favoriteItems);
         return "favorites";
     }
 
-    @PostMapping("/remove/{productId}")
-    public String remove(@PathVariable Long productId, Principal principal, HttpSession session) {
+    @PostMapping("/remove/{favoriteItemId}")
+    public String remove(@PathVariable Long favoriteItemId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            guestFavoriteService.deleteProduct(guestIdentifier, productId, session);
+            guestFavoritesService.deleteProduct(guestIdentifier, favoriteItemId, session);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            favoriteService.deleteProduct(user, productId);
+            favoritesService.deleteProduct(user, favoriteItemId);
         }
         return "redirect:/favorites";
     }

@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuestFavorite {
+public class GuestFavorites {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class GuestFavorite {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public GuestFavorite(String guestIdentifier, LocalDateTime createdAt) {
+    public GuestFavorites(String guestIdentifier, LocalDateTime createdAt) {
         this.guestIdentifier = guestIdentifier;
         this.createdAt = createdAt;
     }

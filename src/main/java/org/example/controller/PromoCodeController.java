@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.example.model.PromoCode;
-import org.example.repository.PromoCodeRepository;
+import org.example.service.PromoCodeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("promo")
 public class PromoCodeController {
 
-    PromoCodeRepository promoCodeRepository;
+    PromoCodeService promoCodeService;
 
     @PostMapping("/apply")
     public ResponseEntity<Double> applyPromoCode(@RequestParam String code, @RequestParam double originalSum) {
-        PromoCode promoCode = promoCodeRepository.findByCode(code);
+        PromoCode promoCode = promoCodeService.findByCode(code);
         System.out.println(originalSum);
         if (promoCode != null) {
             double discount = promoCode.getDiscount();

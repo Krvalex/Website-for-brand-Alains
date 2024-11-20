@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.example.model.Product;
 import org.example.model.User;
 import org.example.model.enums.Category;
-import org.example.service.FavoriteService;
+import org.example.service.FavoritesService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class ProductController {
 
     ProductService productService;
     UserService userService;
-    FavoriteService favoriteService;
+    FavoritesService favoritesService;
 
     @GetMapping
     public String getAll(Model model, @RequestParam(required = false) Category category, Principal principal) {
@@ -37,7 +37,7 @@ public class ProductController {
         List<Product> favoriteProducts = new ArrayList<>();
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoriteService.getProducts(user);
+            favoriteProducts = favoritesService.getProducts(user);
         }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
@@ -55,7 +55,7 @@ public class ProductController {
         List<Product> favoriteProducts = new ArrayList<>();
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoriteService.getProductsByCategory(user, Category.T_SHIRTS);
+            favoriteProducts = favoritesService.getProductsByCategory(user, Category.T_SHIRTS);
         }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
@@ -73,7 +73,7 @@ public class ProductController {
         List<Product> favoriteProducts = new ArrayList<>();
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoriteService.getProductsByCategory(user, Category.HOODIES);
+            favoriteProducts = favoritesService.getProductsByCategory(user, Category.HOODIES);
         }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
@@ -94,6 +94,6 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("productSizes", productSizes);
         model.addAttribute("oldPrice", oldPrice);
-        return "product-details";
+        return "productDetails";
     }
 }
