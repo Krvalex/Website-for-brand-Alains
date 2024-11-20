@@ -73,7 +73,7 @@ public class CartController {
     }
 
     @GetMapping("/details")
-    public String getCartDetails(Model model, Principal principal, HttpSession session) {
+    public String getCartDetails(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
         List<CartItem> cartItems;
         String sum;
         if (principal == null) { // если гость
@@ -88,6 +88,10 @@ public class CartController {
             sum = cartItemService.formatSum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
+        }
+        if (cartItems.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Ваша корзина пуста. Добавьте товары для оформления заказа.");
+            return "redirect:/cart";
         }
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("sum", sum);

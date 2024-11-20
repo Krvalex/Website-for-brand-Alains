@@ -11,7 +11,14 @@
 
 <div class="cart-container">
     <h2>Ваш заказ</h2>
-    <div class="cart-items">
+
+    <!-- Сообщение при пустой корзине -->
+    <div class="empty-cart-message" th:if="${cartItems.isEmpty()}">
+        <p>Корзина пуста. Добавьте в корзину хотя бы один товар.</p>
+    </div>
+
+    <!-- Список товаров -->
+    <div class="cart-items" th:if="${not cartItems.isEmpty()}">
         <div class="cart-item" th:each="item : ${cartItems}">
             <div class="item-image">
                 <img alt="Product Image" th:src="@{${item.product.imageFront}}">
@@ -36,12 +43,20 @@
             <button class="remove-item-btn" onclick="deleteCartItem(this)" th:data-id="${item.id}">×</button>
         </div>
     </div>
+
+    <!-- Итоговая сумма и кнопка оформления -->
     <div class="cart-summary">
-        <p class="cart-total">Сумма: <span th:text="${sum} + ' ₽'"></span></p>
-        <a class="checkout-btn" href="/cart/details">Оформить</a>
+        <p class="cart-total" th:if="${not cartItems.isEmpty()}">Сумма: <span th:text="${sum} + ' ₽'"></span></p>
+        <a class="checkout-btn" href="/cart/details" th:if="${not cartItems.isEmpty()}">Оформить</a>
+        <a class="checkout-btn disabled" href="javascript:void(0)" th:if="${cartItems.isEmpty()}">Оформить</a>
     </div>
 </div>
+
 <div class="notification error" id="stockErrorNotification" th:if="${error}">
+    <button class="close-notification" onclick="closeNotification('stockErrorNotification')">&times;</button>
+    <p th:text="${error}"></p>
+</div>
+<div class="notification error" th:if="${error}">
     <button class="close-notification" onclick="closeNotification('stockErrorNotification')">&times;</button>
     <p th:text="${error}"></p>
 </div>

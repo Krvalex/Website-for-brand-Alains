@@ -27,7 +27,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt1 = new Product("KINGVON T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -38,7 +38,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt2 = new Product("SECOND T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -49,7 +49,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt3 = new Product("THIRD T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -60,7 +60,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt4 = new Product("FOURTH T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -71,7 +71,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt5 = new Product("FIFTH T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ТЕМНО-СЕРЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -82,7 +82,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt6 = new Product("SIXTH T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -93,7 +93,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product tShirt7 = new Product("SEVENTH T-SHIRT", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "1 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 1990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -105,7 +105,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie1 = new Product("ZIPALAINS HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -116,7 +116,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie2 = new Product("VANDAL HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ТЕМНО-СЕРЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -127,7 +127,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie3 = new Product("THIRD HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -138,7 +138,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie4 = new Product("FOURTH HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -149,7 +149,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie5 = new Product("FIFTH HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -160,7 +160,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie6 = new Product("SIXTH HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: БЕЛЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);
@@ -171,7 +171,7 @@ public class DataInitializer implements CommandLineRunner {
 //        Product hoodie7 = new Product("SEVENTH HOODIE", "ТКАНЬ: КУЛИРНАЯ ГЛАДЬ\n" +
 //                "ЦВЕТ: ЧЕРНЫЙ\n" +
 //                "СОСТАВ: 100% ХЛОПОК\n" +
-//                "ПЛОТНОСТЬ 240 ГР/М", "3 990", new HashMap<>() {{
+//                "ПЛОТНОСТЬ 240 ГР/М", 3990, new HashMap<>() {{
 //            put(Size.XS.getDisplayName(), 0);
 //            put(Size.S.getDisplayName(), 5);
 //            put(Size.M.getDisplayName(), 7);

@@ -202,3 +202,19 @@ body {
     top: 20px; /* Позиция, когда уведомление отображается */
     opacity: 1;
 }
+
+/* Стиль для пустой корзины */
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.3em;
+    color: #656565;
+    margin: 20px 0;
+}
+
+/* Отключенная кнопка "Оформить" */
+.checkout-btn.disabled {
+    background-color: #393636;
+    color: #ffffff;
+    cursor: not-allowed;
+    pointer-events: none;
+}

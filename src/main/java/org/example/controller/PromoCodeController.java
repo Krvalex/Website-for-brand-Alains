@@ -1,8 +1,10 @@
 package org.example.controller;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.model.PromoCode;
 import org.example.repository.PromoCodeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
-@RequestMapping("/api/promo")
+@RequiredArgsConstructor
+@RequestMapping("promo")
 public class PromoCodeController {
 
-    @Autowired
-    private PromoCodeRepository promoCodeRepository;
+    PromoCodeRepository promoCodeRepository;
 
     @PostMapping("/apply")
     public ResponseEntity<Double> applyPromoCode(@RequestParam String code, @RequestParam double originalSum) {

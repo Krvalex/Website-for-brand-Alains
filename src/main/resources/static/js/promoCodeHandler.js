@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const originalSum = parseFloat(originalSumText);
 
         if (promoCode !== "") {
-            fetch("/api/promo/apply", {
+            fetch("/promo/apply", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",

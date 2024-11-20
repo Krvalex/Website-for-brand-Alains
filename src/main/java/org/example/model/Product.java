@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.model.enums.Category;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Map;
 
 @Entity
@@ -20,7 +22,7 @@ public class Product implements Cloneable {
     private Long Id;
     private String name;
     private String description;
-    private String price;
+    private double price;
 
     @ElementCollection
     @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
@@ -34,7 +36,7 @@ public class Product implements Cloneable {
     private String imageFront;
     private String imageBack;
 
-    public Product(String name, String description, String price, Map<String, Integer> sizes,
+    public Product(String name, String description, double price, Map<String, Integer> sizes,
                    Category category, String imageFront, String imageBack) {
         this.name = name;
         this.description = description;
@@ -54,5 +56,9 @@ public class Product implements Cloneable {
         }
     }
 
+    public String getPrice() {
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("ru", "RU"));
+        return numberFormat.format(this.price).replace("\u00A0", " ");
+    }
 }
 
