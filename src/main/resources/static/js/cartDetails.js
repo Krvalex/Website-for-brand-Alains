@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const promoCodeInput = document.querySelector("#promo-code");
     const originalSumElement = document.querySelector(".cart-summary span");
     const totalSumInput = document.querySelector("#totalSum");
+    const discountInfo = document.querySelector(".discount-info");
+    const discountPercentageElement = document.querySelector("#discountPercentage");
 
     // Устанавливаем итоговую сумму при загрузке страницы
     if (originalSumElement && totalSumInput) {
@@ -30,8 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 })
                 .then((discountedSum) => {
+                    const discountPercentage = calculateDiscountPercentage(originalSum, discountedSum);
+
+                    // Обновляем отображение итоговой суммы и скидки
                     originalSumElement.textContent = formatNumberWithSpaces(discountedSum) + " ₽";
-                    totalSumInput.value = discountedSum; // Обновляем скрытое поле
+                    totalSumInput.value = discountedSum;
+
+                    // Показать скидку
+                    discountPercentageElement.textContent = discountPercentage;
+                    discountInfo.style.display = "block"; // Отображаем скидку
+
                     showNotification("promoSuccessNotification");
 
                     // Блокируем поле и кнопку
@@ -47,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
             showNotification("promoErrorNotification");
         }
     });
+
+    function calculateDiscountPercentage(originalSum, discountedSum) {
+        return Math.round(((originalSum - discountedSum) / originalSum) * 100);
+    }
 
     function formatNumberWithSpaces(number) {
         return number

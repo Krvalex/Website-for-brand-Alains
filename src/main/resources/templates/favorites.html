@@ -18,17 +18,16 @@
     </div>
 
     <!-- Список избранных товаров -->
-    <div class="favorite-items" th:if="${not favoriteItems.isEmpty()}">
-        <div class="favorite-item" th:each="item : ${favoriteItems}">
-            <div class="item-image">
-                <img alt="Product Image" th:src="@{${item.product.imageFront}}">
-            </div>
-            <div class="item-details">
-                <h3 class="item-name" th:text="${item.product.name}"></h3>
-                <p class="item-price" th:text="${item.product.price} + ' ₽'"></p>
-            </div>
-            <button class="remove-item-btn" onclick="removeFavoriteItem(this)" th:data-id="${item.id}">×</button>
+    <div class="favorite-item" th:each="item : ${favoriteItems}">
+        <div class="item-image">
+            <img alt="Product Image" th:src="@{${item.product.imageFront}}">
         </div>
+        <div class="item-details">
+            <h3 class="item-name" th:text="${item.product.name}"></h3>
+            <p class="item-price" th:text="${item.product.price} + ' ₽'"></p>
+        </div>
+        <a class="view-product-btn" th:href="@{/products/{id}(id=${item.product.id})}">Перейти к товару</a>
+        <button class="remove-item-btn" onclick="removeFavoriteItem(this)" th:data-id="${item.id}">×</button>
     </div>
 </div>
 

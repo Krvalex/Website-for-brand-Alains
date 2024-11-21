@@ -3,6 +3,7 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-container {
@@ -28,6 +29,7 @@ body {
     color: #333;
     font-weight: bold;
     text-align: center;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-form label {
@@ -35,6 +37,7 @@ body {
     font-size: 1em;
     color: #333;
     margin-bottom: 5px;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-form input {
@@ -45,6 +48,7 @@ body {
     border-radius: 5px;
     font-size: 1em;
     box-sizing: border-box;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-btn {
@@ -60,6 +64,7 @@ body {
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-btn:hover {
@@ -245,4 +250,10 @@ select:focus {
 .notification.show {
     bottom: 20px; /* Уведомление выдвигается из правого нижнего угла */
     opacity: 1;
+}
+
+.discount-info {
+    font-size: 1em;
+    text-align: right;
+    margin-top: 10px;
 }

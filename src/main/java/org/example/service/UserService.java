@@ -31,10 +31,10 @@ public class UserService {
     }
 
     public void create(User user) {
-        if (existsByUsername(user.getUsername())) {
+        if (existsByUsername(user.getEmail())) {
             throw new IllegalArgumentException("Пользователь с таким email уже существует");
         }
-        user.setUsername(user.getUsername());
+        user.setEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         user.getRoles().add(Role.ROLE_USER);
@@ -43,10 +43,10 @@ public class UserService {
 
     public User getByPrincipal(Principal principal) {
         if (principal == null) return null;
-        return userRepository.findByUsername(principal.getName()).orElseThrow();
+        return userRepository.findByEmail(principal.getName()).orElseThrow();
     }
 
     public boolean existsByUsername(String email) {
-        return userRepository.existsByUsername(email);
+        return userRepository.existsByEmail(email);
     }
 }

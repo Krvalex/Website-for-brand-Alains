@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Контейнер для страницы */
@@ -200,6 +201,9 @@ body {
     width: 411px; /* Совпадает с шириной кнопок размеров */
     height: 45px;
     text-align: center;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+    font-weight: bold; /* Жирный текст */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .add-to-cart-btn:hover {
@@ -212,6 +216,7 @@ body {
     top: 75px; /* Расположение в верхнем левом углу */
     left: 40px;
     z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
+
 }
 
 /* Стили кнопки "Вернуться" */
@@ -224,6 +229,8 @@ body {
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Стили для стрелки */

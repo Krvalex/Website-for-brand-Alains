@@ -8,7 +8,7 @@
     <link href="/css/registration.css" rel="stylesheet">
 </head>
 <body>
-<div th:replace="navigation.html :: navigation"></div>
+<div th:replace="~{navigation.html :: navigation}"></div>
 
 <div class="registration-container">
     <!-- Логотип в правом верхнем углу -->
@@ -18,9 +18,26 @@
     <p class="login-prompt">Уже есть аккаунт? <a href="/users/login">Войти</a></p>
 
     <form action="/users/registration" class="registration-form" method="post">
-        <input id="username" name="username" placeholder="Введите ваш email" required type="email">
-        <input id="password" name="password" placeholder="Введите пароль" required type="password">
-        <input id="confirm-password" name="confirm-password" placeholder="Повторите пароль" required type="password">
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input id="name" name="name" placeholder="Иван" required type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" placeholder="ivanivanovich@mail.ru" required type="email">
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Номер телефона</label>
+            <input id="phoneNumber" name="phoneNumber" placeholder="+7 (999) 999-99-99" required type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input id="password" name="password" placeholder="Введите пароль" required type="password">
+        </div>
+
         <button class="registration-button" type="submit">Зарегистрироваться</button>
     </form>
 

@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .products-page {
@@ -19,6 +20,9 @@ body {
     font-size: 2em;
     color: #333;
     margin-bottom: 20px;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+    font-weight: bold; /* Жирный текст */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Сетка товаров */
@@ -97,6 +101,9 @@ body {
     font-size: 1.2em;
     color: #333;
     margin: 10px 0;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+    font-weight: bold; /* Жирный текст */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Цена товара */
@@ -105,6 +112,8 @@ body {
     color: #333;
     font-weight: normal;
     margin: 5px 0;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Кнопка с сердечком */

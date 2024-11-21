@@ -8,6 +8,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Контейнер для формы */
@@ -63,10 +64,13 @@ body {
 
 /* Метки для полей ввода */
 .login-form label {
-    align-self: flex-start;
+    align-self: flex-start; /* Выравнивание над полем ввода */
     font-size: 1em;
-    margin-bottom: 5px;
-    color: #ffffff;
+    font-weight: bold;
+    color: #ffffff; /* Белый цвет текста */
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    transition: color 0.3s ease; /* Эффект при наведении */
+    padding-left: 5px; /* Добавляем отступ слева */
 }
 
 /* Поля ввода */
@@ -126,4 +130,12 @@ body {
 
 .forgot-password a:hover {
     color: #5cb3fd;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; /* Лейбл над полем */
+    align-items: flex-start; /* Выравнивание по левому краю */
+    gap: 5px; /* Отступ между лейблом и полем ввода */
+    width: 100%; /* Полная ширина для выравнивания */
 }

@@ -8,6 +8,7 @@ body.cart-placed {
     display: flex;
     flex-direction: column; /* Учитываем наличие навигационной полосы */
     align-items: center;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Исправление для фиксированной навигационной полосы */

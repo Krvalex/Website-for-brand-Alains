@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Оформление</title>
     <link href="/css/navigation.css" rel="stylesheet">
-    <link href="/css/cartdetails.css" rel="stylesheet">
+    <link href="/css/cartDetails.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{navigation.html :: navigation}"></div>
@@ -83,7 +83,8 @@
 
         <!-- Итоговые суммы -->
         <div class="cart-summary">
-            <p>Сумма: <span th:text="${sum} + ' ₽'">0 ₽</span></p>
+            <p>Итоговая сумма: <span th:text="${sum} + ' ₽'">0 ₽</span></p>
+            <p class="discount-info" style="display: none;">Скидка: <span id="discountPercentage">0</span>%</p>
         </div>
     </div>
 </div>

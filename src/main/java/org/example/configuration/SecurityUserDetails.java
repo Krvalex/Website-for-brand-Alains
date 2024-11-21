@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class SecurityUserDetails implements UserDetails {
-    private User user;
+    private final User user;
 
     public SecurityUserDetails(User user) {
         this.user = user;
@@ -26,7 +26,7 @@ public class SecurityUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
 
     @Override
