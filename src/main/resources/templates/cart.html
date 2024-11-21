@@ -21,10 +21,14 @@
     <div class="cart-items" th:if="${not cartItems.isEmpty()}">
         <div class="cart-item" th:each="item : ${cartItems}">
             <div class="item-image">
-                <img alt="Product Image" th:src="@{${item.product.imageFront}}">
+                <a th:href="@{'/products/' + ${item.product.id}}">
+                    <img alt="Product Image" th:src="@{${item.product.imageFront}}">
+                </a>
             </div>
             <div class="item-details">
-                <h3 class="item-name" th:text="${item.product.name}"></h3>
+                <h3 class="item-name">
+                    <a th:href="@{'/products/' + ${item.product.id}}" th:text="${item.product.name}"></a>
+                </h3>
                 <p class="item-size" th:text="'Размер: ' + ${item.size}"></p>
             </div>
             <div class="item-quantity">

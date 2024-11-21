@@ -85,6 +85,11 @@ body {
     margin-bottom: 15px;
 }
 
+.cart-item a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Цвет ссылки совпадает с родительским элементом */
+}
+
 .item-image img {
     width: 75px;
     height: 75px;

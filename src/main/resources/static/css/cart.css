@@ -39,6 +39,11 @@ body {
     gap: 20px; /* Увеличиваем расстояние между элементами */
 }
 
+.cart-item a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Цвет ссылки совпадает с родительским элементом */
+}
+
 .cart-item:last-child {
     border-bottom: none;
 }

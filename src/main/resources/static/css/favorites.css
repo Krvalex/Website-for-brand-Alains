@@ -60,6 +60,11 @@ body {
     gap: 8px; /* Отступ между названием и кнопкой */
 }
 
+.item-details a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: black; /* Цвет ссылки совпадает с родительским элементом */
+}
+
 .item-name {
     font-size: 1em;
     color: #000;
@@ -75,7 +80,7 @@ body {
 
 .view-product-btn {
     padding: 8px 12px;
-    background-color: #494949;
+    background-color: #454545;
     color: #fff;
     text-decoration: none;
     font-size: 0.9em;
