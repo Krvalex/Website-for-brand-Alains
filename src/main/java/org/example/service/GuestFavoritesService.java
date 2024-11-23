@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,12 @@ public class GuestFavoritesService {
                 .orElseGet(() -> create(identifier));
     }
 
+    @Transactional
+    public GuestFavorites get(String guestIdentifier) {
+        return guestFavoritesRepository.findByGuestIdentifier(guestIdentifier)
+                .orElse(null);
+    }
+
     public void saveIfNotAlreadyInFavorite(String guestIdentifier, Long productId, HttpSession session) {
         GuestFavorites guestFavorites = getOrCreate(guestIdentifier, session);
         if (guestFavorites.getFavoriteItems().stream().noneMatch(f -> f.getProduct().getId().equals(productId))) {
@@ -44,16 +51,20 @@ public class GuestFavoritesService {
         }
     }
 
-    public List<Product> getProducts(String guestIdentifier, HttpSession session) {
-        GuestFavorites guestFavorites = getOrCreate(guestIdentifier, session);
-        return guestFavorites.getFavoriteItems().stream()
-                .map(FavoriteItem::getProduct)
-                .toList();
+    public List<Product> getProducts(String guestIdentifier) {
+        GuestFavorites guestFavorites = get(guestIdentifier);
+        if (guestFavorites != null) {
+            return guestFavorites.getFavoriteItems().stream()
+                    .map(FavoriteItem::getProduct)
+                    .toList();
+        }
+        return new ArrayList<>();
     }
 
-    public void deleteProduct(String guestIdentifier, Long favoriteItemId, HttpSession session) {
-        GuestFavorites guestFavorites = getOrCreate(guestIdentifier, session);
-        guestFavorites.getFavoriteItems().removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
+    public void deleteProduct(String guestIdentifier, Long favoriteItemId) {
+        GuestFavorites guestFavorites = get(guestIdentifier);
+        List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
+        favoriteItems.removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
         guestFavoritesRepository.save(guestFavorites);
     }
 

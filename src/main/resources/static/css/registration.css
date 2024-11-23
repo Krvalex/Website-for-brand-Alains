@@ -60,6 +60,7 @@ body {
     align-items: center;
     gap: 15px;
     width: 100%; /* Растянуть форму на всю ширину контейнера */
+    margin-top: 20px;
 }
 
 /* Поля ввода */

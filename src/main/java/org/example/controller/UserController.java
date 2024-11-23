@@ -57,7 +57,7 @@ public class UserController {
             User user = userService.getByPrincipal(principal);
             model.addAttribute("user", user);
             model.addAttribute("orders", user.getOrders());
-            return "useraccount";
+            return "userAccount";
         }
         return "login";
     }
@@ -73,4 +73,5 @@ public class UserController {
         model.addAttribute("user", userService.getById(id));
         return "userdetails";
     }
+
 }

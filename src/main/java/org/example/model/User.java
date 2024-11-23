@@ -40,5 +40,26 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
+
+    public String getPhoneNumber() {
+        String normalized = phoneNumber.replaceAll("[^\\d]", "");
+
+        if (normalized.startsWith("8")) {
+            normalized = "7" + normalized.substring(1);
+        } else if (!normalized.startsWith("7")) {
+            return "";
+        }
+
+        if (normalized.length() != 11) {
+            return "";
+        }
+
+        String formatted = String.format("+7 (%s) %s %s %s",
+                normalized.substring(1, 4),
+                normalized.substring(4, 7),
+                normalized.substring(7, 9),
+                normalized.substring(9, 11));
+        return formatted;
+    }
 }
 

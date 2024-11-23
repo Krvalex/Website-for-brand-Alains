@@ -22,8 +22,8 @@ public class FavoritesService {
     ProductService productService;
 
     public void deleteProduct(User user, Long favoriteItemId) {
-        List<FavoriteItem> products = user.getFavorites().getFavoriteItems();
-        products.removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
+        List<FavoriteItem> favoriteItems = user.getFavorites().getFavoriteItems();
+        favoriteItems.removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
         favoritesRepository.save(user.getFavorites());
     }
 

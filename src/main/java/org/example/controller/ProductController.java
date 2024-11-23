@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -7,6 +8,7 @@ import org.example.model.Product;
 import org.example.model.User;
 import org.example.model.enums.Category;
 import org.example.service.FavoritesService;
+import org.example.service.GuestFavoritesService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -30,21 +32,23 @@ public class ProductController {
     ProductService productService;
     UserService userService;
     FavoritesService favoritesService;
+    GuestFavoritesService guestFavoritesService;
 
     @GetMapping
-    public String getAll(Model model, @RequestParam(required = false) Category category, Principal principal) {
+    public String getAll(Model model, @RequestParam(required = false) Category category, Principal principal, HttpSession session) {
         List<Product> products = productService.getByCategory(category);
-        List<Product> favoriteProducts = new ArrayList<>();
+        List<Product> favoriteProducts;
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
             favoriteProducts = favoritesService.getProducts(user);
+        } else {
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            favoriteProducts = guestFavoritesService.getProducts(guestIdentifier);
         }
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
         model.addAttribute("favoriteProducts", favoriteProducts);
-
-        // Добавляем информацию о категории для динамического заголовка
         model.addAttribute("category", category != null ? category.name() : "Все товары");
         return "products";
     }

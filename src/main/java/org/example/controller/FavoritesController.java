@@ -62,7 +62,8 @@ public class FavoritesController {
     public String remove(@PathVariable Long favoriteItemId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            guestFavoritesService.deleteProduct(guestIdentifier, favoriteItemId, session);
+            System.out.println("Post remove");
+            guestFavoritesService.deleteProduct(guestIdentifier, favoriteItemId);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             favoritesService.deleteProduct(user, favoriteItemId);

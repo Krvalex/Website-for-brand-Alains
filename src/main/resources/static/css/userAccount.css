@@ -1,0 +1,104 @@
+/* Общие стили */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+}
+
+.account-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 70px auto; /* Форму опустили на 50px + отступы сверху */
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Левая колонка с инфо о пользователе */
+.user-info {
+    flex: 1;
+    padding: 20px;
+    background: #f9f9f9;
+    border-right: 2px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start; /* Поднимаем содержимое блока вверх */
+    margin-top: 0; /* Убираем любые отступы сверху */
+}
+
+.user-info h2 {
+    font-size: 36px;
+    margin-bottom: 15px; /* Увеличено расстояние между именем и телефоном */
+}
+
+.user-info p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold; /* Жирный текст */
+}
+
+.user-info .buttons {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    margin-top: 25px; /* Увеличено расстояние между информацией и кнопками */
+    font-weight: bold;
+}
+
+.user-info button {
+    padding: 12px 17px;
+    background-color: #555; /* Тёмно-серый фон */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 135px; /* Устанавливаем одинаковую минимальную ширину для кнопок */
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Жирный текст */
+}
+
+.user-info button:hover {
+    background-color: #222222; /* Цвет кнопки при наведении */
+}
+
+/* Правая колонка с историей заказов */
+.order-history {
+    flex: 2;
+    padding: 20px;
+}
+
+.order-history h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-item {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.order-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.order-item b {
+    font-weight: bold;
+}

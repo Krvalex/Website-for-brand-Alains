@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Аккаунт пользователя</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/userAccount.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
+<div class="account-page">
+    <!-- Левая колонка с информацией о пользователе -->
+    <div class="user-info">
+        <h2 th:text="${user.name}">Имя</h2>
+        <p th:text="${user.phoneNumber}">Телефон</p>
+        <p th:text="${user.email}">Email</p>
+        <div class="buttons">
+            <button>Сменить пароль</button>
+            <form method="post" th:action="@{/users/logout}">
+                <button type="submit">Выйти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Правая колонка с историей заказов -->
+    <div class="order-history">
+        <h2>История заказов</h2>
+        <div class="orders">
+            <div class="order-item" th:each="order : ${orders}">
+                <p><b>Дата:</b> <span th:text="${order.date}">01.01.2024</span></p>
+                <p><b>Город:</b> <span th:text="${order.city}">Москва</span></p>
+                <p><b>Сумма:</b> <span th:text="${order.totalSum} + ' ₽'">5000 руб.</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/navigation.js"></script>
+</body>
+</html>
