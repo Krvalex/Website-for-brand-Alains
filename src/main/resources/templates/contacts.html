@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Page Title</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/contacts.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
+<div class="contacts-container">
+    <div class="contact-info">
+        <h3>Почта:</h3>
+        <p>alainshop@gmail.com</p>
+    </div>
+    <div class="contact-info">
+        <h3>Социальные сети</h3>
+        <a href="#">VK</a>
+        <a href="#">Telegram</a>
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+    </div>
+</div>
+<script src="/js/navigation.js"></script>
+</body>
+</html>

@@ -6,6 +6,7 @@
     <title>Аккаунт пользователя</title>
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/css/userAccount.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{navigation.html :: navigation}"></div>
@@ -27,14 +28,48 @@
     <div class="order-history">
         <h2>История заказов</h2>
         <div class="orders">
-            <div class="order-item" th:each="order : ${orders}">
-                <p><b>Дата:</b> <span th:text="${order.date}">01.01.2024</span></p>
-                <p><b>Город:</b> <span th:text="${order.city}">Москва</span></p>
-                <p><b>Сумма:</b> <span th:text="${order.totalSum} + ' ₽'">5000 руб.</span></p>
+            <!-- Заказы -->
+            <div class="order-item" th:each="order, iterStat : ${orders}">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- Номер заказа -->
+                    <div class="order-number">
+                        <span th:text="${iterStat.index + 1}">1</span>
+                    </div>
+                    <!-- Информация о заказе -->
+                    <div style="flex-grow: 1;">
+                        <p><b>Дата:</b> <span th:text="${order.getDateFormat()}">2024-11-22 18:56</span></p>
+                        <p><b>Сумма:</b> <span th:text="${order.totalSum} + ' ₽'">5 970 ₽</span></p>
+                    </div>
+                    <!-- Стрелка -->
+                    <div class="toggle-details" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down arrow closed"></i>
+                    </div>
+                </div>
+                <div class="order-details" style="display: none;"> <!-- Скрыто по умолчанию -->
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Размер</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${order.orderItems}">
+                            <td th:text="${item.product.name}">Товар 1</td>
+                            <td th:text="${item.size}">M</td>
+                            <td th:text="${item.quantity}">2</td>
+                            <td th:text="${item.product.price} + ' ₽'">1500 руб.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script src="/js/navigation.js"></script>
+<script src="/js/userAccount.js"></script>
 </body>
 </html>

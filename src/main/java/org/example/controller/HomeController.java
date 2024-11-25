@@ -26,4 +26,18 @@ public class HomeController {
         model.addAttribute("cartItemsCount", cartItemsCount);
         return "home";
     }
+
+    @GetMapping("/garmentCare")
+    public String garmentCare(Principal principal, Model model) {
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "garmentCare";
+    }
+
+    @GetMapping("/contacts")
+    public String contacts(Principal principal, Model model) {
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "contacts";
+    }
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,5 +53,10 @@ public class Order {
     public String getTotalSum() {
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("ru", "RU"));
         return numberFormat.format(this.totalSum).replace("\u00A0", " ");
+    }
+
+    public String getDateFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return date.format(formatter);
     }
 }

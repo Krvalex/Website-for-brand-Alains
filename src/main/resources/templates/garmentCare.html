@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Garment Care</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/garmentCare.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
+
+<!-- Контент страницы -->
+<div class="care-container">
+    <h1>Рекомендации по уходу</h1>
+    <p>Выберите тип вещи для получения <strong>инструкции</strong> по уходу</p>
+
+    <!-- Кнопки для выбора типа одежды -->
+    <div class="filter-buttons">
+        <select class="filter-select" id="categorySelect" onchange="filterCare(this.value)">
+            <option disabled hidden selected value="">Тип одежды</option>
+            <option value="HOODIES">Худи</option>
+            <option value="T_SHIRTS">Футболки</option>
+        </select>
+    </div>
+
+    <!-- Тип одежды -->
+    <div class="selected-clothing-type" style="display: none; font-weight: bold; margin-top: 10px;"></div>
+
+    <!-- Инструкции по уходу -->
+    <div class="care-instructions">
+        <div class="care-item">
+            <p>Стирка при температуре не выше 40 градусов</p>
+            <p>&nbsp;</p>
+            <img alt="Wash at 40 degrees" src="/images/various/wash.jpg">
+        </div>
+        <div class="care-item">
+            <p>Только ручная стирка</p>
+            <p>&nbsp;</p>
+            <img alt="Hand wash" src="/images/various/handWash.jpg">
+        </div>
+        <div class="care-item">
+            <p>Сушить в расправленном виде</p>
+            <p>&nbsp;</p>
+            <img alt="Flat dry" src="/images/various/flatDry.jpg">
+        </div>
+        <div class="care-item">
+            <p>Гладить при низкой температуре (110°C)</p>
+            <p>&nbsp;</p>
+            <img alt="Iron at low temperature" src="/images/various/ironLow.jpg">
+        </div>
+    </div>
+</div>
+
+<script src="/js/navigation.js"></script>
+<script src="/js/garmentCare.js"></script>
+</body>
+</html>

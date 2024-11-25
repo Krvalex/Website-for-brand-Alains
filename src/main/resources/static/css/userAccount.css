@@ -65,7 +65,7 @@ body {
 }
 
 .user-info button:hover {
-    background-color: #222222; /* Цвет кнопки при наведении */
+    background-color: #000000; /* Цвет кнопки при наведении */
 }
 
 /* Правая колонка с историей заказов */
@@ -95,10 +95,140 @@ body {
 
 .order-item p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 20px;
     color: #333;
+}
+
+.order-item span {
+    font-size: 15px; /* Ещё больший размер текста для данных внутри */
 }
 
 .order-item b {
     font-weight: bold;
+    font-size: 18px;
+}
+
+.order-details {
+    display: none; /* Скрыто по умолчанию */
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.order-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-details th, .order-details td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Выравнивание текста в заголовке таблицы */
+.order-details th {
+    text-align: center; /* Центровка текста в заголовках */
+    font-weight: bold; /* Жирный текст */
+    background-color: #f1f1f1; /* Фон заголовков */
+    padding: 10px;
+}
+
+/* Выравнивание текста в ячейках таблицы */
+.order-details td {
+    text-align: center; /* Центровка текста в ячейках */
+    padding: 8px;
+    vertical-align: middle; /* Выравнивание по вертикали */
+}
+
+/* Стили для всей таблицы */
+.order-details table {
+    width: 100%;
+    border-collapse: collapse; /* Убираем промежутки между границами */
+}
+
+.order-details th, .order-details td {
+    border: 1px solid #ddd; /* Границы ячеек */
+}
+
+/* Обновлённый стиль для стрелки */
+.toggle-details {
+    display: flex;
+    align-items: center; /* Выравниваем стрелку по вертикали с текстом */
+    justify-content: flex-end; /* Стрелка справа */
+    cursor: pointer;
+    padding: 0; /* Убираем лишние отступы */
+    margin-top: 0; /* Выровнено по линии текста */
+    background: none; /* Убираем фон */
+    border: none; /* Убираем рамки */
+    outline: none; /* Убираем выделение */
+}
+
+/* Убираем выделение при фокусе (для мыши и клавиатуры) */
+.toggle-details:focus {
+    outline: none;
+    box-shadow: none; /* Убираем любые тени */
+}
+
+.arrow {
+    font-size: 18px; /* Размер стрелки */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Плавный масштаб и прозрачность */
+    color: #555; /* Цвет стрелки */
+    background: none; /* Убираем фон */
+}
+
+/* Наведение на стрелку */
+.arrow:hover {
+    transform: scale(1.2); /* Увеличение на 20% */
+    opacity: 0.8; /* Лёгкая прозрачность */
+}
+
+.arrow:focus {
+    outline: none;
+    box-shadow: none; /* Убираем любые тени */
+}
+
+.toggle-details:hover {
+    background-color: #333;
+}
+
+.arrow.open {
+    transform: rotate(180deg); /* Поворот вверх */
+}
+
+.arrow.closed {
+    transform: rotate(0deg); /* Поворот вниз */
+}
+
+/* Стиль для блока с номером заказа */
+/* Стиль для блока с номером заказа */
+.order-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff; /* Синий фон */
+    color: white; /* Белый текст */
+    font-size: 14px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    width: 40px; /* Ширина круга */
+    height: 40px; /* Высота круга */
+    line-height: 40px; /* Выравнивание текста по центру */
+    text-align: center; /* Центровка текста */
+    border-radius: 50%; /* Круглая форма */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Отступы между номером заказа и текстом */
+.order-item > div {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между номером и текстом */
+}
+
+/* Общий стиль для текста */
+.order-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
 }
