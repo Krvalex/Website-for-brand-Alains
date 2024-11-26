@@ -1,4 +1,142 @@
+/* Общие стили для блоков */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    overflow-y: scroll;
+    letter-spacing: 0.5px;
+}
 
+/* Стиль для вертикальной полосы прокрутки */
+::-webkit-scrollbar {
+    width: 5px;
+}
 
+::-webkit-scrollbar-track {
+    background-color: #888;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4a4a4a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Общие стили для блоков */
+.full-screen-section {
+    height: 100vh; /* 100% высоты экрана */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+/* Белый фон для первого блока */
+.white-background {
+    background-color: white;
+    color: black;
+}
+
+/* Серый фон для второго блока */
+.gray-background {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+/* Темно-серый фон для третьего блока */
+.dark-gray-background {
+    background-color: #333;
+    color: white;
+}
+
+/* Контейнер для контента в блоках */
+.content-wrapper {
+    max-width: 90%; /* Максимальная ширина для контента */
+    padding: 4vw; /* Отступы, зависящие от ширины экрана */
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem); /* Адаптивный размер шрифта */
+    margin-bottom: 1vw;
+}
+
+p {
+    font-size: clamp(0.8rem, 2vw, 1.25rem); /* Адаптивный размер текста */
+    margin-bottom: 2vw;
+    word-wrap: break-word; /* Для длинных слов */
+}
+
+/* Первый блок - флекс контейнер */
+.block {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative; /* Для позиционирования кнопки */
+}
+
+/* Левая половина (текстовый контент) */
+.text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    padding-left: 4vw; /* Используем vw для отступов */
+    padding-right: 8vw;
+    box-sizing: border-box;
+    font-size: clamp(1rem, 2vw, 1.5rem); /* Адаптивный размер текста */
+    overflow-wrap: break-word; /* Перенос длинных слов */
+    background-color: rgba(255, 255, 255, 0.7); /* полупрозрачный фон */
+}
+
+.text p {
+    line-height: 1.4;
+    font-style: italic;
+}
+
+/* Правая половина (изображение) */
+.image {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+/* Изображение */
+.image img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shop-button {
+    background: linear-gradient(45deg, #000000, #474747);
+    color: white;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: block;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop-button:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+    background: linear-gradient(45deg, #474747, #000000); /* Инвертируем градиент при наведении */
+}
 
 

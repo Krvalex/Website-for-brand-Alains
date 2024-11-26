@@ -3,13 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Page Title</title>
+    <title>Home Page</title>
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{navigation.html :: navigation}"></div>
-<!-- Остальной контент страницы -->
+
+<!-- Первый блок (Белый фон) -->
+<div class="block white-background">
+    <div class="text">
+        <p> &nbsp;&nbsp;"<strong>Alains Shop</strong> — мир моды, где стиль не имеет границ!
+            В нашем интернет-магазине вы найдете лучшие тренды
+            молодежной моды от ярких и дерзких образов до уютных
+            и комфортных вещей, которые идеально подойдут для
+            активного образа жизни. Мы создаем одежду, которая
+            говорит на языке молодежной культуры: креативность,
+            свобода самовыражения и уникальность — вот что нас
+            вдохновляет в каждом новом дизайне.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Наши коллекции — это не просто одежда, это способ
+            выделиться, быть уверенным в себе и носить то, что
+            нравится. Будь то городской стиль с нотками уличной
+            моды или casual для расслабленного дня. У нас есть
+            все для того, чтобы собрать идеальный гардероб. Мы
+            вдохновляемся уличной культурой и всем, что движет
+            современным поколением. Присоединяйтесь к нам и
+            создавайте свой собственный стиль с нашими новыми
+            коллекциями. Время выделяться — время быть собой!"</p>
+        <!-- Кнопка Перейти к покупкам -->
+        <button class="shop-button" onclick="toggleMenu()">Перейти к покупкам</button>
+    </div>
+    <div class="image">
+        <img alt="Home Picture" src="images/various/homePic.jpg">
+    </div>
+</div>
+
+<!-- Второй блок (Серый фон) -->
+<section class="full-screen-section gray-background">
+    <div class="content-wrapper">
+        <h1>Our Products</h1>
+        <p>Explore a variety of quality products.</p>
+    </div>
+</section>
+
+<!-- Третий блок (Темно-серый фон) -->
+<section class="full-screen-section dark-gray-background">
+    <div class="content-wrapper">
+        <h1>Contact Us</h1>
+        <p>Get in touch for any queries.</p>
+    </div>
+</section>
+
 <script src="/js/navigation.js"></script>
 </body>
 </html>
