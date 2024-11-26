@@ -3,7 +3,6 @@ package org.example.controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.example.model.Product;
 import org.example.model.PromoCode;
 import org.example.service.ProductService;
 import org.example.service.PromoCodeService;
@@ -32,26 +31,31 @@ public class AdminController {
     @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute("users", userService.getAll());
-        return "adminusers";
+        return "adminUsersList";
     }
 
     @GetMapping("/create/product")
     public String addProduct() {
-        return "/adminaddproduct";
+        return "adminAddProduct";
     }
 
     @PostMapping("/create/product")
-    public String createProduct(@ModelAttribute Product product,
-                                @RequestParam("productSize") List<String> productSizes,
-                                @RequestParam("productQuantity") List<Integer> productQuantities) {
-        productService.create(product, productSizes, productQuantities);
+    public String createProduct(@RequestParam("name") String name,
+                                @RequestParam("description") String description,
+                                @RequestParam("price") double price,
+                                @RequestParam("sizes") List<String> sizes,
+                                @RequestParam("quantities") List<Integer> quantities,
+                                @RequestParam("category") String category,
+                                @RequestParam("imageFront") String imageFront,
+                                @RequestParam("imageBack") String imageBack) {
+        productService.create(name, description, price, sizes, quantities, category, imageFront, imageBack);
         return "redirect:/admin/products";
     }
 
     @GetMapping("/products")
-    public String listProducts(Model model) {
+    public String productList(Model model) {
         model.addAttribute("products", productService.getAll());
-        return "/adminproducts";
+        return "adminProductsList";
     }
 
     @PostMapping("/delete/product")
@@ -60,22 +64,22 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/promocodes")
-    public String listPromocodes(Model model) {
-        model.addAttribute("promocodes", promoCodeService.getAll());
-        return "adminpromocodes";
+    @GetMapping("/promo")
+    public String promoList(Model model) {
+        model.addAttribute("promoCodes", promoCodeService.getAll());
+        return "adminPromoList";
     }
 
-    @PostMapping("/add/promocode")
-    public String addPromocode(@ModelAttribute PromoCode promoCode) {
+    @PostMapping("/add/promo")
+    public String addPromo(@ModelAttribute PromoCode promoCode) {
         promoCodeService.add(promoCode);
-        return "redirect:/admin/promocodes";
+        return "redirect:/admin/promo";
     }
 
-    @PostMapping("/delete/promocode/{id}")
-    public String deletePromocode(@PathVariable Long id) {
+    @PostMapping("/delete/promo/{id}")
+    public String deletePromo(@PathVariable Long id) {
         promoCodeService.delete(id);
-        return "redirect:/admin/promocodes";
+        return "redirect:/admin/promo";
     }
 }
 

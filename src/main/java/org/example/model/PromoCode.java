@@ -20,8 +20,7 @@ public class PromoCode {
     private String code;
     private double discount;
 
-    public PromoCode(String code, double discount) {
-        this.code = code;
-        this.discount = discount;
+    public String getFormatDiscount() {
+        return String.format("%.0f %%", discount);
     }
 }

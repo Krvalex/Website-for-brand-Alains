@@ -40,12 +40,14 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void create(Product product, List<String> productSizes, List<Integer> productQuantities) {
-        Map<String, Integer> sizes = new HashMap<>();
-        for (int i = 0; i < productSizes.size(); i++) {
-            sizes.put(productSizes.get(i), productQuantities.get(i));
+    public void create(String name, String description, double price,
+                       List<String> sizes, List<Integer> quantities,
+                       String category, String imageFront, String imageBack) {
+        Map<String, Integer> sizeAndQuantities = new HashMap<>();
+        for (int i = 0; i < sizes.size(); i++) {
+            sizeAndQuantities.put(sizes.get(i), quantities.get(i));
         }
-        product.setSizes(sizes);
+        Product product = new Product(name, description, price, sizeAndQuantities, Category.valueOf(category), imageFront, imageBack);
         productRepository.save(product);
     }
 

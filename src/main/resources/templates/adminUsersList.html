@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link href="/css/adminUsersList.css" rel="stylesheet">
+</head>
+<body>
+<h1>Список пользователей</h1>
+<hr>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Email</th>
+        <th>Номер телефона</th>
+        <th>Роли</th>
+    </tr>
+    <tr th:each="user : ${users}"> <!-- Внедрить цикл в таблицу -->
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getEmail}"></td>
+        <td th:text="${user.getPhoneNumber()}"></td>
+        <td th:text="${user.getRoles()}"></td> <!-- Добавьте столбцы для информации -->
+    </tr>
+</table>
+<div class="back-button-container">
+    <a class="back-button" href="/admin">Назад</a>
+</div>
+</body>
+</html>

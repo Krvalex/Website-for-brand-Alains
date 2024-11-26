@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link href="/css/adminProductsList.css" rel="stylesheet">
+</head>
+<body>
+<div class="back-button-container">
+    <a class="back-button" href="/admin">Назад</a>
+</div>
+
+<h1>Список продуктов</h1>
+
+<!-- Контейнер для кнопок -->
+<div class="product-buttons-container">
+    <!-- Кнопка добавления товара -->
+    <a href="/admin/create/product">
+        <button class="add-product-button">Добавить товар</button>
+    </a>
+
+    <!-- Форма для удаления товара -->
+    <form action="/admin/delete/product" method="post" style="display: inline-block;">
+        <label for="productId" style="font-size: 18px; margin-right: 10px;">ID товара для удаления:</label>
+        <input id="productId" name="id" required
+               style="padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;"
+               type="number">
+        <button class="delete-product-button" onclick="return confirm('Вы уверены, что хотите удалить этот товар?');"
+                type="submit">Удалить товар
+        </button>
+    </form>
+</div>
+
+
+<hr>
+
+<!-- Таблица продуктов -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Цена</th>
+        <th>Размер - Количество</th>
+        <th>Категория</th>
+        <th>Фото</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.getId}"></td>
+        <td th:text="${product.getName}"></td>
+        <td th:text="${product.getDescription}"></td>
+        <td th:text="${product.getPrice}"></td>
+        <td>
+            <ul>
+                <li th:each="entry : ${product.getSizes}"
+                    th:text="${entry.key} + '  Осталось: ' + ${entry.value} + 'шт.'"></li>
+            </ul>
+        </td>
+        <td th:text="${product.getCategory}"></td>
+        <td>
+            <img alt="Front Image" class="product-image" th:src="${product.getImageFront}">
+            <img alt="Back Image" class="product-image" th:src="${product.getImageBack}">
+        </td>
+    </tr>
+</table>
+</body>
+</html>

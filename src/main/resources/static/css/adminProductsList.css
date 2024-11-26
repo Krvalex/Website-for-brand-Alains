@@ -1,0 +1,180 @@
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #4a4a4a;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #ddd;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    top: 35px;
+    left: 35px;
+    flex-wrap: wrap;
+}
+
+.button-container a {
+    text-decoration: none;
+}
+
+.button-container button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.button-container button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.back-button-container {
+    position: absolute;
+    top: 35px; /* Опустил кнопку ниже */
+    left: 35px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #393939;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #000000;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.back-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styles for User List */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 20px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    font-size: 18px;
+    max-width: 200px; /* Ограничил максимальную ширину для блока с описанием */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Разрешил перенос строк для описания */
+    word-wrap: break-word; /* Перенос длинных слов на следующую строку */
+}
+
+/* Styles for product images */
+.product-image {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.product-buttons-container {
+    display: flex;
+    justify-content: space-between; /* Разделяет кнопки по краям */
+    align-items: center; /* Выравнивает кнопки по вертикали */
+    margin: 20px auto; /* Центрирует контейнер */
+    width: 80%; /* Ширина контейнера */
+}
+
+.add-product-button,
+.delete-product-button {
+    flex: 1; /* Кнопки равной ширины, занимают доступное пространство */
+    max-width: 300px; /* Ограничивает максимальную ширину кнопки */
+    padding: 10px 20px; /* Внутренние отступы для гармоничного вида */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    border: none; /* Без границ */
+    border-radius: 10px; /* Скругление углов */
+    background-color: #2196f3; /* Синий фон для кнопки добавления */
+    color: #fff; /* Белый текст */
+    cursor: pointer; /* Указатель мыши при наведении */
+    text-align: center; /* Центрирование текста */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+    transition: all 0.3s ease; /* Плавный переход при наведении */
+    margin: 0 10px; /* Отступ между кнопками */
+}
+
+.add-product-button:hover {
+    background-color: #1976d2; /* Более тёмный синий при наведении */
+    transform: translateY(-3px); /* Эффект подъёма */
+}
+
+.delete-product-button {
+    background-color: #f44336; /* Красный фон для кнопки удаления */
+}
+
+.delete-product-button:hover {
+    background-color: #d32f2f; /* Тёмно-красный при наведении */
+}
+

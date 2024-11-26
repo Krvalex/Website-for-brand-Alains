@@ -1,0 +1,147 @@
+/* Общие стили для всей страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Контейнер, чтобы ограничить ширину страницы */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовок */
+header h1 {
+    font-size: 28px;
+    color: #4a4a4a;
+    text-align: center;
+}
+
+/* Стили для формы */
+.promo-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.promo-form h2 {
+    font-size: 24px;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+.promo-form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.promo-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.promo-form button {
+    background-color: #3a3a3a; /* Серый цвет */
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.promo-form button:hover {
+    background-color: #000000; /* Более тёмный серый при наведении */
+}
+
+.promo-form button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для таблицы */
+.promo-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.promo-table th, .promo-table td {
+    padding: 12px 15px;
+    text-align: center; /* Центрируем текст в таблице */
+    border: 1px solid #ddd;
+}
+
+.promo-table th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.promo-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.promo-table button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.promo-table button:hover {
+    background-color: #d32f2f;
+}
+
+.promo-table button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.back-button-container {
+    position: absolute;
+    top: 35px; /* Опустил кнопку ниже */
+    left: 35px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #393939;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #000000;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.back-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
