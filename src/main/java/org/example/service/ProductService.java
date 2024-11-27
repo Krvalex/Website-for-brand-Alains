@@ -56,4 +56,8 @@ public class ProductService {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("ru", "RU"));
         return formatter.format(oldPrice);
     }
+
+    public Product getProductByName(String name) {
+        return productRepository.findByName(name);
+    }
 }

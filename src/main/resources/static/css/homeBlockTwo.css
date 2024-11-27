@@ -1,0 +1,107 @@
+.full-screen-section.gray-background {
+    background-color: #f2f2f2;
+    color: black;
+    padding: 0; /* Отступы для второго блока */
+    position: relative; /* Убедимся, что блок второй секции будет правильно позиционирован */
+    height: 90vh; /* Устанавливаем высоту 80% от высоты экрана */
+}
+
+.content-wrapper {
+    max-width: 90%; /* Максимальная ширина для контента */
+    padding: 4vw;
+    box-sizing: border-box;
+    margin-right: 0;
+}
+
+h1 {
+    font-size: 5px;
+    margin-bottom: 1vw;
+    font-weight: bold;
+}
+
+p {
+    font-size: 2vh; /* Адаптивный размер текста */
+    margin-bottom: 3vw;
+}
+
+/* Контейнер для товаров */
+.products {
+    display: flex;
+    justify-content: flex-end; /* Размещаем товары справа */
+    align-items: center;
+    margin-top: 2vw;
+    gap: 3vw; /* Расстояние между карточками */
+    padding-left: 23vw; /* Отступ справа, чтобы товары не прижимались к краю */
+    padding-top: 5vw;
+}
+
+/* Карточка товара */
+.product-card {
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 20vw;
+    padding: 0.6vw 0.6vw 0.1vw; /* Уменьшаем нижний отступ, чтобы уменьшить пространство до нижнего края */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Изображение товара */
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Название и цена товара */
+.product-card h2 {
+    font-size: 3vh;
+    margin-top: 1vw;
+}
+
+.product-card p {
+    font-size: 3vh;
+    color: #333;
+    margin-top: 0.5vw;
+}
+
+/* Цена товара */
+.product-card .price {
+    font-size: 2.65vh;
+    color: #333;
+    margin-top: 0.5vw;
+    margin-bottom: 1.5vw; /* Меньше отступа снизу */
+}
+
+/* Слева картинка */
+/* Стиль для фотографии с девушкой */
+.image-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+}
+
+.image-left img {
+    max-width: 25vw; /* Размер фото можно регулировать */
+    height: auto;
+}
+
+.centered-heading {
+    font-size: 6vh;
+    margin-bottom: 0.5vw; /* Убираем лишние отступы снизу */
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; /* Чтобы заголовок был поверх других элементов */
+}

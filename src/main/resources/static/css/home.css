@@ -91,7 +91,6 @@ p {
     padding-left: 4vw; /* Используем vw для отступов */
     padding-right: 8vw;
     box-sizing: border-box;
-    font-size: clamp(1rem, 2vw, 1.5rem); /* Адаптивный размер текста */
     overflow-wrap: break-word; /* Перенос длинных слов */
     background-color: rgba(255, 255, 255, 0.7); /* полупрозрачный фон */
 }
@@ -99,6 +98,7 @@ p {
 .text p {
     line-height: 1.4;
     font-style: italic;
+    font-size: 2.7vh;
 }
 
 /* Правая половина (изображение) */
@@ -121,7 +121,7 @@ p {
 .shop-button {
     background: linear-gradient(45deg, #000000, #474747);
     color: white;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: 2.7vh;
     padding: 12px 24px;
     border: none;
     border-radius: 20px;

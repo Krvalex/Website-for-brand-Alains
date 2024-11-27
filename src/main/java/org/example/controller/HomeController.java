@@ -3,7 +3,9 @@ package org.example.controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.example.model.Product;
 import org.example.model.User;
+import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +19,18 @@ import java.security.Principal;
 public class HomeController {
 
     UserService userService;
+    ProductService productService;
 
     @GetMapping("/")
     public String home(Principal principal, Model model) {
         User user = userService.getByPrincipal(principal);
         int cartItemsCount = user != null ? user.getCart().getCartItems().size() : 0;
+        Product bestTshirt = productService.getProductByName("KINGVON T-SHIRT");
+        Product bestHoodie = productService.getProductByName("ZIPALAINS HOODIE");
         model.addAttribute("user", user);
         model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("bestTshirt", bestTshirt);
+        model.addAttribute("bestHoodie", bestHoodie);
         return "home";
     }
 

@@ -30,35 +30,35 @@ body {
 }
 
 .products-page {
-    padding: 20px;
-    max-width: 1200px;
+    padding: 2vh;
+    max-width: 80vw;
     margin: 0 auto;
     text-align: center;
-    margin-top: 40px; /* Отступ для избежания перекрытия навигацией */
+    margin-top: 4vh; /* Отступ для избежания перекрытия навигацией */
 }
 
 /* Заголовок */
 .products-page h2 {
-    font-size: 2em;
+    font-size: 2vw;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 2vw;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
     font-weight: bold; /* Жирный текст */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Сетка товаров */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: repeat(4, 19vw);
+    gap: 1vw;
+    padding: 0 0;
 }
 
 .product-card {
     display: block;
     background: linear-gradient(135deg, #ffffff, #f9f9f9);
-    padding: 20px;
+    padding: 0.5vw;
+    width: 18vw;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -120,7 +120,7 @@ body {
 
 /* Название товара */
 .product-name {
-    font-size: 1.2em;
+    font-size: 1.15vw;
     color: #333;
     margin: 10px 0;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
@@ -130,10 +130,10 @@ body {
 
 /* Цена товара */
 .product-price {
-    font-size: 1em;
+    font-size: 1.1vw;
     color: #333;
     font-weight: normal;
-    margin: 5px 0;
+    margin: 0.5vh 0;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
     letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
@@ -141,8 +141,8 @@ body {
 /* Кнопка с сердечком */
 .favorite-form {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 0.5vh;
+    left: 0.5vw;
     margin: 0;
     z-index: 2; /* Сердечко всегда должно быть над изображениями */
 }
@@ -157,12 +157,12 @@ body {
 /* Сердечко в правом верхнем углу карточки */
 .heart-icon {
     position: absolute;
-    top: 10px; /* Располагаем на расстоянии от верхнего края */
-    right: 10px; /* Располагаем на расстоянии от правого края */
+    top: 0.25vh; /* Располагаем на расстоянии от верхнего края */
+    right: 0.25vw; /* Располагаем на расстоянии от правого края */
     background-color: #ffffff;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 2vw;
+    height: 2vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,7 +174,7 @@ body {
 
 .heart-icon:hover {
     background-color: #f8f8f8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.3);
 }
 
 .heart-icon.active {

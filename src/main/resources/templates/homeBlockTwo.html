@@ -1,0 +1,27 @@
+<section class="full-screen-section gray-background">
+    <h1 class="centered-heading">Хиты Продаж</h1>
+
+    <div class="content-wrapper">
+        <!-- Добавляем изображение слева (должно быть во втором блоке) -->
+        <div class="image-left">
+            <img alt="Girl" src="/images/various/girl.png">
+        </div>
+
+        <!-- Хиты продаж -->
+        <div class="products">
+            <!-- Продукт: Футболка -->
+            <div class="product-card">
+                <img alt="Best T-shirt" th:src="@{${bestTshirt.imageFront}}">
+                <h2 th:text="${bestTshirt.name}">Product Name</h2>
+                <p class="price" th:text="${bestTshirt.price} + ' ₽'">Price</p>
+            </div>
+
+            <!-- Продукт: Худи -->
+            <div class="product-card">
+                <img alt="Best Hoodie" th:src="@{${bestHoodie.imageFront}}">
+                <h2 th:text="${bestHoodie.name}">Product Name</h2>
+                <p class="price" th:text="${bestHoodie.price} + ' ₽'">Price</p>
+            </div>
+        </div>
+    </div>
+</section>
