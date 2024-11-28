@@ -1,41 +1,41 @@
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
-    padding: 45px 0 0;
+    padding: 4.5vh 0 0;
     background-color: #ffffff;
     color: #000;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.02vw;
 }
 
 .care-container {
-    max-width: 1200px;
+    max-width: 80vw;
     margin: 0 auto;
     padding: 20px;
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 2vw;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
 }
 
 p {
-    font-size: 18px;
+    font-size: 1vw;
     margin: 5px 0 20px;
 }
 
 .filter-buttons {
     display: flex;
     justify-content: center;
-    gap: 150px;
+    gap: 15vh;
     margin-bottom: 50px;
 }
 
 .filter-select {
     appearance: none;
-    padding: 15px;
-    font-size: 20px;
+    padding: 1.5vh;
+    font-size: 1.1vw;
     font-weight: bold;
     border-radius: 10px;
     border: 2px solid #000;
@@ -54,11 +54,11 @@ p {
 .care-instructions {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 2vh;
     text-align: center;
     justify-content: space-evenly;
     align-items: flex-start;
-    margin-top: 150px;
+    margin-top: 16vh;
 }
 
 .care-item {

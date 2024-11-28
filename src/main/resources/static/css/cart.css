@@ -3,40 +3,39 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    letter-spacing: 0.02vw; /* Лёгкое межбуквенное расстояние */
 }
 
 .cart-container {
-    max-width: 750px; /* Увеличиваем ширину контейнера */
-    margin: 80px auto;
-    padding: 20px;
+    max-width: 45vw; /* Увеличиваем ширину контейнера */
+    margin: 8.3vh auto;
+    padding: 2vh;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 1vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cart-container h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    font-size: 1.8vw;
+    margin-bottom: 2vh;
     color: #333;
     text-align: center;
     font-weight: bold;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .cart-items {
     border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
 }
 
 .cart-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 0;
+    padding: 1.2vh 0;
     border-bottom: 1px solid #f0f0f0;
     position: relative;
-    gap: 20px; /* Увеличиваем расстояние между элементами */
+    gap: 2vh; /* Увеличиваем расстояние между элементами */
 }
 
 .cart-item a {
@@ -49,27 +48,26 @@ body {
 }
 
 .item-image img {
-    width: 100px; /* Увеличиваем размер изображения */
-    height: 100px;
+    width: 7vw; /* Увеличиваем размер изображения */
+    height: 7vw;
     object-fit: contain;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     border: 1px solid #ddd;
 }
 
 .item-details {
     flex: 2;
-    padding-left: 20px;
-    max-width: 300px; /* Ограничиваем ширину текста */
+    max-width: 10vw; /* Ограничиваем ширину текста */
 }
 
 .item-details h3 {
-    font-size: 1em;
+    font-size: 1vw;
     color: #000;
-    margin: 0 0 5px;
+    margin: 0 0 0.5vw;
 }
 
 .item-details p {
-    font-size: 0.9em;
+    font-size: 0.9vw;
     color: #777;
     margin: 0;
 }
@@ -77,17 +75,17 @@ body {
 .item-quantity {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.8vw;
 }
 
 .quantity-btn {
-    width: 25px;
-    height: 25px;
+    width: 1.7vw;
+    height: 1.7vw;
     background-color: #f0f0f0;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1vw;
     font-weight: bold;
     color: #333;
     display: flex;
@@ -105,7 +103,7 @@ body {
 }
 
 .item-price p {
-    font-size: 1.2em;
+    font-size: 1vw;
     font-weight: bold;
     color: #000;
     margin: 0;
@@ -114,17 +112,16 @@ body {
 .remove-item-btn {
     background-color: #f44336; /* Красный фон для кнопки */
     border: none;
-    font-size: 1em; /* Уменьшаем размер текста крестика для кнопки */
+    font-size: 1vw; /* Уменьшаем размер текста крестика для кнопки */
     color: #fff; /* Белый крестик */
     cursor: pointer;
-    width: 30px; /* Ширина кружка */
-    height: 30px; /* Высота кружка */
+    width: 1.7vw; /* Ширина кружка */
+    height: 1.7vw; /* Высота кружка */
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%; /* Делаем кнопку круглой */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-left: 10px; /* Отступ от цены */
     position: relative;
 }
 
@@ -135,30 +132,29 @@ body {
 
 .cart-summary {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .cart-total {
-    font-size: 1.2em;
+    font-size: 1vw;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 1vw;
 }
 
 .checkout-btn {
     display: block; /* Делает <a> блочным, как <button> */
     width: 100%; /* Полная ширина, как у кнопки */
-    padding: 15px 0;
+    padding: 1.5vh 0;
     background-color: #000; /* Черный фон */
     color: #fff; /* Белый текст */
     text-align: center;
     text-decoration: none; /* Убирает подчеркивание */
-    border-radius: 10px;
-    font-size: 1.2em;
+    border-radius: 1vw;
+    font-size: 1vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .checkout-btn:hover {
@@ -167,15 +163,15 @@ body {
 
 .notification {
     position: fixed;
-    top: -100px; /* Начальная позиция скрыта */
+    top: -10vh; /* Начальная позиция скрыта */
     left: 50%;
     transform: translateX(-50%);
     width: 80%; /* Ширина уведомления */
-    max-width: 500px;
-    padding: 15px;
-    border-radius: 8px;
+    max-width: 30vw;
+    padding: 1.5vw;
+    border-radius: 0.7vw;
     color: white;
-    font-size: 1em;
+    font-size: 0.8vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     opacity: 0; /* Прозрачность для скрытого состояния */
     transition: all 0.4s ease-in-out;
@@ -193,11 +189,11 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 1.2em;
+    font-size: 1vw;
     font-weight: bold;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vw;
+    right: 1vw;
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -208,16 +204,16 @@ body {
 
 /* Показываем уведомление */
 .notification.show {
-    top: 20px; /* Позиция, когда уведомление отображается */
+    top: 2vh; /* Позиция, когда уведомление отображается */
     opacity: 1;
 }
 
 /* Стиль для пустой корзины */
 .empty-cart-message {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.1vw;
     color: #656565;
-    margin: 20px 0;
+    margin: 2vw 0;
 }
 
 /* Отключенная кнопка "Оформить" */

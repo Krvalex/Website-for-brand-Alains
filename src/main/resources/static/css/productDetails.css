@@ -5,6 +5,28 @@ body {
     padding: 0;
     background-color: #f9f9f9;
     letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    overflow-y: scroll;
+}
+
+/* Стиль для вертикальной полосы прокрутки */
+::-webkit-scrollbar {
+    width: 5px; /* Устанавливаем ширину полосы прокрутки */
+}
+
+/* Стиль для трека (фона) полосы прокрутки */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Цвет фона полосы */
+}
+
+/* Стиль для ползунка (движущейся части) полосы прокрутки */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Цвет ползунка */
+    border-radius: 4px; /* Скругляем края */
+}
+
+/* Стиль для ползунка при наведении */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Цвет ползунка при наведении */
 }
 
 /* Контейнер для страницы */
@@ -12,9 +34,9 @@ body {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    gap: 15px; /* Уменьшаем расстояние между блоками */
-    max-width: 1200px;
-    margin: 60px auto;
+    gap: 1.5vw; /* Уменьшаем расстояние между блоками */
+    max-width: 60vw;
+    margin: 7vh auto;
     padding: 20px;
 }
 
@@ -29,7 +51,7 @@ body {
 
 .product-images img {
     width: 100%;
-    max-width: 650px; /* Увеличение размера */
+    max-width: 37vw; /* Увеличение размера */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     object-fit: contain;
@@ -44,7 +66,7 @@ body {
 /* Информация о товаре */
 .product-info {
     position: sticky; /* Фиксация блока */
-    top: 70px; /* Отступ сверху при прокрутке */
+    top: 8vh; /* Отступ сверху при прокрутке */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -57,7 +79,7 @@ body {
 }
 
 .product-name {
-    font-size: 2.5em;
+    font-size: 2.1vw;
     color: #333;
     margin: 0;
 }
@@ -66,13 +88,13 @@ body {
 .price-wrapper {
     display: flex;
     align-items: center;
-    gap: 10px; /* Расстояние между основной и зачеркнутой ценой */
+    gap: 0.5vw; /* Расстояние между основной и зачеркнутой ценой */
     /*margin-bottom: 10px; !* Отступ снизу, чтобы цена была ближе к описанию *!*/
 }
 
 /* Основная цена */
 .product-price {
-    font-size: 1.6em;
+    font-size: 1.5vw;
     color: #000; /* Черный цвет */
     font-weight: bold;
     margin: 10px 0; /* Убираем дополнительные отступы */
@@ -80,7 +102,7 @@ body {
 
 /* Зачеркнутая цена */
 .product-price-discounted {
-    font-size: 1.4em; /* Чуть меньше, чем основная цена */
+    font-size: 1.4vw; /* Чуть меньше, чем основная цена */
     color: #888; /* Серый цвет */
     text-decoration: line-through; /* Зачеркнутость */
     margin: 0; /* Убираем отступы */
@@ -88,7 +110,7 @@ body {
 
 
 .product-description {
-    font-size: 1.2em;
+    font-size: 0.9vw;
     color: #333;
     line-height: 1.4;
     padding: 10px;
@@ -98,7 +120,7 @@ body {
 }
 
 .product-note {
-    font-size: 0.9em;
+    font-size: 0.8vw;
     color: #666;
     line-height: 1.5;
     margin-top: 5px;
@@ -111,18 +133,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 1.1vh;
     margin-top: 10px;
 }
 
 .size-options {
     display: flex;
-    gap: 10px;
+    gap: 0.6vw;
 }
 
 /* Общие стили для кнопок размеров */
 .size-option {
-    font-size: 1em;
+    font-size: 0.9vw;
     font-weight: bold;
     color: #000;
     border: 2px solid #000;
@@ -130,7 +152,7 @@ body {
     background-color: #fff;
     padding: 8px 12px;
     cursor: pointer;
-    width: 60px;
+    width: 3.1vw;
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
     position: relative; /* Для позиционирования подсказки */
@@ -147,7 +169,7 @@ body {
     position: absolute;
     background-color: #fff;
     color: #000;
-    font-size: 0.9em;
+    font-size: 0.7vw;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -192,18 +214,17 @@ body {
 .add-to-cart-btn {
     background-color: #000;
     color: white;
-    font-size: 1em;
+    font-size: 0.9vw;
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 411px; /* Совпадает с шириной кнопок размеров */
-    height: 45px;
+    width: 21.7vw; /* Совпадает с шириной кнопок размеров */
+    height: 4.7vh;
     text-align: center;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
     font-weight: bold; /* Жирный текст */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .add-to-cart-btn:hover {
@@ -213,8 +234,8 @@ body {
 /* Контейнер для кнопки "Вернуться" */
 .back-button-wrapper {
     position: fixed;
-    top: 75px; /* Расположение в верхнем левом углу */
-    left: 40px;
+    top: 9vh; /* Расположение в верхнем левом углу */
+    left: 2.8vw;
     z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
 
 }
@@ -223,19 +244,18 @@ body {
 .back-button {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.4vw;
     font-weight: bold;
     color: #000;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 /* Стили для стрелки */
 .back-arrow {
-    font-size: 1.2em;
+    font-size: 1.5vw;
     margin-right: 8px;
     transition: transform 0.3s ease;
 }
@@ -248,12 +268,12 @@ body {
 .notification {
     position: fixed;
     bottom: -100px; /* Начальная позиция скрыта */
-    right: 20px;
-    width: 300px;
+    right: 2vw;
+    width: 18.5vw;
     padding: 15px;
     border-radius: 8px;
     color: white;
-    font-size: 1em;
+    font-size: 1vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     opacity: 0; /* Прозрачность для скрытого состояния */
     transform: translateY(0); /* Начальное положение */
@@ -278,7 +298,7 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.2vw;
     font-weight: bold;
     position: absolute;
     top: 10px;

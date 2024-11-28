@@ -8,6 +8,7 @@
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
     <link href="/css/homeBlockTwo.css" rel="stylesheet">
+    <link href="/css/homeBlockThree.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{navigation.html :: navigation}"></div>
@@ -44,12 +45,7 @@
 <div th:replace="~{homeBlockTwo.html}"></div>
 
 <!-- Третий блок (Темно-серый фон) -->
-<section class="full-screen-section dark-gray-background">
-    <div class="content-wrapper">
-        <h1>Contact Us</h1>
-        <p>Get in touch for any queries.</p>
-    </div>
-</section>
+<div th:replace="~{homeBlockThree.html}"></div>
 
 <script src="/js/navigation.js"></script>
 </body>

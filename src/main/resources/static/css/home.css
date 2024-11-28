@@ -49,8 +49,9 @@ body {
 
 /* Темно-серый фон для третьего блока */
 .dark-gray-background {
-    background-color: #333;
+    background-color: #000000;
     color: white;
+    height: 15vh;
 }
 
 /* Контейнер для контента в блоках */

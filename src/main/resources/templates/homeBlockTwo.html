@@ -11,16 +11,20 @@
         <div class="products">
             <!-- Продукт: Футболка -->
             <div class="product-card">
-                <img alt="Best T-shirt" th:src="@{${bestTshirt.imageFront}}">
-                <h2 th:text="${bestTshirt.name}">Product Name</h2>
-                <p class="price" th:text="${bestTshirt.price} + ' ₽'">Price</p>
+                <a class="product-link" th:href="@{'/products/' + ${bestTshirt.id}}">
+                    <img alt="Best T-shirt" th:src="@{${bestTshirt.imageFront}}">
+                    <h2 th:text="${bestTshirt.name}">Product Name</h2>
+                    <p class="price" th:text="${bestTshirt.price} + ' ₽'">Price</p>
+                </a>
             </div>
 
             <!-- Продукт: Худи -->
             <div class="product-card">
-                <img alt="Best Hoodie" th:src="@{${bestHoodie.imageFront}}">
-                <h2 th:text="${bestHoodie.name}">Product Name</h2>
-                <p class="price" th:text="${bestHoodie.price} + ' ₽'">Price</p>
+                <a class="product-link" th:href="@{'/products/' + ${bestHoodie.id}}">
+                    <img alt="Best Hoodie" th:src="@{${bestHoodie.imageFront}}">
+                    <h2 th:text="${bestHoodie.name}">Product Name</h2>
+                    <p class="price" th:text="${bestHoodie.price} + ' ₽'">Price</p>
+                </a>
             </div>
         </div>
     </div>

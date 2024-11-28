@@ -1,0 +1,76 @@
+/* Обёртка для всего контента */
+.content-wrapper-three {
+    text-align: left; /* Выравниваем текст по левому краю */
+    padding-left: 2vw; /* Отступ слева */
+    padding-top: 1vh; /* Добавляем отступ сверху, чтобы текст был ближе к верхней границе */
+    width: 100%; /* Обеспечиваем, чтобы блок занимал всю ширину */
+    /*padding-bottom: 1vh;*/
+    display: flex; /* Используем flexbox для выравнивания контента */
+    justify-content: space-between; /* Равномерное распределение контента, чтобы текст был слева, а картинка справа */
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+}
+
+/* Контактная информация */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh; /* Уменьшаем расстояние между почтой и соцсетями */
+}
+
+/* Почтовый элемент */
+.contact-item {
+    margin-bottom: 1vh; /* Уменьшаем отступ между почтой и социальными сетями */
+}
+
+/* Подписи для email и соцсетей */
+.label {
+    font-size: 1.8vh;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #c6c6c6;
+}
+
+/* Социальные сети */
+.social-media {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по центру вертикально */
+    gap: 1vh; /* Уменьшаем расстояние между текстом и иконками */
+}
+
+/* Ссылки для соцсетей */
+.social-link {
+    font-size: 1.8vh;
+    color: #c6c6c6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ff7f50; /* Цвет при наведении */
+    transform: scale(1.1); /* Эффект увеличения при наведении */
+}
+
+/* Цвет для каждой соцсети */
+.social-link.vk:hover {
+    color: #4C75A3; /* Цвет для VK */
+}
+
+.social-link.telegram:hover {
+    color: #0088cc; /* Цвет для Telegram */
+}
+
+.social-link.instagram:hover {
+    color: #E4405F; /* Цвет для Instagram */
+}
+
+.social-link.whatsapp:hover {
+    color: #25D366; /* Цвет для WhatsApp */
+}
+
+/* Картинка */
+.contact-image {
+    width: 6vw; /* Максимальная ширина картинки, чтобы она не занимала весь блок */
+    height: 6vw;
+    padding-right: 4vh;
+}
