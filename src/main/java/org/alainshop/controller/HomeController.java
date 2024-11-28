@@ -13,8 +13,10 @@ import org.alainshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
@@ -81,5 +83,13 @@ public class HomeController {
         model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("user", user);
         return "contacts";
+    }
+
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("query") String query, Model model) {
+        List<Product> products = productService.searchByName(query);
+        model.addAttribute("products", products);
+        System.out.println(products);
+        return "searchResults";
     }
 }

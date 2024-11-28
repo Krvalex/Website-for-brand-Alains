@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/searchResults.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
+<div class="back-button-wrapper">
+    <a class="back-button" href="javascript:history.back()">
+        <span class="back-arrow">&#8592;</span> ВЕРНУТЬСЯ
+    </a>
+</div>
+<div class="products-page">
+    <!-- Динамически меняем заголовок -->
+    <h2>Результат поиска</h2>
+
+    <!-- Список товаров -->
+    <div class="product-grid">
+        <div class="product-card" th:each="product : ${products}">
+            <!-- Оборачиваем карточку товара в ссылку, которая ведет на страницу деталей товара -->
+            <a class="product-card-link" th:href="@{/products/{id}(id=${product.id})}">
+                <!-- Контейнер для изображений товара -->
+                <div class="product-image-wrapper">
+                    <img alt="Product Front" class="product-image product-image-front" loading="lazy"
+                         th:src="@{${product.getImageFront}}">
+                    <img alt="Product Back" class="product-image product-image-back" loading="lazy"
+                         th:src="@{${product.getImageBack}}">
+                </div>
+                <h3 class="product-name" th:text="${product.name}"></h3>
+                <p class="product-price" th:text="${product.price} + ' ₽'"></p>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="/js/navigation.js"></script>
+<script src="/js/searchResults.js"></script>
+</body>
+</html>

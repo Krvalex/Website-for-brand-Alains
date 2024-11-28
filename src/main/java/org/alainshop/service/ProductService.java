@@ -60,4 +60,8 @@ public class ProductService {
     public Product getProductByName(String name) {
         return productRepository.findByName(name);
     }
+
+    public List<Product> searchByName(String query) {
+        return productRepository.findByNameContainingIgnoreCase(query);
+    }
 }

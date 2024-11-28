@@ -18,7 +18,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000; /* Убедитесь, что navbar не перекрывает меню */
+    z-index: 950; /* Убедитесь, что navbar не перекрывает меню */
     height: 5.5vh;
 }
 
@@ -70,10 +70,10 @@ body {
 
 /* Логотип */
 .logo {
-    height: 230px;
+    height: 27vh;
     object-fit: contain;
     margin-top: 3px;
-    margin-left: 90px;
+    margin-left: 7.8vw;
     position: relative;
 }
 
@@ -86,7 +86,7 @@ body {
 .navbar-right {
     display: flex;
     align-items: center;
-    margin-right: 30px; /* Убираем смещение значков левее */
+    margin-right: 1.8vw; /* Убираем смещение значков левее */
 }
 
 .navbar .icon-link {
@@ -103,7 +103,7 @@ body {
     object-fit: cover;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); /* Меньшая тень */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 20px; /* Расстояние между значками */
+    margin-left: 0.9vw; /* Расстояние между значками */
 }
 
 /* Эффект при наведении на иконки */
@@ -240,4 +240,55 @@ body {
     justify-content: center;
     font-weight: bold;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для поля поиска */
+#search-bar {
+    position: fixed;
+    top: -20vh; /* Скрыто за пределами экрана */
+    width: 100%;
+    left: 0;
+    background-color: white;
+    padding: 5vh;
+    display: flex;
+    justify-content: center; /* Центрирует элементы по горизонтали */
+    align-items: center; /* Центрирует элементы по вертикали */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.3s ease; /* Плавный переход */
+    z-index: 1; /* Находится над другими элементами */
+}
+
+/* Стили для поля ввода */
+#search-bar input {
+    width: 30%; /* Ширина поля ввода */
+    padding: 1.5vh;
+    font-size: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Стили для кнопки поиска */
+#search-button {
+    width: 2vw; /* Размер кнопки */
+    height: 2vw; /* Размер кнопки */
+    cursor: pointer;
+    margin-left: 0.7vw; /* Немного расстояния между кнопкой и полем ввода */
+}
+
+/* Эффект при наведении на кнопку */
+#search-button:hover {
+    opacity: 0.8;
+}
+
+/* Стили для картинки (кнопки закрытия) */
+#close-search {
+    width: 3vw; /* Устанавливаем размер картинки */
+    height: 3vw; /* Устанавливаем размер картинки */
+    cursor: pointer; /* Указываем, что это кликабельный элемент */
+    margin-left: 0.1vw; /* Немного расстояния между картинкой и полем ввода */
+}
+
+/* Эффект при наведении на картинку */
+#close-search:hover {
+    opacity: 0.7; /* Добавляем эффект при наведении */
 }

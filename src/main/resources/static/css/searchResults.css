@@ -34,14 +34,14 @@ body {
     max-width: 80vw;
     margin: 0 auto;
     text-align: center;
-    margin-top: 4vh; /* Отступ для избежания перекрытия навигацией */
+    margin-top: 3vh; /* Отступ для избежания перекрытия навигацией */
 }
 
 /* Заголовок */
 .products-page h2 {
     font-size: 2vw;
-    color: #333;
-    margin-bottom: 2vw;
+    color: #000000;
+    padding-bottom: 1vw;
     font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
     font-weight: bold; /* Жирный текст */
 }
@@ -138,57 +138,6 @@ body {
     letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
-/* Кнопка с сердечком */
-.favorite-form {
-    position: absolute;
-    top: 0.5vh;
-    left: 0.5vw;
-    margin: 0;
-    z-index: 2; /* Сердечко всегда должно быть над изображениями */
-}
-
-.favorite-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-/* Сердечко в правом верхнем углу карточки */
-.heart-icon {
-    position: absolute;
-    top: 0.25vh; /* Располагаем на расстоянии от верхнего края */
-    right: 0.25vw; /* Располагаем на расстоянии от правого края */
-    background-color: #ffffff;
-    border-radius: 50%;
-    width: 2vw;
-    height: 2vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    z-index: 2; /* Сердечко всегда должно быть поверх изображения */
-}
-
-.heart-icon:hover {
-    background-color: #f8f8f8;
-    box-shadow: 0 1vh 1vh rgba(0, 0, 0, 0.3);
-}
-
-.heart-icon.active {
-    background-color: #f9ecec;
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
-}
-
-/* Изображение сердечка */
-.heart-icon img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-}
-
 /* Дополнительные стили для анимации появления карточек */
 .product-card {
     opacity: 0;
@@ -206,4 +155,38 @@ body {
     text-decoration: none; /* Убираем подчеркивание */
     color: inherit; /* Наследуем цвет от родительского элемента */
     display: block; /* Делаем ссылку блочной, чтобы она занимала всю карточку */
+}
+
+
+/* Контейнер для кнопки "Вернуться" */
+.back-button-wrapper {
+    position: fixed;
+    top: 9vh; /* Расположение в верхнем левом углу */
+    left: 2.5vw;
+    z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
+
+}
+
+/* Стили кнопки "Вернуться" */
+.back-button {
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+}
+
+/* Стили для стрелки */
+.back-arrow {
+    font-size: 1.5vw;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-arrow {
+    transform: translateX(-5px); /* Легкое смещение стрелки влево при наведении */
 }

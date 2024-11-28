@@ -19,4 +19,26 @@ function toggleMenu() {
     }
 }
 
+function toggleSearch() {
+    const searchBar = document.getElementById('search-bar');
+    searchBar.style.top = searchBar.style.top === '0px' ? '-20vh' : '0px'; // Выдвигаем или скрываем
+}
+
+// Функция поиска, которая срабатывает по клику на картинку
+function searchProducts() {
+    const query = document.getElementById('search-input').value;
+
+    if (query.length >= 3) { // Проверка на минимальную длину строки
+        // Перенаправляем на страницу с результатами поиска
+        window.location.href = `/search?query=${encodeURIComponent(query)}`;
+    } else {
+        alert("Введите хотя бы 3 символа для поиска.");
+    }
+}
+
+// Функция для закрытия поля поиска
+function closeSearch() {
+    document.getElementById('search-bar').style.top = '-20vh'; // Скрываем поле поиска
+    document.getElementById('overlay').style.display = 'none'; // Убираем затемнение
+}
 

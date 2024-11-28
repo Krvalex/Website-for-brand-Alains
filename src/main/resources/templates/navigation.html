@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div th:fragment="navigation" xmlns:th="http://www.thymeleaf.org">
     <!-- Полупрозрачный фон для затемнения -->
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div> <!-- Клик по фону закрывает меню -->
+    <div class="overlay" id="overlay" onclick="closeSearch()"></div> <!-- Клик по фону закрывает меню -->
 
     <!-- Навигационная полоса -->
     <nav class="navbar">
@@ -22,18 +22,28 @@
 
         <!-- Правая часть: Корзина, Избранное, Аккаунт -->
         <div class="navbar-right">
+            <a class="icon-link" href="/users/account">
+                <img alt="Account" src="/images/various/account.png">
+            </a>
+            <a class="icon-link" href="javascript:void(0);" onclick="toggleSearch()">
+                <img alt="Search" src="/images/various/search.png">
+            </a>
+            <a class="icon-link" href="/favorites">
+                <img alt="Favorites" src="/images/various/favorites.png">
+            </a>
             <a class="icon-link" href="/cart">
                 <div class="cart-icon-wrapper">
                     <img alt="Cart" src="/images/various/cart.png">
                     <span class="cart-count" th:text="${cartItemsCount}">0</span>
                 </div>
             </a>
-            <a class="icon-link" href="/favorites">
-                <img alt="Favorites" src="/images/various/favorites.png">
-            </a>
-            <a class="icon-link" href="/users/account">
-                <img alt="Account" src="/images/various/account.png">
-            </a>
+        </div>
+
+        <!-- Поле поиска -->
+        <div id="search-bar">
+            <input id="search-input" placeholder="Поиск товаров" type="text">
+            <img alt="Поиск" id="search-button" onclick="searchProducts()" src="/images/various/searchSlim.png">
+            <img alt="Закрыть" id="close-search" onclick="closeSearch()" src="/images/various/cross.png">
         </div>
     </nav>
 
