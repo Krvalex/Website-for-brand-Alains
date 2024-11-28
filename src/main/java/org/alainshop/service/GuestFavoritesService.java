@@ -94,4 +94,15 @@ public class GuestFavoritesService {
                 .filter(product -> product.getCategory() == category) // Фильтрация по категории
                 .collect(Collectors.toList());
     }
+
+    public boolean isFavorite(String guestIdentifier, Product product) {
+        GuestFavorites guestFavorites = get(guestIdentifier);
+        List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
+        for (FavoriteItem favoriteItem : favoriteItems) {
+            if (favoriteItem.getProduct().getId().equals(product.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

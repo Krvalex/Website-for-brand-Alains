@@ -1,7 +1,7 @@
 function removeFavoriteItem(button) {
-    const itemId = button.getAttribute('data-id');
+    const productId = button.getAttribute('data-id');
 
-    fetch(`/favorites/remove/${itemId}`, {
+    fetch(`/favorites/remove/${productId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

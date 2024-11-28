@@ -69,8 +69,18 @@
                 <form class="size-selection-form" method="post"
                       th:action="@{/cart/add/{productId}(productId=${product.Id})}">
                     <input id="selected-size" name="size" required type="hidden">
-                    <button class="add-to-cart-btn" type="submit">Добавить в корзину</button>
+                    <div class="add-to-cart-wrapper">
+                        <button class="add-to-cart-btn" type="submit">Добавить в корзину</button>
+                        <span class="heart-icon"
+                              onclick="toggleFavorite(this); event.preventDefault(); event.stopPropagation();"
+                              th:classappend="${isFavoriteProduct} ? 'active' : ''"
+                              th:data-product-id="${product.id}">
+            <img alt="Favorite Icon"
+                 th:src="@{${isFavoriteProduct ? '/images/various/favorites-active.png' : '/images/various/favorites.png'}}">
+        </span>
+                    </div>
                 </form>
+
             </div>
         </div>
     </div>

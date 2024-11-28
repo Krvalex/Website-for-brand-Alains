@@ -63,3 +63,34 @@ document.querySelector('.add-to-cart-btn').addEventListener('click', function (e
             showNotification('errorNotification'); // Показываем уведомление об ошибке
         });
 });
+
+function toggleFavorite(element) {
+    const productId = element.getAttribute("data-product-id");
+    const isActive = element.classList.contains("active");
+    const heartIconImage = element.querySelector("img"); // Получаем изображение внутри сердечка
+    const url = isActive
+        ? `/favorites/remove/${productId}` // URL для удаления
+        : `/favorites/${productId}`; // URL для добавления
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                // Переключаем класс активного сердечка
+                element.classList.toggle("active");
+
+                // Меняем изображение в зависимости от состояния
+                if (element.classList.contains("active")) {
+                    heartIconImage.src = "/images/various/favorites-active.png"; // Изображение для активного состояния
+                } else {
+                    heartIconImage.src = "/images/various/favorites.png"; // Исходное изображение
+                }
+            } else {
+                alert("Не удалось обновить избранное. Попробуйте снова.");
+            }
+        });
+}

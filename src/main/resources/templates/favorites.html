@@ -35,7 +35,7 @@
             <p class="item-price" th:text="${item.product.price} + ' ₽'"></p>
         </div>
         <a class="view-product-btn" th:href="@{/products/{id}(id=${item.product.id})}">Перейти к товару</a>
-        <button class="remove-item-btn" onclick="removeFavoriteItem(this)" th:data-id="${item.id}">×</button>
+        <button class="remove-item-btn" onclick="removeFavoriteItem(this)" th:data-id="${item.product.id}">×</button>
     </div>
 </div>
 

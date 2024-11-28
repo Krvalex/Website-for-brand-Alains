@@ -114,18 +114,23 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getById(@PathVariable Long id, Model model, Principal principal, HttpSession session) {
         Product product = productService.getById(id);
-        Map<String, Integer> productSizes = product.getSizes(); // Получаем карту размеров и количества
+        Map<String, Integer> productSizes = product.getSizes();
         String oldPrice = productService.getOldPrice(product.getPrice());
         int cartItemsCount = 0;
+        boolean isFavoriteProduct = false;
         if (principal != null) {
-            cartItemsCount = userService.getByPrincipal(principal).getCart().getCartItems().size();
+            User user = userService.getByPrincipal(principal);
+            cartItemsCount = user.getCart().getCartItems().size();
+            isFavoriteProduct = favoritesService.isFavorite(user, product);
         } else {
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.get(guestIdentifier);
             if (guestCart != null) {
                 cartItemsCount = guestCart.getCartItems().size();
+                isFavoriteProduct = guestFavoritesService.isFavorite(guestIdentifier, product);
             }
         }
+        model.addAttribute("isFavoriteProduct", isFavoriteProduct);
         model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("product", product);
         model.addAttribute("productSizes", productSizes);
