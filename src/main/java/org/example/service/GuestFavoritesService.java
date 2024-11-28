@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.example.model.FavoriteItem;
 import org.example.model.GuestFavorites;
 import org.example.model.Product;
+import org.example.model.enums.Category;
 import org.example.repository.GuestFavoritesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -36,7 +38,6 @@ public class GuestFavoritesService {
                 .orElseGet(() -> create(identifier));
     }
 
-    @Transactional
     public GuestFavorites get(String guestIdentifier) {
         return guestFavoritesRepository.findByGuestIdentifier(guestIdentifier)
                 .orElse(null);
@@ -61,10 +62,10 @@ public class GuestFavoritesService {
         return new ArrayList<>();
     }
 
-    public void deleteProduct(String guestIdentifier, Long favoriteItemId) {
+    public void deleteProductById(String guestIdentifier, Long favoriteItemId) {
         GuestFavorites guestFavorites = get(guestIdentifier);
         List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
-        favoriteItems.removeIf(favoriteItem -> favoriteItem.getId().equals(favoriteItemId));
+        favoriteItems.removeIf(favoriteItem -> favoriteItem.getProduct().getId().equals(favoriteItemId));
         guestFavoritesRepository.save(guestFavorites);
     }
 
@@ -80,5 +81,17 @@ public class GuestFavoritesService {
             favoriteItemService.deleteByGuestFavoriteId(oldFavorite.getId());
         }
         guestFavoritesRepository.deleteAll(oldFavorites);
+    }
+
+    public List<Product> getProductsByCategory(String guestIdentifier, Category category) {
+        GuestFavorites guestFavorites = guestFavoritesRepository.findByGuestIdentifier(guestIdentifier).orElse(null);
+        if (guestFavorites == null) {
+            return new ArrayList<>();
+        }
+        return guestFavorites.getFavoriteItems()
+                .stream()
+                .map(FavoriteItem::getProduct)
+                .filter(product -> product.getCategory() == category) // Фильтрация по категории
+                .collect(Collectors.toList());
     }
 }

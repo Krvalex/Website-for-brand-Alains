@@ -5,9 +5,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.example.model.FavoriteItem;
+import org.example.model.GuestCart;
 import org.example.model.GuestFavorites;
 import org.example.model.User;
 import org.example.service.FavoritesService;
+import org.example.service.GuestCartService;
 import org.example.service.GuestFavoritesService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,7 @@ public class FavoritesController {
     FavoritesService favoritesService;
     UserService userService;
     GuestFavoritesService guestFavoritesService;
+    GuestCartService guestCartService;
 
     @PostMapping("/{productId}")
     public String add(@PathVariable Long productId, Principal principal, HttpSession session) {
@@ -45,28 +48,35 @@ public class FavoritesController {
     @GetMapping
     public String get(Principal principal, HttpSession session, Model model) {
         List<FavoriteItem> favoriteItems;
+        int cartItemsCount = 0;
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestFavorites guestFavorites = guestFavoritesService.getOrCreate(guestIdentifier, session);
             favoriteItems = guestFavorites.getFavoriteItems();
+            GuestCart guestCart = guestCartService.get(guestIdentifier);
+            if (guestCart != null) {
+                cartItemsCount = guestCart.getCartItems().size();
+            }
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             favoriteItems = user.getFavorites().getFavoriteItems();
+            cartItemsCount = user.getCart().getCartItems().size();
             model.addAttribute("user", user);
         }
+        model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("favoriteItems", favoriteItems);
         return "favorites";
     }
 
-    @PostMapping("/remove/{favoriteItemId}")
-    public String remove(@PathVariable Long favoriteItemId, Principal principal, HttpSession session) {
+    @PostMapping("/remove/{productId}")
+    public String remove(@PathVariable Long productId, Principal principal, HttpSession session) {
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             System.out.println("Post remove");
-            guestFavoritesService.deleteProduct(guestIdentifier, favoriteItemId);
+            guestFavoritesService.deleteProductById(guestIdentifier, productId);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            favoritesService.deleteProduct(user, favoriteItemId);
+            favoritesService.deleteProductById(user, productId);
         }
         return "redirect:/favorites";
     }

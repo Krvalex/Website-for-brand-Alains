@@ -8,7 +8,11 @@
 </head>
 <body class="favorites">
 <div th:replace="~{navigation.html :: navigation}"></div>
-
+<div class="back-button-wrapper">
+    <a class="back-button" href="javascript:history.back()">
+        <span class="back-arrow">&#8592;</span> ВЕРНУТЬСЯ
+    </a>
+</div>
 <div class="favorites-container">
     <h2>Избранное</h2>
 

@@ -35,20 +35,23 @@ public class CartController {
     public String get(Principal principal, HttpSession session, Model model) {
         List<CartItem> cartItems;
         String formattedSum;
+        int cartItemsCount;
         if (principal == null) { //если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
             cartItems = guestCart.getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
+            cartItemsCount = guestCart.getCartItems().size();
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
+            cartItemsCount = user.getCart().getCartItems().size();
             cartItems = user.getCart().getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
         }
-
+        model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("sum", formattedSum);
         return "cart";
@@ -76,16 +79,19 @@ public class CartController {
     public String getCartDetails(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
         List<CartItem> cartItems;
         String sum;
+        int cartItemsCount;
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
             cartItems = guestCart.getCartItems();
             sum = cartItemService.formatSum(cartItems);
+            cartItemsCount = guestCart.getCartItems().size();
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             cartItems = user.getCart().getCartItems();
             sum = cartItemService.formatSum(cartItems);
+            cartItemsCount = user.getCart().getCartItems().size();
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
         }
@@ -93,6 +99,7 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", "Ваша корзина пуста. Добавьте товары для оформления заказа.");
             return "redirect:/cart";
         }
+        model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("sum", sum);
         return "cartDetails";
@@ -107,7 +114,8 @@ public class CartController {
                                      @RequestParam("totalSum") double totalSum,
                                      Principal principal,
                                      HttpSession session,
-                                     RedirectAttributes redirectAttributes) {
+                                     RedirectAttributes redirectAttributes,
+                                     Model model) {
         List<CartItem> cartItems;
         try {
             if (principal == null) { // если гость
@@ -126,6 +134,7 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", "Недостаточное количество товара на складе.");
             return "redirect:/cart";
         }
+        model.addAttribute("cartItemsCount", 0);
         return "cartPlaced";
     }
 

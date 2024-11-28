@@ -7,7 +7,10 @@ import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
@@ -55,23 +58,12 @@ public class UserController {
     public String account(Principal principal, Model model) {
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
+            int cartItemsCount = user.getCart().getCartItems().size();
+            model.addAttribute("cartItemsCount", cartItemsCount);
             model.addAttribute("user", user);
             model.addAttribute("orders", user.getOrders());
             return "userAccount";
         }
         return "login";
     }
-
-    @GetMapping
-    public String getAll(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "users";
-    }
-
-    @GetMapping("/{id}")
-    public String getById(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.getById(id));
-        return "userdetails";
-    }
-
 }

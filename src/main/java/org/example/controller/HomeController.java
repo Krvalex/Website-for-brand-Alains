@@ -1,10 +1,13 @@
 package org.example.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.example.model.GuestCart;
 import org.example.model.Product;
 import org.example.model.User;
+import org.example.service.GuestCartService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -20,11 +23,21 @@ public class HomeController {
 
     UserService userService;
     ProductService productService;
+    GuestCartService guestCartService;
 
     @GetMapping("/")
-    public String home(Principal principal, Model model) {
+    public String home(Principal principal, Model model, HttpSession session) {
         User user = userService.getByPrincipal(principal);
-        int cartItemsCount = user != null ? user.getCart().getCartItems().size() : 0;
+        int cartItemsCount = 0;
+        if (user != null) {
+            cartItemsCount = user.getCart().getCartItems().size();
+        } else {
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.get(guestIdentifier);
+            if (guestCart != null) {
+                cartItemsCount = guestCart.getCartItems().size();
+            }
+        }
         Product bestTshirt = productService.getProductByName("KINGVON T-SHIRT");
         Product bestHoodie = productService.getProductByName("ZIPALAINS HOODIE");
         model.addAttribute("user", user);
@@ -35,15 +48,37 @@ public class HomeController {
     }
 
     @GetMapping("/garmentCare")
-    public String garmentCare(Principal principal, Model model) {
+    public String garmentCare(Principal principal, Model model, HttpSession session) {
         User user = userService.getByPrincipal(principal);
+        int cartItemsCount = 0;
+        if (user != null) {
+            cartItemsCount = user.getCart().getCartItems().size();
+        } else {
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.get(guestIdentifier);
+            if (guestCart != null) {
+                cartItemsCount = guestCart.getCartItems().size();
+            }
+        }
+        model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("user", user);
         return "garmentCare";
     }
 
     @GetMapping("/contacts")
-    public String contacts(Principal principal, Model model) {
+    public String contacts(Principal principal, Model model, HttpSession session) {
         User user = userService.getByPrincipal(principal);
+        int cartItemsCount = 0;
+        if (user != null) {
+            cartItemsCount = user.getCart().getCartItems().size();
+        } else {
+            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
+            GuestCart guestCart = guestCartService.get(guestIdentifier);
+            if (guestCart != null) {
+                cartItemsCount = guestCart.getCartItems().size();
+            }
+        }
+        model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("user", user);
         return "contacts";
     }

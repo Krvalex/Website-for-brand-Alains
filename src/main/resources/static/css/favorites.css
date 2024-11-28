@@ -145,3 +145,36 @@ body::after {
     margin: 0; /* Убираем лишние отступы */
 }
 
+/* Контейнер для кнопки "Вернуться" */
+.back-button-wrapper {
+    position: fixed;
+    top: 9vh; /* Расположение в верхнем левом углу */
+    left: 2.8vw;
+    z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
+
+}
+
+/* Стили кнопки "Вернуться" */
+.back-button {
+    display: flex;
+    align-items: center;
+    font-size: 1.4vw;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
+}
+
+/* Стили для стрелки */
+.back-arrow {
+    font-size: 1.5vw;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-arrow {
+    transform: translateX(-5px); /* Легкое смещение стрелки влево при наведении */
+}
+

@@ -35,6 +35,11 @@ public class GuestCartService {
                 .orElseGet(() -> create(identifier));
     }
 
+    public GuestCart get(String guestIdentifier) {
+        return guestCartRepository.findByGuestIdentifier(guestIdentifier)
+                .orElse(null);
+    }
+
     private GuestCart create(String guestIdentifier) {
         GuestCart newCart = new GuestCart(guestIdentifier, LocalDateTime.now());
         return guestCartRepository.save(newCart);
