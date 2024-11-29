@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String lopginPost() {
-        return "redirect:/";
+    public String loginPost() {
+        return "userAccount";
     }
 
     @GetMapping("/registration")

@@ -34,7 +34,7 @@ public class SecurityConfig {
                         .permitAll())
                 .logout((logout) -> logout
                         .logoutUrl("/users/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/account")
                         .permitAll())
                 .build();
     }

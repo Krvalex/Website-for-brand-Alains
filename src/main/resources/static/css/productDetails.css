@@ -1,81 +1,72 @@
-/* Основные стили */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    letter-spacing: 0.02vw;
     overflow-y: scroll;
 }
 
-/* Стиль для вертикальной полосы прокрутки */
 ::-webkit-scrollbar {
-    width: 5px; /* Устанавливаем ширину полосы прокрутки */
+    width: 5px;
 }
 
-/* Стиль для трека (фона) полосы прокрутки */
 ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Цвет фона полосы */
+    background-color: #f1f1f1;
 }
 
-/* Стиль для ползунка (движущейся части) полосы прокрутки */
 ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Цвет ползунка */
-    border-radius: 4px; /* Скругляем края */
+    background-color: #888;
+    border-radius: 4px;
 }
 
-/* Стиль для ползунка при наведении */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Цвет ползунка при наведении */
+    background-color: #555;
 }
 
-/* Контейнер для страницы */
 .product-details {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    gap: 1.5vw; /* Уменьшаем расстояние между блоками */
+    gap: 1.5vw;
     max-width: 62.3vw;
     margin: 7vh auto;
-    padding: 20px;
+    padding: 2vh;
 }
 
-/* Стили для изображений */
 .product-images {
-    flex: 1 1 60%; /* Уменьшили ширину блока с изображениями */
+    flex: 1 1 60%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 2vh;
     align-items: center;
 }
 
 .product-images img {
     width: 100%;
-    max-width: 37vw; /* Увеличение размера */
+    max-width: 35vw;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     object-fit: contain;
 }
 
-/* Обертка для информации о товаре */
 .product-info-wrapper {
-    flex: 1 1 40%; /* Увеличили ширину блока с описанием */
+    flex: 1 1 40%;
     position: relative;
 }
 
-/* Информация о товаре */
 .product-info {
-    position: sticky; /* Фиксация блока */
-    top: 8vh; /* Отступ сверху при прокрутке */
+    position: sticky;
+    top: 8vh;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1vh;
     background-color: white;
-    padding: 20px;
+    padding: 2vh;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-height: calc(100vh - 40px); /* Высота, чтобы блок помещался на экран */
-    overflow-y: auto; /* Прокрутка внутри блока, если контент длиннее */
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .product-name {
@@ -84,36 +75,31 @@ body {
     margin: 0;
 }
 
-/* Контейнер для цены */
 .price-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.5vw; /* Расстояние между основной и зачеркнутой ценой */
-    /*margin-bottom: 10px; !* Отступ снизу, чтобы цена была ближе к описанию *!*/
+    gap: 0.5vw;
 }
 
-/* Основная цена */
 .product-price {
     font-size: 1.5vw;
-    color: #000; /* Черный цвет */
+    color: #000;
     font-weight: bold;
-    margin: 10px 0; /* Убираем дополнительные отступы */
+    margin: 1vh 0;
 }
 
-/* Зачеркнутая цена */
 .product-price-discounted {
-    font-size: 1.4vw; /* Чуть меньше, чем основная цена */
-    color: #888; /* Серый цвет */
-    text-decoration: line-through; /* Зачеркнутость */
-    margin: 0; /* Убираем отступы */
+    font-size: 1.4vw;
+    color: #888;
+    text-decoration: line-through;
+    margin: 0;
 }
-
 
 .product-description {
     font-size: 0.9vw;
     color: #333;
     line-height: 1.4;
-    padding: 10px;
+    padding: 1vh;
     background-color: #f9f9f9;
     border-radius: 5px;
     white-space: pre-line;
@@ -123,18 +109,17 @@ body {
     font-size: 0.8vw;
     color: #666;
     line-height: 1.5;
-    margin-top: 5px;
+    margin-top: 0.5vh;
     font-style: italic;
 }
 
 
-/* Контейнер для размеров */
 .size-selection {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.1vh;
-    margin-top: 10px;
+    gap: 1.15vh;
+    margin-top: 1vh;
 }
 
 .size-options {
@@ -142,7 +127,6 @@ body {
     gap: 0.6vw;
 }
 
-/* Общие стили для кнопок размеров */
 .size-option {
     font-size: 0.9vw;
     font-weight: bold;
@@ -150,20 +134,18 @@ body {
     border: 2px solid #000;
     border-radius: 5px;
     background-color: #fff;
-    padding: 8px 12px;
+    padding: 0.8vh 1.2vh;
     cursor: pointer;
-    width: 3.1vw;
+    width: 3.3vw;
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
-    position: relative; /* Для позиционирования подсказки */
+    position: relative;
 }
 
-/* Эффект при наведении */
 .size-option:hover {
     background-color: #f0f0f0;
 }
 
-/* Показ оставшегося количества при наведении */
 .size-option:not(.disabled):hover::after {
     content: attr(data-quantity) " шт. в наличии";
     position: absolute;
@@ -174,7 +156,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     white-space: nowrap;
-    top: -30px;
+    top: -3vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -185,13 +167,12 @@ body {
     color: #fff;
 }
 
-/* Недоступные размеры */
 .size-option.disabled {
-    color: #888; /* Серый цвет для текста */
-    border-color: #ccc; /* Серый цвет для рамки */
-    text-decoration: line-through; /* Зачеркнутый текст */
+    color: #888;
+    border-color: #ccc;
+    text-decoration: line-through;
     background-color: #f9f9f9;
-    cursor: not-allowed; /* Указатель запрещающей иконки */
+    cursor: not-allowed;
 }
 
 .size-option.disabled:hover::after {
@@ -199,12 +180,12 @@ body {
     position: absolute;
     background-color: #fff;
     color: #000;
-    font-size: 0.9em;
+    font-size: 0.7vw;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     white-space: nowrap;
-    top: -30px;
+    top: -3vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -221,69 +202,61 @@ body {
     background-color: #333;
 }
 
-/* Контейнер для кнопки "Вернуться" */
 .back-button-wrapper {
     position: fixed;
-    top: 9vh; /* Расположение в верхнем левом углу */
+    top: 9vh;
     left: 2.8vw;
-    z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
+    z-index: 1;
 
 }
 
-/* Стили кнопки "Вернуться" */
 .back-button {
     display: flex;
     align-items: center;
-    font-size: 1.4vw;
+    font-size: 1.3vw;
     font-weight: bold;
     color: #000;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
 }
 
-/* Стили для стрелки */
 .back-arrow {
     font-size: 1.5vw;
-    margin-right: 8px;
+    margin-right: 0.2vw;
     transition: transform 0.3s ease;
 }
 
 .back-button:hover .back-arrow {
-    transform: translateX(-5px); /* Легкое смещение стрелки влево при наведении */
+    transform: translateX(-5px);
 }
 
-/* Основные стили уведомлений */
 .notification {
     position: fixed;
-    bottom: -100px; /* Начальная позиция скрыта */
+    bottom: -10vh;
     right: 2vw;
     width: 18.5vw;
-    padding: 15px;
+    padding: 1.5vh;
     border-radius: 8px;
     color: white;
     font-size: 1vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    opacity: 0; /* Прозрачность для скрытого состояния */
-    transform: translateY(0); /* Начальное положение */
+    opacity: 0;
+    transform: translateY(0);
     transition: all 0.4s ease-in-out;
     z-index: 1000;
 }
 
-/* Уведомление об ошибке */
 .notification.error {
-    background-color: #f44336; /* Красный фон */
-    border: 2px solid #ff7961; /* Красный контур */
+    background-color: #f44336;
+    border: 2px solid #ff7961;
 }
 
-/* Уведомление об успехе */
 .notification.success {
-    background-color: #4caf50; /* Зеленый фон */
-    border: 2px solid #81c784; /* Зеленый контур */
+    background-color: #4caf50;
+    border: 2px solid #81c784;
 }
 
-/* Кнопка закрытия уведомления */
 .close-notification {
     background: none;
     border: none;
@@ -291,19 +264,18 @@ body {
     font-size: 1.2vw;
     font-weight: bold;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vh;
+    right: 1vh;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .close-notification:hover {
-    color: #ddd; /* Легкое осветление кнопки при наведении */
+    color: #ddd;
 }
 
-/* Показываем уведомление */
 .notification.show {
-    bottom: 20px; /* Уведомление выдвигается из правого нижнего угла */
+    bottom: 2vh;
     opacity: 1;
 }
 
@@ -312,15 +284,13 @@ body {
     align-items: center;
 }
 
-/* Обертка для кнопки и иконки */
 .add-to-cart-wrapper {
     display: flex;
     align-items: center;
-    gap: 10px; /* Расстояние между кнопкой и иконкой */
-    justify-content: flex-start; /* Размещение элементов слева */
+    gap: 1vh;
+    justify-content: flex-start;
 }
 
-/* Кнопка "Добавить в корзину" */
 .add-to-cart-btn {
     background-color: #000;
     color: white;
@@ -329,16 +299,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 19.5vw; /* Совпадает с шириной кнопок размеров */
+    width: 20.7vw;
     height: 4.7vh;
     text-align: center;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    font-weight: bold; /* Жирный текст */
+    font-weight: bold;
 }
 
-/* Иконка сердца */
 .heart-icon {
-    width: 1.7vw; /* Размер иконки */
+    width: 1.7vw;
     height: 1.7vw;
     cursor: pointer;
 }

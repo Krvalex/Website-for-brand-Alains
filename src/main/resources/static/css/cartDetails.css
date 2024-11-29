@@ -3,7 +3,7 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    letter-spacing: 0.02vw; /* Лёгкое межбуквенное расстояние */
+    letter-spacing: 0.02vw;
 }
 
 .checkout-container {
@@ -51,7 +51,7 @@ body {
 .checkout-btn {
     display: block;
     width: 100%;
-    padding: 1.5vh 0;
+    padding: 1vh 0;
     background-color: #000;
     color: #fff;
     text-align: center;
@@ -76,14 +76,14 @@ body {
 .cart-item {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Размещаем элементы равномерно */
+    justify-content: space-between;
     gap: 1vw;
     margin-bottom: 1.5vh;
 }
 
 .cart-item a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: inherit; /* Цвет ссылки совпадает с родительским элементом */
+    text-decoration: none;
+    color: inherit;
 }
 
 .item-image img {
@@ -115,8 +115,8 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем по горизонтали */
-    justify-content: center; /* Центрируем по вертикали */
+    align-items: center;
+    justify-content: center;
     font-size: 0.9vw;
     font-weight: bold;
     text-align: center;
@@ -124,7 +124,7 @@ body {
 
 .item-quantity p {
     margin: 0;
-    font-size: 1em;
+    font-size: 0.9vw;
     color: #333;
 }
 
@@ -149,18 +149,18 @@ body {
 
 select {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 1vh;
+    margin-bottom: 2vh;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9vw;
     box-sizing: border-box;
     background-color: #fff;
     color: #333;
-    appearance: none; /* Убираем стандартный стиль браузера */
+    appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 10px center; /* Позиция галочки */
+    background-position: right 10px center;
     background-size: 12px;
 }
 
@@ -172,89 +172,84 @@ select:focus {
 .promo-code-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Расстояние между полем и кнопкой */
+    gap: 0.3vw;
 }
 
 .promo-code-container input {
-    flex: 1; /* Поле занимает доступное пространство */
-    padding: 10px;
+    flex: 1;
+    padding: 1vh;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9vw;
     box-sizing: border-box;
 }
 
 .apply-promo-btn {
-    padding: 10px 15px;
+    padding: 0.52vw 0.75vw;
     background-color: #000;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: -20px; /* Поднимаем кнопку выше */
+    margin-top: -2vh;
 }
 
 .apply-promo-btn:hover {
     background-color: #333;
 }
 
-/* Основные стили уведомлений */
 .notification {
     position: fixed;
-    bottom: -100px; /* Начальная позиция скрыта */
-    right: 20px;
-    width: 250px;
-    padding: 15px;
+    bottom: -10vh;
+    right: 1.5vw;
+    width: 14vw;
+    padding: 1.5vh;
     border-radius: 8px;
     color: white;
-    font-size: 1em;
+    font-size: 0.9vw;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    opacity: 0; /* Прозрачность для скрытого состояния */
-    transform: translateY(0); /* Начальное положение */
+    opacity: 0;
+    transform: translateY(0);
     transition: all 0.4s ease-in-out;
     z-index: 1000;
 }
 
-/* Уведомление об ошибке */
 .notification.error {
-    background-color: #f44336; /* Красный фон */
-    border: 2px solid #ff7961; /* Красный контур */
+    background-color: #f44336;
+    border: 2px solid #ff7961;
 }
 
-/* Уведомление об успехе */
 .notification.success {
-    background-color: #4caf50; /* Зеленый фон */
-    border: 2px solid #81c784; /* Зеленый контур */
+    background-color: #4caf50;
+    border: 2px solid #81c784;
 }
 
-/* Кнопка закрытия уведомления */
 .close-notification {
     background: none;
     border: none;
     color: white;
-    font-size: 1.2em;
+    font-size: 1vw;
     font-weight: bold;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vh;
+    right: 1vh;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .close-notification:hover {
-    color: #ddd; /* Легкое осветление кнопки при наведении */
+    color: #ddd;
 }
 
-/* Показываем уведомление */
 .notification.show {
-    bottom: 20px; /* Уведомление выдвигается из правого нижнего угла */
+    bottom: 2vh;
     opacity: 1;
 }
 
 .discount-info {
-    font-size: 1em;
+    font-size: 0.9vw;
     text-align: right;
-    margin-top: 10px;
+    margin-top: 1vh;
 }

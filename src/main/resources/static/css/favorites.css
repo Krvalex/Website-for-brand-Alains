@@ -3,29 +3,27 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    letter-spacing: 0.02vw;
 }
 
 .favorites-container {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 20px;
+    max-width: 65vh;
+    margin: 10vh auto;
+    padding: 2vh;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1.5vh;
 }
 
 .favorites-container h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    font-size: 1.5vw;
+    margin-bottom: 2vh;
     color: #333;
     text-align: center;
     font-weight: bold;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
 .favorite-items {
@@ -36,9 +34,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 0;
+    padding: 1.5vh 0;
     border-bottom: 1px solid #f0f0f0;
-    gap: 20px; /* Расстояние между изображением, деталями и кнопкой удаления */
+    gap: 2vh;
 }
 
 .favorite-item:last-child {
@@ -46,8 +44,8 @@ body {
 }
 
 .item-image img {
-    width: 100px;
-    height: 100px;
+    width: 11vh;
+    height: 11vh;
     object-fit: contain;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -57,40 +55,40 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: 8px; /* Отступ между названием и кнопкой */
+    gap: 0.9vh;
 }
 
 .item-details a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: black; /* Цвет ссылки совпадает с родительским элементом */
+    text-decoration: none;
+    color: black;
 }
 
 .item-name {
-    font-size: 1em;
+    font-size: 0.9vw;
     color: #000;
     margin: 0;
     font-weight: bold;
 }
 
 .item-details h3 {
-    font-size: 1em;
+    font-size: 0.9vw;
     color: #000;
     margin: 0;
 }
 
 .view-product-btn {
-    padding: 8px 12px;
+    padding: 0.9vh 1.1vh;
     background-color: #454545;
     color: #fff;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 0.8vw;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: flex-start; /* Выравниваем кнопку по левому краю */
+    align-self: flex-start;
     display: flex;
-    margin-top: 38px;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    font-weight: bold; /* Жирный текст */
+    margin-top: 4vh;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: bold;
 }
 
 .view-product-btn:hover {
@@ -99,7 +97,7 @@ body {
 }
 
 .item-details p {
-    font-size: 0.9em;
+    font-size: 0.8vw;
     color: #777;
     margin: 0;
 }
@@ -107,17 +105,17 @@ body {
 .remove-item-btn {
     background-color: #f44336;
     border: none;
-    font-size: 1em;
+    font-size: 0.9vw;
     color: #fff;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
+    width: 3vh;
+    height: 3vh;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    flex-shrink: 0; /* Кнопка удаления не сжимается */
+    flex-shrink: 0;
 }
 
 .remove-item-btn:hover {
@@ -127,12 +125,11 @@ body {
 
 .empty-favorites-message {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.2vw;
     color: #656565;
-    margin: 20px 0;
+    margin: 2vh 0;
 }
 
-/* Убираем лишнее пространство снизу */
 body::after {
     content: "";
     display: block;
@@ -140,41 +137,37 @@ body::after {
 }
 
 .item-price {
-    font-size: 0.9em;
+    font-size: 0.8vw;
     color: #777;
-    margin: 0; /* Убираем лишние отступы */
+    margin: 0;
 }
 
-/* Контейнер для кнопки "Вернуться" */
 .back-button-wrapper {
     position: fixed;
-    top: 9vh; /* Расположение в верхнем левом углу */
+    top: 9vh;
     left: 2.8vw;
-    z-index: 1; /* Обеспечивает, чтобы кнопка была поверх других элементов */
+    z-index: 1;
 
 }
 
-/* Стили кнопки "Вернуться" */
 .back-button {
     display: flex;
     align-items: center;
-    font-size: 1.4vw;
+    font-size: 1.3vw;
     font-weight: bold;
     color: #000;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
 }
 
-/* Стили для стрелки */
 .back-arrow {
     font-size: 1.5vw;
-    margin-right: 8px;
+    margin-right: 0.2vw;
     transition: transform 0.3s ease;
 }
 
 .back-button:hover .back-arrow {
-    transform: translateX(-5px); /* Легкое смещение стрелки влево при наведении */
+    transform: translateX(-5px);
 }
 

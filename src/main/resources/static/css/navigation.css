@@ -1,13 +1,11 @@
-/* Базовый стиль для всего сайта */
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Основной шрифт для всего сайта */
+    font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    letter-spacing: 0.02vw;
 }
 
-/* Навигационная полоса */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -18,34 +16,32 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 950; /* Убедитесь, что navbar не перекрывает меню */
+    z-index: 950;
     height: 5.5vh;
 }
 
-/* Кнопка для открытия каталога */
 .menu-button {
     background-color: white;
     color: black;
     font-size: 1.4vw;
-    padding: 12px 2px;
+    padding: 1.2vh 2vh;
     border: none;
     cursor: pointer;
     transition: transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px; /* Фиксированная ширина для меню */
-    margin-left: -20px; /* Смещение кнопки левее */
+    width: 6vh;
+    margin-left: -2vh;
 }
 
 .menu-button:hover {
-    transform: scale(1.1); /* Увеличение кнопки на 10% при наведении */
+    transform: scale(1.1);
 }
 
-/* Иконки для кнопки каталога */
 .menu-icon,
 .close-icon {
-    font-size: 1.4em;
+    font-size: 2vw;
     line-height: 1;
     vertical-align: middle;
     opacity: 1;
@@ -68,11 +64,10 @@ body {
     display: inline;
 }
 
-/* Логотип */
 .logo {
     height: 27vh;
     object-fit: contain;
-    margin-top: 3px;
+    margin-top: 0.3vh;
     margin-left: 7.8vw;
     position: relative;
 }
@@ -82,108 +77,92 @@ body {
     text-decoration: none;
 }
 
-/* Правая часть: Корзина, Избранное, Аккаунт */
 .navbar-right {
     display: flex;
     align-items: center;
-    margin-right: 1.8vw; /* Убираем смещение значков левее */
+    margin-right: 1.8vw;
 }
 
 .navbar .icon-link {
-    margin-left: -5px; /* Смещает иконки немного левее */
+    margin-left: -0.5vh;
 }
 
-/* Иконки в правой части навигации с уменьшенными размерами и кружком */
 .navbar .icon-link img {
-    width: 1.5vw; /* Уменьшенный размер иконок */
+    width: 1.5vw;
     height: 1.5vw;
-    border-radius: 50%; /* Круглая форма */
-    background-color: white; /* Белый фон */
-    padding: 4px; /* Уменьшенный отступ внутри круга */
+    border-radius: 50%;
+    background-color: white;
+    padding: 0.4vh;
     object-fit: cover;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); /* Меньшая тень */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 0.9vw; /* Расстояние между значками */
+    margin-left: 0.9vw;
 }
 
-/* Эффект при наведении на иконки */
 .navbar .icon-link:hover img {
-    transform: scale(1.1); /* Лёгкое увеличение при наведении */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Небольшая тень при наведении */
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Полупрозрачный фон для затемнения */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Черный фон с прозрачностью */
-    display: none; /* Скрыт по умолчанию */
-    z-index: 800; /* Задний план, но выше контента */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 800;
 }
 
-/* Основной стиль для навигации */
 .navbar,
 .side-menu {
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Основной шрифт */
-    font-size: 1em; /* Размер текста */
-    font-weight: normal; /* Обычный вес */
-    color: black; /* Цвет текста */
-    letter-spacing: 0.5px; /* Межбуквенное расстояние */
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.9vw;
+    font-weight: normal;
+    color: black;
 }
 
-/* Выдвигающееся навигационное меню */
 .side-menu {
     position: fixed;
     top: 0;
-    left: -250px; /* Начальная позиция вне экрана */
-    width: 250px; /* Ширина меню */
+    left: -27vh;
+    width: 27vh;
     height: 100%;
     background-color: white;
     color: black;
     overflow-x: hidden;
     transition: left 0.3s ease;
-    padding-top: 60px;
+    padding-top: 8vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Основной шрифт */
-    font-size: 1em; /* Размер текста */
-    font-weight: normal; /* Обычный вес */
-    letter-spacing: 0.5px; /* Межбуквенное расстояние */
-    z-index: 900; /* Обеспечим, чтобы меню было поверх всех элементов */
+    font-size: 0.9vw;
+    font-weight: normal;
+    z-index: 900;
 }
 
-/* Класс для открытия меню */
 .side-menu.open {
-    left: 0; /* Сдвигаем меню в видимую область */
+    left: 0;
 }
 
-/* Показать фон, когда меню открыто */
 .side-menu.open ~ .overlay {
-    display: block; /* Показываем фон, когда меню открыто */
+    display: block;
 }
 
-/* Ссылки в боковом меню */
 .side-menu a {
     display: block;
     position: relative;
-    padding: 8px 35px; /* Увеличим отступ слева, чтобы сделать ссылки правее */
+    padding: 1vh 3.5vh;
     text-decoration: none;
     color: #575757;
-    font-size: 1.2em;
-    margin-bottom: 5px;
+    font-size: 1.1vw;
     overflow: hidden;
     transition: color 0.3s ease;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для ссылок */
-    font-weight: bold; /* Жирный текст для ссылок */
-    letter-spacing: 0.8px; /* Увеличенное межбуквенное расстояние */
-    text-transform: uppercase; /* Заглавные буквы для всех ссылок */
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Эффект при наведении на ссылки */
 .side-menu a::after {
     content: "";
     position: absolute;
@@ -192,48 +171,45 @@ body {
     width: 100%;
     height: 2px;
     background-color: black;
-    transform: scaleX(0); /* Изначально невидимо */
+    transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform 0.3s ease; /* Плавное появление */
+    transition: transform 0.3s ease;
 }
 
 .side-menu a:hover::after {
-    transform: scaleX(1); /* Подчёркивание выдвигается слева направо */
+    transform: scaleX(1);
     transform-origin: bottom left;
 }
 
-/* Кнопка закрытия бокового меню */
 .close-btn {
-    font-size: 1.4em; /* Увеличим размер значка закрытия, чтобы он был одинаковым */
+    font-size: 1.3vw;
     background: none;
     border: none;
     color: black;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vh;
+    right: 1vh;
     cursor: pointer;
 }
 
-/* Открытое состояние бокового меню */
 .side-menu.open {
-    left: 0; /* Сдвигаем меню в видимую область */
+    left: 0;
 }
 
 .cart-icon-wrapper {
-    position: relative; /* Это позволит точно позиционировать счетчик относительно значка корзины */
+    position: relative;
     display: inline-block;
 }
 
-/* Стили для маленького кружка с числом товаров */
 .cart-count {
     position: absolute;
-    top: -5px; /* Смещение для точного позиционирования */
-    right: -9px;
-    background-color: #A8F0FF; /* Цвет фона кружка */
+    top: -0.5vh;
+    right: -0.9vh;
+    background-color: #A8F0FF;
     color: black;
-    font-size: 0.7em;
-    width: 14px;
-    height: 14px;
+    font-size: 0.6vw;
+    width: 1.4vh;
+    height: 1.4vh;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -242,53 +218,47 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Стили для поля поиска */
 #search-bar {
     position: fixed;
-    top: -20vh; /* Скрыто за пределами экрана */
+    top: -20vh;
     width: 100%;
     left: 0;
     background-color: white;
     padding: 5vh;
     display: flex;
-    justify-content: center; /* Центрирует элементы по горизонтали */
-    align-items: center; /* Центрирует элементы по вертикали */
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: top 0.3s ease; /* Плавный переход */
-    z-index: 1; /* Находится над другими элементами */
+    transition: top 0.3s ease;
+    z-index: 1;
 }
 
-/* Стили для поля ввода */
 #search-bar input {
-    width: 30%; /* Ширина поля ввода */
+    width: 30%;
     padding: 1.5vh;
     font-size: 1vw;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-/* Стили для кнопки поиска */
 #search-button {
-    width: 2vw; /* Размер кнопки */
-    height: 2vw; /* Размер кнопки */
+    width: 2vw;
+    height: 2vw;
     cursor: pointer;
-    margin-left: 0.7vw; /* Немного расстояния между кнопкой и полем ввода */
+    margin-left: 0.7vw;
 }
 
-/* Эффект при наведении на кнопку */
 #search-button:hover {
     opacity: 0.8;
 }
 
-/* Стили для картинки (кнопки закрытия) */
 #close-search {
-    width: 3vw; /* Устанавливаем размер картинки */
-    height: 3vw; /* Устанавливаем размер картинки */
-    cursor: pointer; /* Указываем, что это кликабельный элемент */
-    margin-left: 0.1vw; /* Немного расстояния между картинкой и полем ввода */
+    width: 3vw;
+    height: 3vw;
+    cursor: pointer;
+    margin-left: 0.1vw;
 }
 
-/* Эффект при наведении на картинку */
 #close-search:hover {
-    opacity: 0.7; /* Добавляем эффект при наведении */
+    opacity: 0.7;
 }

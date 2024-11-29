@@ -1,41 +1,29 @@
 .full-screen-section.gray-background {
     background-color: #f2f2f2;
     color: black;
-    padding: 0; /* Отступы для второго блока */
-    position: relative; /* Убедимся, что блок второй секции будет правильно позиционирован */
-    height: 90vh; /* Устанавливаем высоту 80% от высоты экрана */
+    padding: 0;
+    position: relative;
+    height: 90vh;
+    letter-spacing: 0.02vw;
 }
 
 .content-wrapper {
-    max-width: 90%; /* Максимальная ширина для контента */
+    max-width: 90%;
     padding: 4vw;
     box-sizing: border-box;
     margin-right: 0;
 }
 
-h1 {
-    font-size: 5px;
-    margin-bottom: 1vw;
-    font-weight: bold;
-}
-
-p {
-    font-size: 2vh; /* Адаптивный размер текста */
-    margin-bottom: 3vw;
-}
-
-/* Контейнер для товаров */
 .products {
     display: flex;
-    justify-content: flex-end; /* Размещаем товары справа */
+    justify-content: flex-end;
     align-items: center;
     margin-top: 2vw;
-    gap: 3vw; /* Расстояние между карточками */
-    padding-left: 23vw; /* Отступ справа, чтобы товары не прижимались к краю */
+    gap: 3vw;
+    padding-left: 23vw;
     padding-top: 5vw;
 }
 
-/* Карточка товара */
 .product-card {
     background-color: #fff;
     border-radius: 15px;
@@ -43,7 +31,7 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 20vw;
-    padding: 0.6vw 0.6vw 0.1vw; /* Уменьшаем нижний отступ, чтобы уменьшить пространство до нижнего края */
+    padding: 0.6vw 0.6vw 0.1vw;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -52,7 +40,6 @@ p {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Изображение товара */
 .product-card img {
     width: 100%;
     height: auto;
@@ -60,7 +47,6 @@ p {
     object-fit: cover;
 }
 
-/* Название и цена товара */
 .product-card h2 {
     font-size: 3vh;
     margin-top: 1vw;
@@ -72,16 +58,13 @@ p {
     margin-top: 0.5vw;
 }
 
-/* Цена товара */
 .product-card .price {
     font-size: 2.65vh;
     color: #333;
     margin-top: 0.5vw;
-    margin-bottom: 1.5vw; /* Меньше отступа снизу */
+    margin-bottom: 1.5vw;
 }
 
-/* Слева картинка */
-/* Стиль для фотографии с девушкой */
 .image-left {
     position: absolute;
     bottom: 0;
@@ -90,25 +73,25 @@ p {
 }
 
 .image-left img {
-    max-width: 25vw; /* Размер фото можно регулировать */
+    max-width: 25vw;
     height: auto;
 }
 
 .centered-heading {
-    font-size: 6vh;
-    margin-bottom: 0.5vw; /* Убираем лишние отступы снизу */
+    font-size: 5.5vh;
+    margin-bottom: 0.5vw;
     font-weight: bold;
     text-align: center;
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10; /* Чтобы заголовок был поверх других элементов */
+    z-index: 10;
 }
 
 .product-link {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: inherit; /* Наследуем цвет от родительских элементов */
-    display: block; /* Делаем ссылку блочным элементом, чтобы вся карточка была кликабельной */
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 

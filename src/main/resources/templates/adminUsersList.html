@@ -15,12 +15,12 @@
         <th>Номер телефона</th>
         <th>Роли</th>
     </tr>
-    <tr th:each="user : ${users}"> <!-- Внедрить цикл в таблицу -->
+    <tr th:each="user : ${users}">
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getEmail}"></td>
         <td th:text="${user.getPhoneNumber()}"></td>
-        <td th:text="${user.getRoles()}"></td> <!-- Добавьте столбцы для информации -->
+        <td th:text="${user.getRoles()}"></td>
     </tr>
 </table>
 <div class="back-button-container">

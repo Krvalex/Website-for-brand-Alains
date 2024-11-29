@@ -1,13 +1,11 @@
-/* Общие стили для блоков */
 body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Arial, sans-serif;
     overflow-y: scroll;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.02vw;
 }
 
-/* Стиль для вертикальной полосы прокрутки */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -25,9 +23,8 @@ body {
     background-color: #555;
 }
 
-/* Общие стили для блоков */
 .full-screen-section {
-    height: 100vh; /* 100% высоты экрана */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,53 +32,36 @@ body {
     color: white;
 }
 
-/* Белый фон для первого блока */
 .white-background {
     background-color: #f9f9f9;
     color: black;
 }
 
-/* Серый фон для второго блока */
 .gray-background {
     background-color: #f2f2f2;
     color: black;
 }
 
-/* Темно-серый фон для третьего блока */
 .dark-gray-background {
     background-color: #000000;
     color: white;
     height: 15vh;
 }
 
-/* Контейнер для контента в блоках */
 .content-wrapper {
-    max-width: 90%; /* Максимальная ширина для контента */
-    padding: 4vw; /* Отступы, зависящие от ширины экрана */
+    max-width: 90%;
+    padding: 4vw;
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: clamp(2rem, 5vw, 4rem); /* Адаптивный размер шрифта */
-    margin-bottom: 1vw;
-}
-
-p {
-    font-size: clamp(0.8rem, 2vw, 1.25rem); /* Адаптивный размер текста */
-    margin-bottom: 2vw;
-    word-wrap: break-word; /* Для длинных слов */
-}
-
-/* Первый блок - флекс контейнер */
 .block {
     display: flex;
     height: 100vh;
     flex-wrap: wrap;
     justify-content: space-between;
-    position: relative; /* Для позиционирования кнопки */
+    position: relative;
 }
 
-/* Левая половина (текстовый контент) */
 .text {
     width: 50%;
     display: flex;
@@ -89,11 +69,11 @@ p {
     justify-content: center;
     text-align: left;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    padding-left: 4vw; /* Используем vw для отступов */
+    padding-left: 4vw;
     padding-right: 8vw;
     box-sizing: border-box;
-    overflow-wrap: break-word; /* Перенос длинных слов */
-    background-color: rgba(255, 255, 255, 0.7); /* полупрозрачный фон */
+    overflow-wrap: break-word;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .text p {
@@ -102,14 +82,12 @@ p {
     font-size: 2.7vh;
 }
 
-/* Правая половина (изображение) */
 .image {
     width: 50%;
     height: 100%;
     position: relative;
 }
 
-/* Изображение */
 .image img {
     position: absolute;
     top: 0;
@@ -123,9 +101,9 @@ p {
     background: linear-gradient(45deg, #000000, #474747);
     color: white;
     font-size: 2.7vh;
-    padding: 12px 24px;
+    padding: 1.1vh 2vh;
     border: none;
-    border-radius: 20px;
+    border-radius: 17px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
@@ -136,8 +114,8 @@ p {
 }
 
 .shop-button:hover {
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Тень при наведении */
-    background: linear-gradient(45deg, #474747, #000000); /* Инвертируем градиент при наведении */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #474747, #000000);
 }
 
 

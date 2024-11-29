@@ -11,7 +11,7 @@ body {
 .care-container {
     max-width: 80vw;
     margin: 0 auto;
-    padding: 20px;
+    padding: 2vh;
 }
 
 h1 {
@@ -29,7 +29,7 @@ p {
     display: flex;
     justify-content: center;
     gap: 15vh;
-    margin-bottom: 50px;
+    margin-bottom: 5vh;
 }
 
 .filter-select {
@@ -64,18 +64,18 @@ p {
 .care-item {
     flex: 1 1 calc(25% - 20px);
     box-sizing: border-box;
-    max-width: 450px;
+    max-width: 50vh;
 }
 
 .care-item img {
     width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 30vh;
     object-fit: cover;
 }
 
 .care-item p {
-    font-size: 20px;
+    font-size: 1.3vw;
     font-weight: bold;
     margin: 10px 0;
 }

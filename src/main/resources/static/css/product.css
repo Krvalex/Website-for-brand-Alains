@@ -1,40 +1,34 @@
-/* Общие стили для страницы товаров */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-    letter-spacing: 0.02vw; /* Лёгкое межбуквенное расстояние */
+    letter-spacing: 0.02vw;
     overflow-y: scroll;
 }
 
-/* Стиль для вертикальной полосы прокрутки */
 ::-webkit-scrollbar {
-    width: 5px; /* Устанавливаем ширину полосы прокрутки */
+    width: 5px;
 }
 
-/* Стиль для трека (фона) полосы прокрутки */
 ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Цвет фона полосы */
+    background-color: #f1f1f1;
 }
 
-/* Стиль для ползунка (движущейся части) полосы прокрутки */
 ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Цвет ползунка */
-    border-radius: 4px; /* Скругляем края */
+    background-color: #888;
+    border-radius: 4px;
 }
 
-/* Стиль для ползунка при наведении */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Цвет ползунка при наведении */
+    background-color: #555;
 }
 
 .products-page {
     padding: 2vh;
     max-width: 80vw;
-    margin: 0 auto;
     text-align: center;
-    margin-top: 4vh; /* Отступ для избежания перекрытия навигацией */
+    margin: 4vh auto 0;
 }
 
 /* Заголовок */
@@ -42,8 +36,7 @@ body {
     font-size: 2vw;
     color: #333;
     margin-bottom: 2vw;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    font-weight: bold; /* Жирный текст */
+    font-weight: bold;
 }
 
 /* Сетка товаров */
@@ -65,86 +58,73 @@ body {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1s ease, transform 1s ease;
-    position: relative; /* Обязательно для правильного позиционирования */
+    position: relative;
     text-decoration: none;
     color: inherit;
-    z-index: 1; /* Позиционируем карточку с изображениями */
+    z-index: 1;
 }
 
-/* Когда карточка появляется в области видимости */
 .product-card.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Добавление эффекта hover для карточек товара */
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Контейнер для изображения товара */
 .product-image-wrapper {
     position: relative;
     width: 100%;
     height: 0;
-    padding-top: 100%; /* Это делает контейнер квадратным */
+    padding-top: 100%;
     overflow: hidden;
     border-radius: 8px;
 }
 
-/* Изображение товара (переднее) */
 .product-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Подгонка изображения по размеру контейнера */
-    transition: opacity 0.3s ease; /* Плавное изменение прозрачности */
+    object-fit: cover;
+    transition: opacity 0.3s ease;
 }
 
-/* Изображение сзади скрыто по умолчанию */
 .product-image-back {
     opacity: 0;
 }
 
-/* Когда карточка находится в состоянии hover, показываем заднее изображение */
 .product-card:hover .product-image-front {
-    opacity: 0; /* Скрываем переднее изображение */
+    opacity: 0;
 }
 
 .product-card:hover .product-image-back {
-    opacity: 1; /* Показываем заднее изображение */
+    opacity: 1;
 }
 
-/* Название товара */
 .product-name {
     font-size: 1.15vw;
     color: #333;
     margin: 10px 0;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    font-weight: bold; /* Жирный текст */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
+    font-weight: bold;
 }
 
-/* Цена товара */
 .product-price {
     font-size: 1.1vw;
     color: #333;
     font-weight: normal;
     margin: 0.5vh 0;
-    font-family: "Helvetica Neue", Arial, sans-serif; /* Шрифт для кнопки */
-    letter-spacing: 0.5px; /* Лёгкое межбуквенное расстояние */
 }
 
-/* Кнопка с сердечком */
 .favorite-form {
     position: absolute;
     top: 0.5vh;
     left: 0.5vw;
     margin: 0;
-    z-index: 2; /* Сердечко всегда должно быть над изображениями */
+    z-index: 2;
 }
 
 .favorite-button {
@@ -154,11 +134,10 @@ body {
     cursor: pointer;
 }
 
-/* Сердечко в правом верхнем углу карточки */
 .heart-icon {
     position: absolute;
-    top: 0.25vh; /* Располагаем на расстоянии от верхнего края */
-    right: 0.25vw; /* Располагаем на расстоянии от правого края */
+    top: 0.25vh;
+    right: 0.25vw;
     background-color: #ffffff;
     border-radius: 50%;
     width: 2vw;
@@ -169,7 +148,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    z-index: 2; /* Сердечко всегда должно быть поверх изображения */
+    z-index: 2;
 }
 
 .heart-icon:hover {
@@ -182,14 +161,12 @@ body {
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
 }
 
-/* Изображение сердечка */
 .heart-icon img {
     width: 60%;
     height: 60%;
     object-fit: contain;
 }
 
-/* Дополнительные стили для анимации появления карточек */
 .product-card {
     opacity: 0;
     transform: translateY(30px);
@@ -201,9 +178,8 @@ body {
     transform: translateY(0);
 }
 
-/* Стили для ссылки, оборачивающей карточку товара */
 .product-card-link {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: inherit; /* Наследуем цвет от родительского элемента */
-    display: block; /* Делаем ссылку блочной, чтобы она занимала всю карточку */
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }

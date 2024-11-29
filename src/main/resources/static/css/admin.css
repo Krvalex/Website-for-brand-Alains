@@ -8,9 +8,9 @@ body {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 2.5vw;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 2vh 0;
     color: #4a4a4a;
 }
 
@@ -18,15 +18,15 @@ hr {
     border: none;
     height: 2px;
     background-color: #ddd;
-    margin: 20px auto;
+    margin: 2vh auto;
     width: 80%;
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
+    gap: 3vw;
+    margin-top: 5vh;
     flex-wrap: wrap;
 }
 
@@ -35,8 +35,8 @@ hr {
 }
 
 .button-container button {
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 0.75vw 1.5vw;
+    font-size: 1vw;
     font-weight: bold;
     border: none;
     border-radius: 10px;

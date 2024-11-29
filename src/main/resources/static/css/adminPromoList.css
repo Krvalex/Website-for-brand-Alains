@@ -1,4 +1,4 @@
-/* Общие стили для всей страницы */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f9;
@@ -7,33 +7,30 @@ body {
     padding: 0;
 }
 
-/* Контейнер, чтобы ограничить ширину страницы */
 .container {
     width: 80%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 2vh;
 }
 
-/* Заголовок */
 header h1 {
-    font-size: 28px;
+    font-size: 2vw;
     color: #4a4a4a;
     text-align: center;
 }
 
-/* Стили для формы */
 .promo-form {
     background-color: #fff;
-    padding: 20px;
+    padding: 2vh;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    margin-bottom: 3vh;
 }
 
 .promo-form h2 {
-    font-size: 24px;
+    font-size: 1.5vw;
     color: #4a4a4a;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
 }
 
 .promo-form label {
@@ -44,28 +41,28 @@ header h1 {
 
 .promo-form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 1vh;
+    margin-bottom: 1.5vh;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 0.8vw;
 }
 
 .promo-form button {
-    background-color: #3a3a3a; /* Серый цвет */
+    background-color: #3a3a3a;
     color: white;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 0.5vw 1vw;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    font-size: 16px;
+    font-size: 0.9vw;
     transition: all 0.3s ease;
 }
 
 .promo-form button:hover {
-    background-color: #000000; /* Более тёмный серый при наведении */
+    background-color: #000000;
 }
 
 .promo-form button:active {
@@ -73,18 +70,17 @@ header h1 {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для таблицы */
 .promo-table table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 2vh;
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .promo-table th, .promo-table td {
-    padding: 12px 15px;
-    text-align: center; /* Центрируем текст в таблице */
+    padding: 0.7vw;
+    text-align: center;
     border: 1px solid #ddd;
 }
 
@@ -101,7 +97,7 @@ header h1 {
     background-color: #f44336;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 0.35vw 0.55vw;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -117,13 +113,13 @@ header h1 {
 
 .back-button-container {
     position: absolute;
-    top: 35px; /* Опустил кнопку ниже */
-    left: 35px;
+    top: 1.5vw;
+    left: 1.5vw;
 }
 
 .back-button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.6vw 1vw;
+    font-size: 0.9vw;
     font-weight: bold;
     border: none;
     border-radius: 10px;

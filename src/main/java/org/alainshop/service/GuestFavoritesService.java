@@ -96,8 +96,11 @@ public class GuestFavoritesService {
     }
 
     public boolean isFavorite(String guestIdentifier, Product product) {
+        List<FavoriteItem> favoriteItems = new ArrayList<>();
         GuestFavorites guestFavorites = get(guestIdentifier);
-        List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
+        if (guestFavorites != null) {
+            favoriteItems = guestFavorites.getFavoriteItems();
+        }
         for (FavoriteItem favoriteItem : favoriteItems) {
             if (favoriteItem.getProduct().getId().equals(product.getId())) {
                 return true;

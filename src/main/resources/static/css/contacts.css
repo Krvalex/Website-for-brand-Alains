@@ -1,32 +1,32 @@
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
-    padding: 45px 0 0;
+    padding: 4.5vh 0 0;
     background-color: #f9f9f9;
     color: #000;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.02vw;
 }
 
 .contacts-container {
     display: flex;
     justify-content: center;
-    gap: 100px;
-    margin-top: 80px;
+    gap: 11vh;
+    margin-top: 8vh;
     text-align: left;
 }
 
 .contact-info {
-    font-size: 20px;
+    font-size: 1.1vw;
 }
 
 .contact-info h3 {
     font-weight: bold;
-    margin-bottom: 10px; /* Уменьшил расстояние между заголовком и контентом */
+    margin-bottom: 1vh;
 }
 
 .contact-info p {
-    margin-top: 10px; /* Уменьшил расстояние между Почтой и самой почтой */
+    margin-top: 1vh;
 }
 
 .contact-info a {

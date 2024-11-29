@@ -8,27 +8,25 @@ body {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 2vw;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 2vh 0;
     color: #4a4a4a;
-    display: inline-block;
-    margin-left: 50px;
 }
 
 hr {
     border: none;
     height: 2px;
     background-color: #ddd;
-    margin: 20px auto;
+    margin: 2vh auto;
     width: 80%;
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
+    gap: 2vw;
+    margin-top: 5vh;
     flex-wrap: wrap;
 }
 
@@ -36,43 +34,19 @@ hr {
     text-decoration: none;
 }
 
-.button-container button {
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    background-color: #4caf50;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.button-container button:hover {
-    background-color: #45a049;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-}
-
-.button-container button:active {
-    transform: translateY(1px);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
 .back-button-container {
     position: absolute;
-    top: 35px;
-    left: 35px;
+    top: 1.5vw;
+    left: 1.5vw;
 }
 
 .back-button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.6vw 1vw;
+    font-size: 0.9vw;
     font-weight: bold;
     border: none;
     border-radius: 10px;
-    background-color: #2e2e2e;
+    background-color: #393939;
     color: #fff;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -91,17 +65,16 @@ hr {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Table Styles for User List */
 table {
     width: 80%;
-    margin: 30px auto;
+    margin: 3vh auto;
     border-collapse: collapse;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
 
 table th, table td {
-    padding: 15px;
+    padding: 0.7vw;
     text-align: center;
     border: 1px solid #ddd;
 }
@@ -109,7 +82,7 @@ table th, table td {
 table th {
     background-color: #4caf50;
     color: #fff;
-    font-size: 20px;
+    font-size: 1vw;
 }
 
 table tr:nth-child(even) {

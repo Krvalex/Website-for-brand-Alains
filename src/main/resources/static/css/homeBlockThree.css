@@ -1,28 +1,24 @@
-/* Обёртка для всего контента */
 .content-wrapper-three {
-    text-align: left; /* Выравниваем текст по левому краю */
-    padding-left: 2vw; /* Отступ слева */
-    padding-top: 1vh; /* Добавляем отступ сверху, чтобы текст был ближе к верхней границе */
-    width: 100%; /* Обеспечиваем, чтобы блок занимал всю ширину */
-    /*padding-bottom: 1vh;*/
-    display: flex; /* Используем flexbox для выравнивания контента */
-    justify-content: space-between; /* Равномерное распределение контента, чтобы текст был слева, а картинка справа */
-    align-items: flex-start; /* Выравнивание по верхнему краю */
+    text-align: left;
+    padding-left: 2vw;
+    padding-top: 1vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    letter-spacing: 0.02vw;
 }
 
-/* Контактная информация */
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 1vh; /* Уменьшаем расстояние между почтой и соцсетями */
+    gap: 1vh;
 }
 
-/* Почтовый элемент */
 .contact-item {
-    margin-bottom: 1vh; /* Уменьшаем отступ между почтой и социальными сетями */
+    margin-bottom: 1vh;
 }
 
-/* Подписи для email и соцсетей */
 .label {
     font-size: 1.8vh;
     font-weight: bold;
@@ -30,14 +26,12 @@
     color: #c6c6c6;
 }
 
-/* Социальные сети */
 .social-media {
     display: flex;
-    align-items: center; /* Выравниваем элементы по центру вертикально */
-    gap: 1vh; /* Уменьшаем расстояние между текстом и иконками */
+    align-items: center;
+    gap: 1vh;
 }
 
-/* Ссылки для соцсетей */
 .social-link {
     font-size: 1.8vh;
     color: #c6c6c6;
@@ -47,30 +41,28 @@
 }
 
 .social-link:hover {
-    color: #ff7f50; /* Цвет при наведении */
-    transform: scale(1.1); /* Эффект увеличения при наведении */
+    color: #ff7f50;
+    transform: scale(1.1);
 }
 
-/* Цвет для каждой соцсети */
 .social-link.vk:hover {
-    color: #4C75A3; /* Цвет для VK */
+    color: #4C75A3;
 }
 
 .social-link.telegram:hover {
-    color: #0088cc; /* Цвет для Telegram */
+    color: #0088cc;
 }
 
 .social-link.instagram:hover {
-    color: #E4405F; /* Цвет для Instagram */
+    color: #E4405F;
 }
 
 .social-link.whatsapp:hover {
-    color: #25D366; /* Цвет для WhatsApp */
+    color: #25D366;
 }
 
-/* Картинка */
 .contact-image {
-    width: 6vw; /* Максимальная ширина картинки, чтобы она не занимала весь блок */
+    width: 6vw;
     height: 6vw;
     padding-right: 4vh;
 }
