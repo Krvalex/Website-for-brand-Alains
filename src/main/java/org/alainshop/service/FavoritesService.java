@@ -55,13 +55,9 @@ public class FavoritesService {
     }
 
     public boolean isFavorite(User user, Product product) {
-        List<FavoriteItem> favoriteItems = user.getFavorites().getFavoriteItems();
-        for (FavoriteItem favoriteItem : favoriteItems) {
-            if (favoriteItem.getProduct().getId().equals(product.getId())) {
-                return true;
-            }
-        }
-        return false;
+        return user.getFavorites().getFavoriteItems()
+                .stream()
+                .anyMatch(favoriteItem -> favoriteItem.getProduct().getId().equals(product.getId()));
     }
 }
 

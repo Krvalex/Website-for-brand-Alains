@@ -84,27 +84,23 @@ public class GuestFavoritesService {
     }
 
     public List<Product> getProductsByCategory(String guestIdentifier, Category category) {
-        GuestFavorites guestFavorites = guestFavoritesRepository.findByGuestIdentifier(guestIdentifier).orElse(null);
-        if (guestFavorites == null) {
-            return new ArrayList<>();
+        GuestFavorites guestFavorites = get(guestIdentifier);
+        if (guestFavorites != null) {
+            return guestFavorites.getFavoriteItems()
+                    .stream()
+                    .map(FavoriteItem::getProduct)
+                    .filter(product -> product.getCategory() == category)
+                    .collect(Collectors.toList());
         }
-        return guestFavorites.getFavoriteItems()
-                .stream()
-                .map(FavoriteItem::getProduct)
-                .filter(product -> product.getCategory() == category) // Фильтрация по категории
-                .collect(Collectors.toList());
+        return new ArrayList<>();
     }
 
     public boolean isFavorite(String guestIdentifier, Product product) {
-        List<FavoriteItem> favoriteItems = new ArrayList<>();
         GuestFavorites guestFavorites = get(guestIdentifier);
         if (guestFavorites != null) {
-            favoriteItems = guestFavorites.getFavoriteItems();
-        }
-        for (FavoriteItem favoriteItem : favoriteItems) {
-            if (favoriteItem.getProduct().getId().equals(product.getId())) {
-                return true;
-            }
+            List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
+            return favoriteItems.stream()
+                    .anyMatch(favoriteItem -> favoriteItem.getProduct().getId().equals(product.getId()));
         }
         return false;
     }

@@ -20,22 +20,63 @@
     <form action="/users/registration" class="registration-form" method="post">
         <div class="form-group">
             <label for="name">Имя</label>
-            <input id="name" name="name" placeholder="Иван" required type="text">
+            <input
+                    id="name"
+                    maxlength="40"
+                    minlength="2"
+                    name="name"
+                    pattern="^[А-Яа-яЁёA-Za-z\s]+$"
+                    placeholder="Иван"
+                    required
+                    title="Имя должно содержать только буквы и пробелы, и быть от 2 до 30 символов"
+                    type="text">
+            <small class="error-message" style="display: none; color: red;">
+                Имя должно содержать только буквы и пробелы, и быть от 2 до 30 символов.
+            </small>
         </div>
 
         <div class="form-group">
             <label for="email">E-mail</label>
-            <input id="email" name="email" placeholder="ivanivanovich@mail.ru" required type="email">
+            <input
+                    id="email"
+                    name="email"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    placeholder="ivanivanovich@mail.ru"
+                    required
+                    title="Введите корректный email. Пример: example@mail.com"
+                    type="email">
+            <small class="error-message" style="display: none; color: red;">Пожалуйста, введите корректный
+                email-адрес.</small>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">Номер телефона</label>
-            <input id="phoneNumber" name="phoneNumber" placeholder="+7 (999) 999-99-99" required type="text">
+            <input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    pattern="^(\+7|8)\s?(\(?\d{3}\)?)[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$"
+                    placeholder="+7 (999) 999-99-99"
+                    required
+                    title="Телефонный номер должен быть в формате: +7 (999) 999-99-99 или 8 (999) 999-99-99"
+                    type="text">
+            <small class="error-message" style="display: none; color: red;">Пожалуйста, введите корректный номер
+                телефона.</small>
         </div>
 
         <div class="form-group">
             <label for="password">Пароль</label>
-            <input id="password" name="password" placeholder="Введите пароль" required type="password">
+            <input
+                    id="password"
+                    maxlength="15"
+                    minlength="4"
+                    name="password"
+                    pattern="^[a-zA-Z0-9!@#$%^&*()_+=-]*$"
+                    placeholder="Введите пароль"
+                    required
+                    title="Пароль должен содержать только латинские буквы и другие символы (цифры и спецсимволы), длина от 4 до 15 символов."
+                    type="password">
+            <small class="error-message" style="display: none; color: red;">Пароль должен быть от 4 до 15
+                символов.</small>
         </div>
 
         <button class="registration-button" type="submit">Зарегистрироваться</button>
@@ -45,5 +86,6 @@
 </div>
 
 <script src="/js/navigation.js"></script>
+<script src="/js/registration.js"></script>
 </body>
 </html>

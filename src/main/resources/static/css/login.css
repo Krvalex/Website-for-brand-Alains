@@ -126,3 +126,15 @@ body {
     gap: 0.5vh;
     width: 100%;
 }
+
+input.error {
+    border: 1px solid #f44336;
+    background-color: #ffebeb;
+    box-shadow: 0 0 5px rgba(244, 67, 54, 0.7);
+}
+
+.error-message {
+    padding-left: 1vw;
+    opacity: 0.9;
+    font-weight: bold;
+}

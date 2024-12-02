@@ -78,19 +78,19 @@ public class CartController {
     @GetMapping("/details")
     public String getCartDetails(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
         List<CartItem> cartItems;
-        String sum;
+        String formattedSum;
         int cartItemsCount;
         if (principal == null) { // если гость
             String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
             cartItems = guestCart.getCartItems();
-            sum = cartItemService.formatSum(cartItems);
+            formattedSum = cartItemService.formatSum(cartItems);
             cartItemsCount = guestCart.getCartItems().size();
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             cartItems = user.getCart().getCartItems();
-            sum = cartItemService.formatSum(cartItems);
+            formattedSum = cartItemService.formatSum(cartItems);
             cartItemsCount = user.getCart().getCartItems().size();
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
@@ -101,7 +101,7 @@ public class CartController {
         }
         model.addAttribute("cartItemsCount", cartItemsCount);
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("sum", sum);
+        model.addAttribute("formattedSum", formattedSum);
         return "cartDetails";
     }
 

@@ -27,9 +27,8 @@ public class CartItemService {
         double sum = 0;
         for (CartItem item : items) {
             double price = Double.parseDouble(item.getProduct().getPrice().replace(" ", ""));
-            sum += price * item.getQuantity(); // Учитываем количество
+            sum += price * item.getQuantity();
         }
-
         NumberFormat formatter = NumberFormat.getInstance(new Locale("ru", "RU"));
         return formatter.format(sum);
     }
@@ -77,20 +76,11 @@ public class CartItemService {
                 if (availableQuantity >= requestedQuantity) {
                     product.getSizes().put(size, availableQuantity - requestedQuantity);
                 } else {
-                    errorMessage.append("Недостаточно товара ")
-                            .append(product.getName())
-                            .append(" размера ")
-                            .append(size)
-                            .append(". Осталось ")
-                            .append(availableQuantity)
-                            .append(" шт.\n");
+                    errorMessage.append(String.format("Недостаточно товара %s размера %s. Осталось %d шт.\n",
+                            product.getName(), size, availableQuantity));
                 }
             } else {
-                errorMessage.append("Товар ")
-                        .append(product.getName())
-                        .append(" размера ")
-                        .append(size)
-                        .append(" отсутствует.\n");
+                errorMessage.append(String.format("Товар %s размера %s отсутствует.\n", product.getName(), size));
             }
         }
         if (!errorMessage.isEmpty()) {

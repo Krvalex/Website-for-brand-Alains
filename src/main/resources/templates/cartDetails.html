@@ -87,7 +87,7 @@
 
         <!-- Итоговые суммы -->
         <div class="cart-summary">
-            <p>Итоговая сумма: <span th:text="${sum} + ' ₽'">0 ₽</span></p>
+            <p>Итоговая сумма: <span th:text="${formattedSum} + ' ₽'">0 ₽</span></p>
             <p class="discount-info" style="display: none;">Скидка: <span id="discountPercentage">0</span>%</p>
         </div>
     </div>

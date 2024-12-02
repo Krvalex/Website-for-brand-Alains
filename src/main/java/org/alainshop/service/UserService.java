@@ -30,7 +30,6 @@ public class UserService {
         if (existsByUsername(user.getEmail())) {
             throw new IllegalArgumentException("Пользователь с таким email уже существует");
         }
-        user.setEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         user.getRoles().add(Role.ROLE_USER);
