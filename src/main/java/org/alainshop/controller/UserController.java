@@ -50,8 +50,10 @@ public class UserController {
 
     @PostMapping("/logout")
     public String logout(Principal principal) {
+        System.out.println("LOGOUT 1");
         userService.getByPrincipal(principal).setActive(false);
-        return "redirect:/";
+        System.out.println("LOGOUT 2");
+        return "home";
     }
 
     @GetMapping("/account")

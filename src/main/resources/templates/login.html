@@ -20,11 +20,30 @@
     <form action="/users/login" class="login-form" method="post">
         <div class="form-group">
             <label for="username">Ваш E-mail</label>
-            <input id="username" name="username" placeholder="ivanivanov@mail.ru" required type="email">
+            <input
+                    id="username"
+                    name="username"
+                    placeholder="ivanivanov@mail.ru"
+                    required
+                    title="Введите корректный email. Пример: example@mail.com"
+                    type="email">
+            <small class="error-message" style="display: none; color: red;">Пожалуйста, введите корректный
+                email-адрес.</small>
         </div>
         <div class="form-group">
             <label for="password">Ваш пароль</label>
-            <input id="password" name="password" placeholder="Введите пароль" required type="password">
+            <input
+                    id="password"
+                    maxlength="15"
+                    minlength="4"
+                    name="password"
+                    pattern="^[a-zA-Z0-9!@#$%^&*()_+=-]*$"
+                    placeholder="Введите пароль"
+                    required
+                    title="Пароль должен содержать только латинские буквы и другие символы (цифры и спецсимволы), длина от 4 до 15 символов."
+                    type="password">
+            <small class="error-message" style="display: none; color: red;">Пароль должен быть от 4 до 15
+                символов.</small>
         </div>
         <button class="login-button" type="submit">Войти</button>
     </form>
@@ -35,5 +54,6 @@
 </div>
 
 <script src="/js/navigation.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
