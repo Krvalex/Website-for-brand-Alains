@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (value.length > 40) {
             nameInput.classList.add('error');
             errorMessage.style.display = 'inline';
-            errorMessage.textContent = 'Имя должно содержать не более 30 символов.';
+            errorMessage.textContent = 'Имя должно содержать не более 40 символов.';
         } else {
             nameInput.classList.remove('error');
             errorMessage.style.display = 'none';
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('registrationForm');
     form.addEventListener('submit', function (event) {
         const value = nameInput.value;
-        if (!nameInput.validity.valid || value.length < 2 || value.length > 30) {
+        if (!nameInput.validity.valid || value.length < 2 || value.length > 40) {
             errorMessage.style.display = 'inline';
             event.preventDefault();
         }

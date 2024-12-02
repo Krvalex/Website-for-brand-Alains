@@ -33,4 +33,9 @@ public class PromoCodeService {
     public PromoCode findByCode(String promoCode) {
         return promoCodeRepository.findByCode(promoCode);
     }
+
+
+    public double getDiscountedSum(PromoCode promoCode, double originalSum) {
+        return originalSum - (originalSum * promoCode.getDiscount() / 100);
+    }
 }

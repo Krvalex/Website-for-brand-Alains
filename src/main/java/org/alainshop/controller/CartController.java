@@ -35,23 +35,19 @@ public class CartController {
     public String get(Principal principal, HttpSession session, Model model) {
         List<CartItem> cartItems;
         String formattedSum;
-        int cartItemsCount;
         if (principal == null) { //если гость
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+            GuestCart guestCart = guestCartService.getOrCreate(session);
             cartItems = guestCart.getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
-            cartItemsCount = guestCart.getCartItems().size();
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
-            cartItemsCount = user.getCart().getCartItems().size();
             cartItems = user.getCart().getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
         }
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("sum", formattedSum);
         return "cart";
@@ -63,9 +59,8 @@ public class CartController {
                              Principal principal,
                              HttpSession session) {
         if (principal == null) { // если гость
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
             Product product = productService.getById(productId);
-            guestCartService.addItem(guestIdentifier, product, size, 1, session);
+            guestCartService.addToCart(product, size, session);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             Product product = productService.getById(productId);
@@ -79,19 +74,15 @@ public class CartController {
     public String getCartDetails(Model model, Principal principal, HttpSession session, RedirectAttributes redirectAttributes) {
         List<CartItem> cartItems;
         String formattedSum;
-        int cartItemsCount;
         if (principal == null) { // если гость
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+            GuestCart guestCart = guestCartService.getOrCreate(session);
             cartItems = guestCart.getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
-            cartItemsCount = guestCart.getCartItems().size();
             model.addAttribute("cart", guestCart);
         } else { // если пользователь
             User user = userService.getByPrincipal(principal);
             cartItems = user.getCart().getCartItems();
             formattedSum = cartItemService.formatSum(cartItems);
-            cartItemsCount = user.getCart().getCartItems().size();
             model.addAttribute("user", user);
             model.addAttribute("cart", user.getCart());
         }
@@ -99,7 +90,7 @@ public class CartController {
             redirectAttributes.addFlashAttribute("error", "Ваша корзина пуста. Добавьте товары для оформления заказа.");
             return "redirect:/cart";
         }
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("formattedSum", formattedSum);
         return "cartDetails";
@@ -120,7 +111,7 @@ public class CartController {
         try {
             if (principal == null) { // если гость
                 String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-                GuestCart guestCart = guestCartService.getOrCreate(guestIdentifier, session);
+                GuestCart guestCart = guestCartService.getOrCreate(session);
                 cartItems = guestCart.getCartItems();
                 cartItemService.decrementProducts(cartItems);
                 orderService.createGuestOrder(cartItems, guestIdentifier, FIO, email, phone, city, deliveryMethod, totalSum);

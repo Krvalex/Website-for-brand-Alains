@@ -4,9 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.alainshop.model.GuestCart;
 import org.alainshop.model.Product;
-import org.alainshop.model.User;
+import org.alainshop.service.CartItemService;
 import org.alainshop.service.GuestCartService;
 import org.alainshop.service.ProductService;
 import org.alainshop.service.UserService;
@@ -26,62 +25,31 @@ public class HomeController {
     UserService userService;
     ProductService productService;
     GuestCartService guestCartService;
+    CartItemService cartItemService;
 
     @GetMapping("/")
     public String home(Principal principal, Model model, HttpSession session) {
-        User user = userService.getByPrincipal(principal);
-        int cartItemsCount = 0;
-        if (user != null) {
-            cartItemsCount = user.getCart().getCartItems().size();
-        } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
-        }
-        Product bestTshirt = productService.getProductByName("KINGVON T-SHIRT");
-        Product bestHoodie = productService.getProductByName("ZIPALAINS HOODIE");
-        model.addAttribute("user", user);
+        int cartItemsCount = cartItemService.getCartItemsCount(principal, guestCartService.get(session));
+        model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("cartItemsCount", cartItemsCount);
-        model.addAttribute("bestTshirt", bestTshirt);
-        model.addAttribute("bestHoodie", bestHoodie);
+        model.addAttribute("bestTshirt", productService.getProductByName("KINGVON T-SHIRT"));
+        model.addAttribute("bestHoodie", productService.getProductByName("ZIPALAINS HOODIE"));
         return "home";
     }
 
     @GetMapping("/garmentCare")
     public String garmentCare(Principal principal, Model model, HttpSession session) {
-        User user = userService.getByPrincipal(principal);
-        int cartItemsCount = 0;
-        if (user != null) {
-            cartItemsCount = user.getCart().getCartItems().size();
-        } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
-        }
+        int cartItemsCount = cartItemService.getCartItemsCount(principal, guestCartService.get(session));
         model.addAttribute("cartItemsCount", cartItemsCount);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getByPrincipal(principal));
         return "garmentCare";
     }
 
     @GetMapping("/contacts")
     public String contacts(Principal principal, Model model, HttpSession session) {
-        User user = userService.getByPrincipal(principal);
-        int cartItemsCount = 0;
-        if (user != null) {
-            cartItemsCount = user.getCart().getCartItems().size();
-        } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
-        }
+        int cartItemsCount = cartItemService.getCartItemsCount(principal, guestCartService.get(session));
         model.addAttribute("cartItemsCount", cartItemsCount);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getByPrincipal(principal));
         return "contacts";
     }
 
@@ -89,7 +57,6 @@ public class HomeController {
     public String searchProducts(@RequestParam("query") String query, Model model) {
         List<Product> products = productService.searchByName(query);
         model.addAttribute("products", products);
-        System.out.println(products);
         return "searchResults";
     }
 }

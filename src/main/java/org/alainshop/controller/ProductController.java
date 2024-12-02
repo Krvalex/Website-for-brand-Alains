@@ -4,9 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.alainshop.model.GuestCart;
 import org.alainshop.model.Product;
-import org.alainshop.model.User;
 import org.alainshop.model.enums.Category;
 import org.alainshop.service.*;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
@@ -31,25 +28,18 @@ public class ProductController {
     FavoritesService favoritesService;
     GuestFavoritesService guestFavoritesService;
     GuestCartService guestCartService;
+    CartItemService cartItemService;
 
     @GetMapping
     public String getAll(Model model, @RequestParam(required = false) Category category, Principal principal, HttpSession session) {
         List<Product> products = productService.getByCategory(category);
         List<Product> favoriteProducts;
-        int cartItemsCount = 0;
         if (principal != null) {
-            User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoritesService.getProducts(user);
-            cartItemsCount = user.getCart().getCartItems().size();
+            favoriteProducts = favoritesService.getProducts(userService.getByPrincipal(principal));
         } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            favoriteProducts = guestFavoritesService.getProducts(guestIdentifier);
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
+            favoriteProducts = guestFavoritesService.getProducts(session);
         }
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
@@ -62,20 +52,12 @@ public class ProductController {
     public String getTshirts(Model model, Principal principal, HttpSession session) {
         List<Product> products = productService.getByCategory(Category.T_SHIRTS);
         List<Product> favoriteProducts;
-        int cartItemsCount = 0;
         if (principal != null) {
-            User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoritesService.getProductsByCategory(user, Category.T_SHIRTS);
-            cartItemsCount = user.getCart().getCartItems().size();
+            favoriteProducts = favoritesService.getProductsByCategory(userService.getByPrincipal(principal), Category.T_SHIRTS);
         } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            favoriteProducts = guestFavoritesService.getProductsByCategory(guestIdentifier, Category.T_SHIRTS);
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
+            favoriteProducts = guestFavoritesService.getProductsByCategory(session, Category.T_SHIRTS);
         }
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
@@ -88,20 +70,12 @@ public class ProductController {
     public String getHoodies(Model model, Principal principal, HttpSession session) {
         List<Product> products = productService.getByCategory(Category.HOODIES);
         List<Product> favoriteProducts;
-        int cartItemsCount = 0;
         if (principal != null) {
-            User user = userService.getByPrincipal(principal);
-            favoriteProducts = favoritesService.getProductsByCategory(user, Category.HOODIES);
-            cartItemsCount = user.getCart().getCartItems().size();
+            favoriteProducts = favoritesService.getProductsByCategory(userService.getByPrincipal(principal), Category.HOODIES);
         } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            favoriteProducts = guestFavoritesService.getProductsByCategory(guestIdentifier, Category.HOODIES);
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-            }
+            favoriteProducts = guestFavoritesService.getProductsByCategory(session, Category.HOODIES);
         }
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         model.addAttribute("categories", Category.values());
@@ -114,27 +88,17 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getById(@PathVariable Long id, Model model, Principal principal, HttpSession session) {
         Product product = productService.getById(id);
-        Map<String, Integer> productSizes = product.getSizes();
-        String oldPrice = productService.getOldPrice(product.getPrice());
-        int cartItemsCount = 0;
-        boolean isFavoriteProduct = false;
+        boolean isFavoriteProduct;
         if (principal != null) {
-            User user = userService.getByPrincipal(principal);
-            cartItemsCount = user.getCart().getCartItems().size();
-            isFavoriteProduct = favoritesService.isFavorite(user, product);
+            isFavoriteProduct = favoritesService.isFavorite(userService.getByPrincipal(principal), product);
         } else {
-            String guestIdentifier = (String) session.getAttribute("guestIdentifier");
-            GuestCart guestCart = guestCartService.get(guestIdentifier);
-            if (guestCart != null) {
-                cartItemsCount = guestCart.getCartItems().size();
-                isFavoriteProduct = guestFavoritesService.isFavorite(guestIdentifier, product);
-            }
+            isFavoriteProduct = guestFavoritesService.isFavorite(session, product);
         }
         model.addAttribute("isFavoriteProduct", isFavoriteProduct);
-        model.addAttribute("cartItemsCount", cartItemsCount);
+        model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("product", product);
-        model.addAttribute("productSizes", productSizes);
-        model.addAttribute("oldPrice", oldPrice);
+        model.addAttribute("productSizes", product.getSizes());
+        model.addAttribute("oldPrice", productService.getOldPrice(product.getPrice()));
         return "productDetails";
     }
 }

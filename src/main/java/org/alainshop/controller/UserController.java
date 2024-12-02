@@ -50,9 +50,7 @@ public class UserController {
 
     @PostMapping("/logout")
     public String logout(Principal principal) {
-        System.out.println("LOGOUT 1");
         userService.getByPrincipal(principal).setActive(false);
-        System.out.println("LOGOUT 2");
         return "home";
     }
 
@@ -60,8 +58,7 @@ public class UserController {
     public String account(Principal principal, Model model) {
         if (principal != null) {
             User user = userService.getByPrincipal(principal);
-            int cartItemsCount = user.getCart().getCartItems().size();
-            model.addAttribute("cartItemsCount", cartItemsCount);
+            model.addAttribute("cartItemsCount", user.getCart().getCartItems().size());
             model.addAttribute("user", user);
             model.addAttribute("orders", user.getOrders());
             return "userAccount";

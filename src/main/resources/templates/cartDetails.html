@@ -15,13 +15,43 @@
         <h2>Оформление заказа</h2>
         <form action="/cart/details" id="checkoutForm" method="post">
             <label for="FIO">ФИО</label>
-            <input id="FIO" name="FIO" placeholder="Иванов Иван Иванович" required type="text">
+            <input
+                    id="FIO"
+                    maxlength="40"
+                    minlength="2"
+                    name="FIO"
+                    pattern="^[А-Яа-яЁёA-Za-z\s]+$"
+                    placeholder="Иванов Иван Иванович"
+                    required
+                    title="ФИО должно содержать только буквы и пробелы, и быть от 2 до 40 символов"
+                    type="text">
+            <small class="error-message" style="display: none; color: red;">
+                Имя должно содержать только буквы и пробелы, и быть от 2 до 40 символов.
+            </small>
 
-            <label for="email">Почта</label>
-            <input id="email" name="email" placeholder="ivanivanov@mail.ru" required type="email">
+            <label for="email">E-mail</label>
+            <input
+                    id="email"
+                    name="email"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    placeholder="ivanivanovich@mail.ru"
+                    required
+                    title="Введите корректный email. Пример: example@mail.com"
+                    type="email">
+            <small class="error-message" style="display: none; color: red;">Пожалуйста, введите корректный
+                email-адрес.</small>
 
-            <label for="phone">Телефон</label>
-            <input id="phone" name="phone" placeholder="+7 (999) 999-99-99" required type="tel">
+            <label for="phone">Номер телефона</label>
+            <input
+                    id="phone"
+                    name="phone"
+                    pattern="^(\+7|8)\s?(\(?\d{3}\)?)[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$"
+                    placeholder="+7 (999) 999-99-99"
+                    required
+                    title="Телефонный номер должен быть в формате: +7 (999) 999-99-99 или 8 (999) 999-99-99"
+                    type="text">
+            <small class="error-message" style="display: none; color: red;">Пожалуйста, введите корректный номер
+                телефона.</small>
 
             <label for="city">Город</label>
             <select id="city" name="city" required>

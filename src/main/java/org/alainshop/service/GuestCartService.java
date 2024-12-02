@@ -25,7 +25,8 @@ public class GuestCartService {
     CartItemService cartItemService;
 
     @Transactional
-    public GuestCart getOrCreate(String guestIdentifier, HttpSession session) {
+    public GuestCart getOrCreate(HttpSession session) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         if (guestIdentifier == null) {
             guestIdentifier = UUID.randomUUID().toString();
             session.setAttribute("guestIdentifier", guestIdentifier);
@@ -35,7 +36,8 @@ public class GuestCartService {
                 .orElseGet(() -> create(identifier));
     }
 
-    public GuestCart get(String guestIdentifier) {
+    public GuestCart get(HttpSession session) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         return guestCartRepository.findByGuestIdentifier(guestIdentifier)
                 .orElse(null);
     }
@@ -46,11 +48,16 @@ public class GuestCartService {
     }
 
     @Transactional
-    public void addItem(String guestIdentifier, Product product, String size, int quantity, HttpSession session) {
-        GuestCart guestCart = getOrCreate(guestIdentifier, session);
-        CartItem cartItem = new CartItem(product, size, quantity);
-        guestCart.getCartItems().add(cartItem);
-        guestCartRepository.save(guestCart);
+    public void addToCart(Product product, String size, HttpSession session) {
+        GuestCart guestCart = getOrCreate(session);
+        guestCart.getCartItems().stream()
+                .filter(item -> item.getProduct().getId().equals(product.getId()) && item.getSize().equals(size))
+                .findFirst()
+                .ifPresentOrElse(cartItem -> cartItem.setQuantity(cartItem.getQuantity() + 1), () -> {
+                    CartItem cartItem = new CartItem(product.clone(), size, 1);
+                    guestCart.getCartItems().add(cartItem);
+                    cartItemService.save(cartItem);
+                });
     }
 
     public void clear(String guestIdentifier) {

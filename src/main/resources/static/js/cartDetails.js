@@ -83,3 +83,87 @@ document.addEventListener("DOMContentLoaded", () => {
         notification.classList.remove("show");
     }
 });
+
+// Обработчик валидации для поля имени
+document.addEventListener("DOMContentLoaded", function () {
+    const FIOInput = document.getElementById('FIO');
+    const errorMessage = FIOInput.nextElementSibling;
+
+    FIOInput.addEventListener('blur', function () {
+        const pattern = /^[А-Яа-яЁёA-Za-z\s]+$/;
+        const value = FIOInput.value;
+
+        if (!pattern.test(value)) {
+            FIOInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+            errorMessage.textContent = 'ФИО должно содержать только буквы и пробелы.';
+        } else if (value.length < 2) {
+            FIOInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+            errorMessage.textContent = 'ФИО должно содержать не менее 2 символов.';
+        } else if (value.length > 40) {
+            FIOInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+            errorMessage.textContent = 'ФИО должно содержать не более 40 символов.';
+        } else {
+            FIOInput.classList.remove('error');
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    // Обработка отправки формы
+    const form = document.getElementById('checkoutForm');
+    form.addEventListener('submit', function (event) {
+        const value = FIOInput.value;
+        if (!FIOInput.validity.valid || value.length < 2 || value.length > 40) {
+            errorMessage.style.display = 'inline';
+            event.preventDefault();
+        }
+    });
+});
+
+// Обработчик валидации для поля email
+document.addEventListener("DOMContentLoaded", function () {
+    const emailInput = document.getElementById('email');
+    const errorMessage = emailInput.nextElementSibling;
+
+    emailInput.addEventListener('blur', function () {
+        const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!pattern.test(emailInput.value)) {
+            emailInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+        } else {
+            emailInput.classList.remove('error');
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    // Дополнительная проверка при отправке формы
+    const form = document.getElementById('checkoutForm');
+    form.addEventListener('submit', function (event) {
+        if (!emailInput.validity.valid) {
+            emailInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+            event.preventDefault();
+        }
+    });
+});
+
+// Обработчик валидации для поля телефон
+document.addEventListener("DOMContentLoaded", function () {
+    const phoneInput = document.getElementById('phone');
+    const errorMessage = phoneInput.nextElementSibling;
+
+    phoneInput.addEventListener('blur', function () {
+        const pattern = /^(\+7|8)\s?(\(?\d{3}\)?)[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
+
+        if (!pattern.test(phoneInput.value)) {
+            phoneInput.classList.add('error');
+            errorMessage.style.display = 'inline';
+        } else {
+            phoneInput.classList.remove('error');
+            errorMessage.style.display = 'none';
+        }
+    });
+});

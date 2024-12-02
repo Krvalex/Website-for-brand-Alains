@@ -28,7 +28,8 @@ public class GuestFavoritesService {
     FavoriteItemService favoriteItemService;
     ProductService productService;
 
-    public GuestFavorites getOrCreate(String guestIdentifier, HttpSession session) {
+    public GuestFavorites getOrCreate(HttpSession session) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         if (guestIdentifier == null) {
             guestIdentifier = UUID.randomUUID().toString();
             session.setAttribute("guestIdentifier", guestIdentifier);
@@ -43,8 +44,8 @@ public class GuestFavoritesService {
                 .orElse(null);
     }
 
-    public void saveIfNotAlreadyInFavorite(String guestIdentifier, Long productId, HttpSession session) {
-        GuestFavorites guestFavorites = getOrCreate(guestIdentifier, session);
+    public void saveIfNotAlreadyInFavorite(Long productId, HttpSession session) {
+        GuestFavorites guestFavorites = getOrCreate(session);
         if (guestFavorites.getFavoriteItems().stream().noneMatch(f -> f.getProduct().getId().equals(productId))) {
             Product product = productService.getById(productId);
             guestFavorites.getFavoriteItems().add(new FavoriteItem(product));
@@ -52,7 +53,8 @@ public class GuestFavoritesService {
         }
     }
 
-    public List<Product> getProducts(String guestIdentifier) {
+    public List<Product> getProducts(HttpSession session) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         GuestFavorites guestFavorites = get(guestIdentifier);
         if (guestFavorites != null) {
             return guestFavorites.getFavoriteItems().stream()
@@ -62,7 +64,8 @@ public class GuestFavoritesService {
         return new ArrayList<>();
     }
 
-    public void deleteProductById(String guestIdentifier, Long favoriteItemId) {
+    public void deleteProductById(Long favoriteItemId, HttpSession session) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         GuestFavorites guestFavorites = get(guestIdentifier);
         List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();
         favoriteItems.removeIf(favoriteItem -> favoriteItem.getProduct().getId().equals(favoriteItemId));
@@ -83,7 +86,8 @@ public class GuestFavoritesService {
         guestFavoritesRepository.deleteAll(oldFavorites);
     }
 
-    public List<Product> getProductsByCategory(String guestIdentifier, Category category) {
+    public List<Product> getProductsByCategory(HttpSession session, Category category) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         GuestFavorites guestFavorites = get(guestIdentifier);
         if (guestFavorites != null) {
             return guestFavorites.getFavoriteItems()
@@ -95,7 +99,8 @@ public class GuestFavoritesService {
         return new ArrayList<>();
     }
 
-    public boolean isFavorite(String guestIdentifier, Product product) {
+    public boolean isFavorite(HttpSession session, Product product) {
+        String guestIdentifier = (String) session.getAttribute("guestIdentifier");
         GuestFavorites guestFavorites = get(guestIdentifier);
         if (guestFavorites != null) {
             List<FavoriteItem> favoriteItems = guestFavorites.getFavoriteItems();

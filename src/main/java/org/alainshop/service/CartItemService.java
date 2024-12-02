@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.alainshop.data.exception.InsufficientStockException;
 import org.alainshop.model.CartItem;
+import org.alainshop.model.GuestCart;
 import org.alainshop.model.Product;
 import org.alainshop.model.User;
 import org.alainshop.repository.CartItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +24,7 @@ public class CartItemService {
     CartItemRepository cartItemRepository;
 
     CartService cartService;
+    UserService userService;
 
     public String formatSum(List<CartItem> items) {
         double sum = 0;
@@ -34,18 +37,14 @@ public class CartItemService {
     }
 
     public void addToCart(User user, Product product, String size) {
-        CartItem existingCartItem = user.getCart().getCartItems().stream()
+        user.getCart().getCartItems().stream()
                 .filter(item -> item.getProduct().getId().equals(product.getId()) && item.getSize().equals(size))
                 .findFirst()
-                .orElse(null);
-
-        if (existingCartItem != null) {
-            existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
-        } else {
-            CartItem cartItem = new CartItem(product.clone(), size, 1);
-            user.getCart().getCartItems().add(cartItem);
-            cartItemRepository.save(cartItem);
-        }
+                .ifPresentOrElse(cartItem -> cartItem.setQuantity(cartItem.getQuantity() + 1), () -> {
+                    CartItem cartItem = new CartItem(product.clone(), size, 1);
+                    user.getCart().getCartItems().add(cartItem);
+                    cartItemRepository.save(cartItem);
+                });
     }
 
     public void deleteProduct(User user, Long cartItemId) {
@@ -96,5 +95,21 @@ public class CartItemService {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
         cartItem.setQuantity(cartItem.getQuantity() + 1);
         cartService.save(user.getCart());
+    }
+
+    public void save(CartItem cartItem) {
+        cartItemRepository.save(cartItem);
+    }
+
+    public int getCartItemsCount(Principal principal, GuestCart guestCart) {
+        int cartItemsCount = 0;
+        if (principal != null) {
+            cartItemsCount = userService.getByPrincipal(principal).getCart().getCartItems().size();
+        } else {
+            if (guestCart != null) {
+                cartItemsCount = guestCart.getCartItems().size();
+            }
+        }
+        return cartItemsCount;
     }
 }

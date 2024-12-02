@@ -23,11 +23,8 @@ public class PromoCodeController {
     @PostMapping("/apply")
     public ResponseEntity<Double> applyPromoCode(@RequestParam String code, @RequestParam double originalSum) {
         PromoCode promoCode = promoCodeService.findByCode(code);
-        System.out.println(originalSum);
         if (promoCode != null) {
-            double discount = promoCode.getDiscount();
-            double discountedSum = originalSum - (originalSum * discount / 100);
-            return ResponseEntity.ok(discountedSum);
+            return ResponseEntity.ok(promoCodeService.getDiscountedSum(promoCode, originalSum));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(originalSum);
         }
