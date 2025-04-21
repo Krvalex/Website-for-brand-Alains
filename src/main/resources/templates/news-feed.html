@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Новости | Brand</title>
+    <link href="/css/navigation.css" rel="stylesheet">
+    <link href="/css/news-feed.css" rel="stylesheet">
+    <!-- Подключаем шрифты Google Fonts для крутой типографики -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navigation.html :: navigation}"></div>
+
+<div class="news-container">
+    <h1 class="page-title animate-title">Последние новости</h1>
+
+    <div class="news-list">
+        <div class="empty-message" th:if="${posts.isEmpty()}">Новостей пока нет 😔</div>
+        <!-- Цикл по новостям -->
+        <div class="news-card animate-card" th:each="post : ${posts}">
+            <div class="news-header">
+                <h2 class="news-title" th:text="${post.title}"></h2>
+                <span class="news-date"
+                      th:text="${#temporals.format(post.createdAt, 'dd.MM.yyyy')}">
+                </span>
+            </div>
+
+            <!-- Текст новости -->
+            <div class="news-content">
+                <p class="news-text" th:text="${post.content}"></p>
+            </div>
+
+            <!-- Блок с изображением (если есть) -->
+            <div class="news-image" th:if="${post.imageUrl}">
+                <img alt="News image"
+                     class="news-image__img"
+                     th:src="@{'/images/news/' + ${post.imageUrl}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/navigation.js"></script>
+</body>
+</html>

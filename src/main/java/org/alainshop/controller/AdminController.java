@@ -81,5 +81,10 @@ public class AdminController {
         promoCodeService.delete(id);
         return "redirect:/admin/promo";
     }
+
+    @GetMapping("/news")
+    public String news() {
+        return "adminNews";
+    }
 }
 

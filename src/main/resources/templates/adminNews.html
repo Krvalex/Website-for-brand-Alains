@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управление новостями</title>
+    <link href="/css/adminPromoList.css" rel="stylesheet">
+</head>
+<body>
+<div class="back-button-container">
+    <a class="back-button" href="/admin">Назад</a>
+</div>
+<div class="container">
+    <header>
+        <h1>Управление новостями</h1>
+        <hr>
+    </header>
+
+    <section class="promo-form">
+        <h2>Добавить новую новость</h2>
+        <form enctype="multipart/form-data" method="post" th:action="@{/admin/add/news}">
+            <label for="title">Заголовок:</label>
+            <input id="title" name="title" placeholder="Введите заголовок" required type="text">
+
+            <label for="content">Текст новости:</label>
+            <textarea id="content" name="content" placeholder="Введите текст новости" required rows="5"></textarea>
+
+            <label for="image">Изображение (необязательно):</label>
+            <input accept="image/*" id="image" name="image" type="file">
+
+            <button type="submit">Опубликовать новость</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

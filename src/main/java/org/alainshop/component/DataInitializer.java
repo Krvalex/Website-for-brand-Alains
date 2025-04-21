@@ -3,15 +3,18 @@ package org.alainshop.component;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.alainshop.model.NewsPost;
 import org.alainshop.model.Product;
 import org.alainshop.model.PromoCode;
 import org.alainshop.model.enums.Category;
 import org.alainshop.model.enums.Size;
+import org.alainshop.repository.NewsRepository;
 import org.alainshop.repository.ProductRepository;
 import org.alainshop.repository.PromoCodeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,11 +25,13 @@ public class DataInitializer implements CommandLineRunner {
 
     ProductRepository productRepository;
     PromoCodeRepository promoCodeRepository;
+    NewsRepository newsRepository;
 
     @Override
     public void run(String... args) {
-//        initializeProducts();
-//        initializePromoCodes();
+        initializeProducts();
+        initializePromoCodes();
+        initializeNewsPosts();
     }
 
     private void initializeProducts() {
@@ -211,5 +216,30 @@ public class DataInitializer implements CommandLineRunner {
         PromoCode promo3 = new PromoCode("DISCOUNT15", 15);
 
         promoCodeRepository.saveAll(List.of(promo1, promo2, promo3));
+    }
+
+    private void initializeNewsPosts() {
+        if (newsRepository.count() == 0) {
+            List<NewsPost> defaultNews = List.of(
+                    new NewsPost("Новая футболка!",
+                            "Мы выпустили новую футболку с логотипом бренда\uD83D\uDE80",
+                            "kingvon.png",
+                            LocalDateTime.of(2025, 1, 15, 10, 0)),
+
+
+                    new NewsPost("Скидка 20%\uD83D\uDD25",
+                            "Дарим промокод WELCOME20 всем новым пользователям",
+                            null,
+                            LocalDateTime.of(2025, 3, 19, 10, 0)),
+
+
+                    new NewsPost("Обновление сайта❗",
+                            "Запустили новый раздел с уходом за одеждой. Выбирай тип одежды и смотри",
+                            "uhod.png",
+                            LocalDateTime.of(2025, 2, 23, 10, 0))
+            );
+
+            newsRepository.saveAll(defaultNews);
+        }
     }
 }

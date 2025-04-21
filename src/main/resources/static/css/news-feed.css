@@ -1,0 +1,199 @@
+/* Общие стили */
+body {
+    font-family: sans-serif; /* Базовый шрифт */
+    margin: 0;
+    padding: 4.5vh 0 0;
+    background-color: #f4f7fa; /* Чуть более современный фон */
+    color: #333;
+    letter-spacing: 0.02vw;
+    overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+}
+
+/* Контейнер новостей */
+.news-container {
+    max-width: 72rem;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Заголовок страницы */
+.page-title {
+    font-family: sans-serif; /* Базовый шрифт */
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    color: #2d3436;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.animate-title {
+    animation: fadeInDown 1s ease-out;
+}
+
+/* Список новостей */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Уменьшил расстояние между карточками */
+    margin-top: 3rem;
+}
+
+/* Сообщение, если новостей нет */
+.empty-message {
+    font-size: 1.5rem;
+    color: #888;
+    text-align: center;
+    padding: 5rem 0;
+}
+
+/* Карточка новости */
+.news-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Более мягкая тень */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Для обрезки контента */
+    border-left: 6px solid #007bff; /* Добавил цветную полоску слева */
+}
+
+.news-card:hover {
+    transform: translateY(-10px); /* Подъем карточки при наведении */
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15); /* Усиливаем тень */
+}
+
+/* Заголовок новости */
+.news-header {
+    border-bottom: 2px solid #e0e0e0; /* Более мягкая линия */
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.news-title {
+    font-family: sans-serif; /* Базовый шрифт */
+    font-size: 1.8rem;
+    margin: 0;
+    color: #2d3436;
+    line-height: 1.3;
+}
+
+.news-date {
+    font-size: 0.9rem;
+    color: #888;
+    display: block;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Контент новости */
+.news-content {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.news-text {
+    margin: 0;
+}
+
+/* Изображения */
+.news-image {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center; /* Центрируем изображение */
+}
+
+.news-image__img {
+    width: 100%;
+    max-width: 100%; /* Убираем растяжение, ограничиваем ширину контейнером */
+    max-height: 25vh; /* Восстановил прежнюю высоту, чтобы помещалось больше */
+    object-fit: contain; /* Сохраняем пропорции, не растягиваем */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.news-image__img:hover {
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+
+/* Анимации */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .news-container {
+        max-width: 90vw;
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .news-title {
+        font-size: 1.5rem;
+    }
+
+    .news-date {
+        font-size: 0.8rem;
+    }
+
+    .news-content {
+        font-size: 1rem;
+    }
+
+    .news-image__img {
+        max-height: 20vh; /* Чуть меньше для мобильных */
+    }
+
+    .news-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .news-title {
+        font-size: 1.3rem;
+    }
+
+    .news-content {
+        font-size: 0.9rem;
+    }
+
+    .news-card {
+        padding: 1rem;
+    }
+
+    .news-image__img {
+        max-height: 15vh; /* Еще меньше для совсем маленьких экранов */
+    }
+}
