@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.alainshop.model.Product;
+import org.alainshop.model.Review;
 import org.alainshop.model.enums.Category;
 import org.alainshop.service.*;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class ProductController {
     GuestFavoritesService guestFavoritesService;
     GuestCartService guestCartService;
     CartItemService cartItemService;
+    ReviewService reviewService;
 
     @GetMapping
     public String getAll(Model model, @RequestParam(required = false) Category category, Principal principal, HttpSession session) {
@@ -94,11 +96,13 @@ public class ProductController {
         } else {
             isFavoriteProduct = guestFavoritesService.isFavorite(session, product);
         }
+        List<Review> reviews = reviewService.getReviewsByProduct(id);
         model.addAttribute("isFavoriteProduct", isFavoriteProduct);
         model.addAttribute("cartItemsCount", cartItemService.getCartItemsCount(principal, guestCartService.get(session)));
         model.addAttribute("product", product);
         model.addAttribute("productSizes", product.getSizes());
         model.addAttribute("oldPrice", productService.getOldPrice(product.getPrice()));
+        model.addAttribute("reviews", reviews);
         return "productDetails";
     }
 }

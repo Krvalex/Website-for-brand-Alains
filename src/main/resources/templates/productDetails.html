@@ -85,6 +85,41 @@
         </div>
     </div>
 </div>
+<section class="reviews-section">
+    <h2 class="section-title">Отзывы</h2>
+
+    <!-- Форма добавления отзыва -->
+    <form class="review-form" onsubmit="return submitReview(event)">
+        <div class="rating-stars">
+            <span class="star" data-rating="1"></span>
+            <span class="star" data-rating="2"></span>
+            <span class="star" data-rating="3"></span>
+            <span class="star" data-rating="4"></span>
+            <span class="star" data-rating="5"></span>
+        </div>
+        <textarea class="review-input" placeholder="Ваш отзыв..." required></textarea>
+        <button class="submit-review-btn" type="submit">Оставить отзыв</button>
+    </form>
+
+    <!-- Список отзывов -->
+    <div class="reviews-list">
+        <!-- Добавленный блок для пустого состояния -->
+        <div class="no-reviews" th:if="${#lists.isEmpty(reviews)}">
+            😔 Пока нет отзывов. Будь первым!
+        </div>
+        <div class="review-item" th:each="review : ${reviews}">
+            <div class="review-header">
+                <span class="review-author" th:text="${review.user.email}"></span>
+                <div class="review-rating">
+                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                        <span th:text="${i <= review.rating} ? '★' : '☆'"></span>
+                    </span>
+                </div>
+            </div>
+            <p class="review-text" th:text="${review.text}"></p>
+        </div>
+    </div>
+</section>
 <!-- Уведомление об ошибке -->
 <div class="notification error" id="errorNotification">
     <button class="close-notification" onclick="closeNotification('errorNotification')">&times;</button>

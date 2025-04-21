@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.alainshop.model.enums.Category;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -35,6 +37,9 @@ public class Product implements Cloneable {
 
     private String imageFront;
     private String imageBack;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public Product(String name, String description, double price, Map<String, Integer> sizes,
                    Category category, String imageFront, String imageBack) {

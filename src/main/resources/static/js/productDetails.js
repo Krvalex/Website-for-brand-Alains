@@ -94,3 +94,43 @@ function toggleFavorite(element) {
             }
         });
 }
+
+const currentProductId = window.location.pathname.split('/').pop();
+
+document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', function () {
+        const rating = parseInt(this.dataset.rating);
+
+        // Удаляем все активные классы
+        document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+
+        // Добавляем активный класс до выбранной звезды
+        document.querySelectorAll('.star').forEach((s, index) => {
+            if (index < rating) {
+                s.classList.add('active');
+            }
+        });
+    });
+});
+
+function submitReview(e) {
+    e.preventDefault();
+    const form = e.target;
+    const rating = document.querySelectorAll('.star.active').length;
+
+    if (rating === 0) {
+        alert('Выберите рейтинг!');
+        return;
+    }
+
+    fetch(`/reviews/add?productId=${currentProductId}&text=${encodeURIComponent(form.querySelector('textarea').value)}&rating=${rating}`, {
+        method: 'POST'
+    })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload(); // Принудительная перезагрузка
+            } else {
+                alert('Ошибка при отправке отзыва');
+            }
+        });
+}
